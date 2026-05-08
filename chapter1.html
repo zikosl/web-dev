@@ -1462,6 +1462,248 @@
       }
     }
 
+
+    /* App-like mobile enhancements */
+    .hamburger-btn,
+    .mobile-drawer,
+    .drawer-overlay,
+    .swipe-lessons,
+    .floating-lesson-nav {
+      display: none;
+    }
+
+    .drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, .45);
+      z-index: 70;
+      backdrop-filter: blur(4px);
+    }
+
+    .mobile-drawer {
+      position: fixed;
+      inset: 0 auto 0 0;
+      width: min(86vw, 340px);
+      z-index: 80;
+      background: #ffffff;
+      border-right: 1px solid var(--line);
+      box-shadow: 20px 0 60px rgba(15, 23, 42, .18);
+      transform: translateX(-105%);
+      transition: transform .24s ease;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .mobile-drawer.open {
+      transform: translateX(0);
+    }
+
+    html[data-mode="ar"] .mobile-drawer {
+      inset: 0 0 0 auto;
+      border-right: 0;
+      border-left: 1px solid var(--line);
+      transform: translateX(105%);
+      direction: rtl;
+      text-align: right;
+    }
+
+    html[data-mode="ar"] .mobile-drawer.open {
+      transform: translateX(0);
+    }
+
+    .drawer-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 14px;
+    }
+
+    .drawer-title {
+      font-weight: 900;
+      color: #0f172a;
+      line-height: 1.25;
+    }
+
+    .drawer-links {
+      display: grid;
+      gap: 8px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .drawer-links a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 13px;
+      border: 1px solid #e8eef7;
+      background: #f8fbff;
+      border-radius: 14px;
+      text-decoration: none;
+      color: #0f172a;
+      font-weight: 800;
+      font-size: .9rem;
+    }
+
+    .drawer-links a::after {
+      content: "›";
+      color: var(--accent);
+      font-size: 1.2rem;
+      line-height: 1;
+    }
+
+    html[data-mode="ar"] .drawer-links a::after {
+      content: "‹";
+    }
+
+    .swipe-lessons {
+      margin: 0 0 4px;
+    }
+
+    .swipe-row {
+      display: flex;
+      gap: 12px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+      padding: 2px 2px 8px;
+    }
+
+    .swipe-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .swipe-card {
+      flex: 0 0 min(78vw, 290px);
+      scroll-snap-align: start;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 15px;
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      color: #0f172a;
+      min-height: 126px;
+      display: grid;
+      align-content: space-between;
+      gap: 12px;
+    }
+
+    .swipe-card small {
+      color: var(--accent);
+      font-weight: 900;
+      font-size: .72rem;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+
+    .swipe-card strong {
+      display: block;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .swipe-card span:last-child {
+      color: #64748b;
+      font-weight: 700;
+      font-size: .82rem;
+    }
+
+    .swipe-card.active {
+      border-color: #bfd6ff;
+      background: #f7fbff;
+      box-shadow: 0 10px 22px rgba(0, 86, 210, .08);
+    }
+
+    .floating-lesson-nav {
+      position: fixed;
+      left: 12px;
+      right: 12px;
+      bottom: calc(80px + env(safe-area-inset-bottom));
+      z-index: 38;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      pointer-events: none;
+    }
+
+    .floating-lesson-nav button {
+      pointer-events: auto;
+      border-radius: 16px;
+      min-height: 44px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, .12);
+      border-color: #dbe5f2;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(12px);
+    }
+
+    .floating-lesson-nav button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .pwa-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #eaf8f0;
+      color: #157347;
+      font-size: .76rem;
+      font-weight: 900;
+      border: 1px solid #ccebd7;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 760px) {
+      .hamburger-btn {
+        display: inline-flex;
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        border-radius: 13px;
+        font-size: 1.18rem;
+      }
+
+      .drawer-overlay.is-visible {
+        display: block;
+      }
+
+      .mobile-drawer {
+        display: block;
+      }
+
+      .swipe-lessons {
+        display: block;
+      }
+
+      .floating-lesson-nav {
+        display: grid;
+      }
+
+      .pwa-status {
+        flex: 0 0 auto;
+      }
+
+      .mobile-dock {
+        padding-bottom: max(8px, env(safe-area-inset-bottom));
+      }
+    }
+
+    @media (min-width: 761px) {
+      .pwa-status {
+        display: none;
+      }
+    }
+
     @media print {
       body { background: white; color: black; }
       body::before,
@@ -1489,6 +1731,7 @@
           <div class="en">Frontend Foundations</div>
           <div class="ar" dir="rtl">أساسيات الواجهة الأمامية</div>
         </div>
+        <button class="hamburger-btn ghost" id="menuBtn" type="button" aria-label="Open menu" aria-controls="mobileDrawer" aria-expanded="false">☰</button>
       </div>
 
       <div class="controls" aria-label="Language and page controls">
@@ -1499,6 +1742,7 @@
         </div>
         <div class="utility-group">
           <span class="mobile-progress-pill"><span class="en">Progress</span><span class="ar">التقدم</span> <span id="topProgressText">0%</span></span>
+          <span class="pwa-status" id="pwaStatus"><span class="en">PWA ready</span><span class="ar">جاهز كتطبيق</span></span>
           <button class="tiny ghost" id="printBtn" type="button">
             <span class="en">Print</span><span class="ar">طباعة</span>
           </button>
@@ -1509,6 +1753,29 @@
       </div>
     </div>
   </header>
+
+  <div class="drawer-overlay" id="drawerOverlay" hidden></div>
+  <aside class="mobile-drawer" id="mobileDrawer" aria-hidden="true" aria-label="Mobile course menu">
+    <div class="drawer-head">
+      <div class="drawer-title">
+        <span class="en">Chapter Menu</span>
+        <span class="ar">قائمة الفصل</span>
+      </div>
+      <button class="tiny ghost" id="drawerCloseBtn" type="button" aria-label="Close menu">×</button>
+    </div>
+    <ul class="drawer-links">
+      <li><a href="#mindset"><span class="en">Mindset</span><span class="ar">طريقة التفكير</span></a></li>
+      <li><a href="#web-basics"><span class="en">Web basics</span><span class="ar">أساسيات الويب</span></a></li>
+      <li><a href="#visual-lab"><span class="en">Interactive visuals</span><span class="ar">الصور التفاعلية</span></a></li>
+      <li><a href="#pc-basics"><span class="en">PC basics</span><span class="ar">أساسيات الحاسوب</span></a></li>
+      <li><a href="#tools"><span class="en">Required programs</span><span class="ar">البرامج المطلوبة</span></a></li>
+      <li><a href="#setup"><span class="en">Windows setup</span><span class="ar">تجهيز ويندوز</span></a></li>
+      <li><a href="#commands"><span class="en">Commands</span><span class="ar">الأوامر</span></a></li>
+      <li><a href="#ai"><span class="en">AI talk</span><span class="ar">الذكاء الاصطناعي</span></a></li>
+      <li><a href="#quiz"><span class="en">Quiz</span><span class="ar">الاختبار</span></a></li>
+      <li><a href="#final-task"><span class="en">Final checklist</span><span class="ar">القائمة النهائية</span></a></li>
+    </ul>
+  </aside>
 
   <section class="hero">
     <div class="shell hero-grid">
@@ -1620,6 +1887,18 @@
           <li><a href="#final-task"><span class="en">10. Final checklist</span><span class="ar">١٠. القائمة النهائية</span></a></li>
         </ul>
       </nav>
+
+
+      <section class="swipe-lessons" aria-label="Swipe lesson cards">
+        <div class="swipe-row">
+          <a class="swipe-card" href="#mindset"><small>01</small><strong><span class="en">Think like a developer</span><span class="ar">فكّر كمطور</span></strong><span><span class="en">Mindset first</span><span class="ar">طريقة التفكير أولاً</span></span></a>
+          <a class="swipe-card" href="#web-basics"><small>02</small><strong><span class="en">Web basics</span><span class="ar">أساسيات الويب</span></strong><span><span class="en">Browser, page, frontend</span><span class="ar">المتصفح والصفحة والواجهة</span></span></a>
+          <a class="swipe-card" href="#visual-lab"><small>03</small><strong><span class="en">Interactive visuals</span><span class="ar">صور تفاعلية</span></strong><span><span class="en">Tap and understand</span><span class="ar">اضغط وافهم</span></span></a>
+          <a class="swipe-card" href="#pc-basics"><small>04</small><strong><span class="en">PC basics</span><span class="ar">أساسيات الحاسوب</span></strong><span><span class="en">Files and folders</span><span class="ar">ملفات ومجلدات</span></span></a>
+          <a class="swipe-card" href="#tools"><small>05</small><strong><span class="en">Required programs</span><span class="ar">البرامج المطلوبة</span></strong><span><span class="en">Modern setup</span><span class="ar">إعداد حديث</span></span></a>
+          <a class="swipe-card" href="#quiz"><small>09</small><strong><span class="en">Mini quiz</span><span class="ar">اختبار قصير</span></strong><span><span class="en">Check understanding</span><span class="ar">اختبر فهمك</span></span></a>
+        </div>
+      </section>
 
       <div class="content">
         <section class="section-card dark" id="mindset">
@@ -2746,6 +3025,11 @@ git config --global user.email "you@example.com"</code></pre>
 
 
 
+  <div class="floating-lesson-nav" aria-label="Floating lesson navigation">
+    <button type="button" class="ghost" id="prevLessonBtn"><span class="en">← Previous</span><span class="ar">السابق →</span></button>
+    <button type="button" class="primary" id="nextLessonBtn"><span class="en">Next →</span><span class="ar">← التالي</span></button>
+  </div>
+
   <nav class="mobile-dock" aria-label="Mobile quick navigation">
     <a href="#chapter-start"><span class="en">Top</span><span class="ar">الأعلى</span></a>
     <a href="#visual-lab"><span class="en">Visuals</span><span class="ar">الصور</span></a>
@@ -2908,6 +3192,136 @@ git config --global user.email "you@example.com"</code></pre>
         });
       }
 
+
+      function initMobileDrawer() {
+        const menuBtn = document.getElementById("menuBtn");
+        const drawer = document.getElementById("mobileDrawer");
+        const overlay = document.getElementById("drawerOverlay");
+        const closeBtn = document.getElementById("drawerCloseBtn");
+
+        if (!menuBtn || !drawer || !overlay) return;
+
+        function openDrawer() {
+          drawer.classList.add("open");
+          drawer.setAttribute("aria-hidden", "false");
+          overlay.hidden = false;
+          overlay.classList.add("is-visible");
+          menuBtn.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeDrawer() {
+          drawer.classList.remove("open");
+          drawer.setAttribute("aria-hidden", "true");
+          overlay.classList.remove("is-visible");
+          menuBtn.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
+          setTimeout(() => { overlay.hidden = true; }, 200);
+        }
+
+        menuBtn.addEventListener("click", openDrawer);
+        overlay.addEventListener("click", closeDrawer);
+        if (closeBtn) closeBtn.addEventListener("click", closeDrawer);
+        drawer.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeDrawer));
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && drawer.classList.contains("open")) closeDrawer();
+        });
+      }
+
+      function initLessonNavigation() {
+        const ids = ["mindset", "web-basics", "visual-lab", "pc-basics", "tools", "setup", "commands", "ai", "quiz", "final-task"];
+        const sections = ids.map((id) => document.getElementById(id)).filter(Boolean);
+        const prev = document.getElementById("prevLessonBtn");
+        const next = document.getElementById("nextLessonBtn");
+        const swipeCards = Array.from(document.querySelectorAll(".swipe-card"));
+        let currentIndex = 0;
+
+        function detectCurrent() {
+          let found = 0;
+          sections.forEach((section, index) => {
+            if (section.getBoundingClientRect().top <= 170) found = index;
+          });
+          currentIndex = found;
+          if (prev) prev.disabled = currentIndex === 0;
+          if (next) next.disabled = currentIndex === sections.length - 1;
+          swipeCards.forEach((card) => {
+            card.classList.toggle("active", card.getAttribute("href") === "#" + sections[currentIndex].id);
+          });
+        }
+
+        function goTo(index) {
+          const target = sections[Math.max(0, Math.min(index, sections.length - 1))];
+          if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+
+        if (prev) prev.addEventListener("click", () => goTo(currentIndex - 1));
+        if (next) next.addEventListener("click", () => goTo(currentIndex + 1));
+        detectCurrent();
+        document.addEventListener("scroll", detectCurrent, { passive: true });
+      }
+
+      function initPWA() {
+        const status = document.getElementById("pwaStatus");
+
+        function setStatus(en, ar) {
+          if (!status) return;
+          status.innerHTML = '<span class="en">' + en + '</span><span class="ar">' + ar + '</span>';
+        }
+
+        try {
+          const manifest = {
+            name: "Frontend Foundations Chapter 1",
+            short_name: "Chapter 1",
+            start_url: location.href,
+            display: "standalone",
+            background_color: "#f7f9fc",
+            theme_color: "#0056d2",
+            description: "Interactive bilingual course chapter for frontend foundations."
+          };
+          const manifestUrl = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: "application/manifest+json" }));
+          const link = document.createElement("link");
+          link.rel = "manifest";
+          link.href = manifestUrl;
+          document.head.appendChild(link);
+        } catch (error) {
+          console.warn("Manifest creation failed", error);
+        }
+
+        if ("serviceWorker" in navigator && (location.protocol === "https:" || location.hostname === "localhost")) {
+          const swCode = `
+            const CACHE = 'chapter-01-course-cache-v1';
+            self.addEventListener('install', event => {
+              event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(['./'])));
+              self.skipWaiting();
+            });
+            self.addEventListener('activate', event => {
+              event.waitUntil(self.clients.claim());
+            });
+            self.addEventListener('fetch', event => {
+              event.respondWith(
+                caches.match(event.request).then(cached => {
+                  return cached || fetch(event.request).then(response => {
+                    const copy = response.clone();
+                    caches.open(CACHE).then(cache => cache.put(event.request, copy));
+                    return response;
+                  });
+                }).catch(() => caches.match('./'))
+              );
+            });
+          `;
+          const swUrl = URL.createObjectURL(new Blob([swCode], { type: "text/javascript" }));
+          navigator.serviceWorker.register(swUrl)
+            .then(() => setStatus("Offline ready", "جاهز بدون إنترنت"))
+            .catch(() => setStatus("PWA ready when hosted", "يعمل كتطبيق عند الاستضافة"));
+        } else {
+          setStatus("PWA ready when hosted", "يعمل كتطبيق عند الاستضافة");
+        }
+
+        window.addEventListener("offline", () => setStatus("Offline mode", "وضع بدون إنترنت"));
+        window.addEventListener("online", () => setStatus("Online", "متصل"));
+      }
+
+
       function initQuiz() {
         document.querySelectorAll(".quiz-card").forEach((card) => {
           const answer = card.dataset.answer;
@@ -2986,6 +3400,9 @@ git config --global user.email "you@example.com"</code></pre>
         document.addEventListener('scroll', updateActive, { passive: true });
       }
 
+      initMobileDrawer();
+      initLessonNavigation();
+      initPWA();
       initInteractiveCards();
       initQuiz();
       initActiveToc();
