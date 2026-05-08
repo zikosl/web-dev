@@ -668,6 +668,168 @@
     }
 
 
+    .visual-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .visual-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+      display: grid;
+      gap: 14px;
+    }
+
+    .visual-top {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+      gap: 16px;
+      align-items: start;
+    }
+
+    .diagram-stage {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      overflow: auto;
+      min-height: 280px;
+    }
+
+    .diagram-stage svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .diagram-note {
+      margin-top: 10px;
+      color: #5f6b7a;
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .diagram-shape {
+      fill: #eff5ff;
+      stroke: #b8cbef;
+      stroke-width: 2;
+      transition: fill .2s ease, stroke .2s ease, transform .2s ease;
+    }
+
+    .diagram-shape.active {
+      fill: #dce9ff;
+      stroke: var(--accent);
+      stroke-width: 3;
+      filter: drop-shadow(0 6px 10px rgba(0, 86, 210, .12));
+    }
+
+    .diagram-text {
+      fill: #0f172a;
+      font-size: 12px;
+      font-weight: 700;
+      font-family: "Cairo", sans-serif;
+    }
+
+    .interactive-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .interactive-output {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+      min-height: 180px;
+    }
+
+    .interactive-output h4 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      color: #0f172a;
+    }
+
+    .interactive-output p:last-child,
+    .interactive-output .ar p:last-child,
+    .interactive-output .en p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hotspot-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .hotspot-btn {
+      border-radius: 12px;
+      padding: 9px 12px;
+      background: #f8fbff;
+      border: 1px solid #dbe5f2;
+      box-shadow: none;
+      color: #1e293b;
+      font-weight: 800;
+      font-size: .85rem;
+    }
+
+    .hotspot-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+
+    .mini-inline-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-inline-start: 18px;
+    }
+
+    .folder-window {
+      width: min(100%, 540px);
+      margin: 0 auto;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, .06);
+    }
+
+    .folder-topbar {
+      padding: 10px 14px;
+      background: #f5f7fb;
+      border-bottom: 1px solid var(--line);
+      font-weight: 800;
+      color: #334155;
+      font-size: .84rem;
+    }
+
+    .folder-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      padding: 10px 14px;
+      border-bottom: 1px solid #eef2f7;
+      font-size: .88rem;
+      color: #334155;
+    }
+
+    .folder-row:last-child {
+      border-bottom: 0;
+    }
+
+    .folder-target.active {
+      background: #eef5ff;
+      box-shadow: inset 4px 0 0 var(--accent);
+    }
+
+    .folder-row strong {
+      color: #0f172a;
+    }
+
+
     /* Fix: light mini-cards inside dark sections must not inherit white text */
     .section-card.dark .mini-card,
     .section-card.dark .mini-card p,
@@ -691,6 +853,7 @@
       .chapter-layout,
       .grid-2,
       .grid-3,
+      .visual-top,
       html[data-mode="both"] .bilingual {
         grid-template-columns: 1fr;
       }
@@ -708,7 +871,8 @@
       .section-card,
       details.lesson,
       .quiz-card,
-      .task-card { padding: 16px; border-radius: 18px; }
+      .task-card,
+      .visual-card { padding: 16px; border-radius: 18px; }
       .tool-table,
       .tool-table tbody,
       .tool-table tr,
@@ -1244,13 +1408,14 @@
         <ul class="toc">
           <li><a href="#mindset"><span class="en">1. Mindset</span><span class="ar">١. طريقة التفكير</span></a></li>
           <li><a href="#web-basics"><span class="en">2. Web basics</span><span class="ar">٢. أساسيات الويب</span></a></li>
-          <li><a href="#pc-basics"><span class="en">3. PC basics for coding</span><span class="ar">٣. أساسيات الحاسوب للبرمجة</span></a></li>
-          <li><a href="#tools"><span class="en">4. Required programs</span><span class="ar">٤. البرامج المطلوبة</span></a></li>
-          <li><a href="#setup"><span class="en">5. Windows setup</span><span class="ar">٥. تجهيز ويندوز</span></a></li>
-          <li><a href="#commands"><span class="en">6. Setup commands</span><span class="ar">٦. أوامر التأكد</span></a></li>
-          <li><a href="#ai"><span class="en">7. AI small talk</span><span class="ar">٧. حديث قصير عن الذكاء الاصطناعي</span></a></li>
-          <li><a href="#quiz"><span class="en">8. Quiz</span><span class="ar">٨. اختبار قصير</span></a></li>
-          <li><a href="#final-task"><span class="en">9. Final checklist</span><span class="ar">٩. القائمة النهائية</span></a></li>
+          <li><a href="#visual-lab"><span class="en">3. Interactive visuals</span><span class="ar">٣. صور تفاعلية</span></a></li>
+          <li><a href="#pc-basics"><span class="en">4. PC basics for coding</span><span class="ar">٤. أساسيات الحاسوب للبرمجة</span></a></li>
+          <li><a href="#tools"><span class="en">5. Required programs</span><span class="ar">٥. البرامج المطلوبة</span></a></li>
+          <li><a href="#setup"><span class="en">6. Windows setup</span><span class="ar">٦. تجهيز ويندوز</span></a></li>
+          <li><a href="#commands"><span class="en">7. Setup commands</span><span class="ar">٧. أوامر التأكد</span></a></li>
+          <li><a href="#ai"><span class="en">8. AI small talk</span><span class="ar">٨. حديث قصير عن الذكاء الاصطناعي</span></a></li>
+          <li><a href="#quiz"><span class="en">9. Quiz</span><span class="ar">٩. اختبار قصير</span></a></li>
+          <li><a href="#final-task"><span class="en">10. Final checklist</span><span class="ar">١٠. القائمة النهائية</span></a></li>
         </ul>
       </nav>
 
@@ -1412,6 +1577,186 @@
             </div>
           </div>
         </details>
+
+        <section class="section-card" id="visual-lab">
+          <div class="bilingual">
+            <div class="en">
+              <h2>Interactive visual lab</h2>
+              <p>Some ideas become much easier when you can see them. Tap the labels under each image to explore the concept step by step.</p>
+            </div>
+            <div class="ar">
+              <h2>مختبر بصري تفاعلي</h2>
+              <p>بعض الأفكار تصبح أسهل كثيراً عندما تراها. اضغط على العناوين أسفل كل صورة لتكتشف الفكرة خطوة بخطوة.</p>
+            </div>
+          </div>
+
+          <div class="visual-grid" style="margin-top:16px;">
+            <article class="visual-card" data-interactive-card>
+              <div class="bilingual">
+                <div class="en">
+                  <h3>1) Anatomy of a web page</h3>
+                  <p class="muted">This image shows the big building blocks of a normal page.</p>
+                </div>
+                <div class="ar">
+                  <h3>١) مكوّنات صفحة الويب</h3>
+                  <p class="muted">هذه الصورة تبيّن الأجزاء الأساسية لصفحة ويب عادية.</p>
+                </div>
+              </div>
+
+              <div class="visual-top">
+                <div>
+                  <div class="diagram-stage">
+                    <svg viewBox="0 0 640 360" role="img" aria-label="Web page anatomy diagram">
+                      <rect x="20" y="20" width="600" height="320" rx="24" fill="#ffffff" stroke="#dbe5f2" stroke-width="2"/>
+                      <rect x="20" y="20" width="600" height="34" rx="24" fill="#eef4ff"/>
+                      <circle cx="48" cy="37" r="6" fill="#f97316"/>
+                      <circle cx="68" cy="37" r="6" fill="#facc15"/>
+                      <circle cx="88" cy="37" r="6" fill="#22c55e"/>
+                      <rect id="shape-header" class="diagram-shape" x="48" y="74" width="544" height="44" rx="14"/>
+                      <text class="diagram-text" x="70" y="101">Header / رأس الصفحة</text>
+                      <rect id="shape-nav" class="diagram-shape" x="48" y="132" width="160" height="122" rx="14"/>
+                      <text class="diagram-text" x="72" y="160">Navigation</text>
+                      <text class="diagram-text" x="72" y="178">التنقل</text>
+                      <rect id="shape-hero" class="diagram-shape" x="224" y="132" width="368" height="74" rx="14"/>
+                      <text class="diagram-text" x="246" y="164">Hero / Intro section</text>
+                      <text class="diagram-text" x="246" y="182">القسم التعريفي</text>
+                      <rect id="shape-content" class="diagram-shape" x="224" y="218" width="228" height="72" rx="14"/>
+                      <text class="diagram-text" x="246" y="250">Content card / محتوى</text>
+                      <rect id="shape-cta" class="diagram-shape" x="470" y="218" width="122" height="72" rx="14"/>
+                      <text class="diagram-text" x="490" y="250">Button</text>
+                      <text class="diagram-text" x="498" y="268">زر</text>
+                      <rect id="shape-footer" class="diagram-shape" x="48" y="300" width="544" height="22" rx="11"/>
+                      <text class="diagram-text" x="70" y="316">Footer / تذييل الصفحة</text>
+                    </svg>
+                    <div class="diagram-note"><span class="en">Tap a label to focus one part.</span><span class="ar">اضغط على عنوان للتركيز على جزء واحد.</span></div>
+                  </div>
+                  <div class="hotspot-buttons" style="margin-top:12px;">
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-header" data-label-en="Header" data-label-ar="رأس الصفحة" data-en="The header is the top area. It often contains the brand, logo, and the first important information a visitor sees." data-ar="رأس الصفحة هو الجزء العلوي. غالباً يحتوي على العلامة التجارية أو الشعار وأول معلومات مهمة يراها الزائر."><span class="en">Header</span><span class="ar">رأس الصفحة</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-nav" data-label-en="Navigation" data-label-ar="التنقل" data-en="Navigation helps the user move between sections or pages. Menus and sidebars belong here." data-ar="التنقل يساعد المستخدم على الانتقال بين الأقسام أو الصفحات. القوائم والشريط الجانبي يدخلان هنا."><span class="en">Navigation</span><span class="ar">التنقل</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-hero" data-label-en="Hero section" data-label-ar="القسم التعريفي" data-en="The hero section introduces the page quickly. It usually has a title, a short message, and sometimes an image." data-ar="القسم التعريفي يقدّم الصفحة بسرعة. غالباً يحتوي على عنوان ورسالة قصيرة وأحياناً صورة."><span class="en">Hero</span><span class="ar">القسم التعريفي</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-content" data-label-en="Content area" data-label-ar="منطقة المحتوى" data-en="This is where the main information lives: text, cards, articles, products, or lessons." data-ar="هنا تعيش المعلومات الأساسية: نصوص، بطاقات، مقالات، منتجات، أو دروس."><span class="en">Content</span><span class="ar">المحتوى</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-cta" data-label-en="Call to action" data-label-ar="زر الإجراء" data-en="A call-to-action button invites the user to do something important like Start, Sign up, Buy, or Learn more." data-ar="زر الإجراء يدعو المستخدم ليفعل شيئاً مهماً مثل ابدأ، سجّل، اشترِ، أو اعرف المزيد."><span class="en">CTA button</span><span class="ar">زر الإجراء</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="shape-footer" data-label-en="Footer" data-label-ar="التذييل" data-en="The footer is the closing area at the bottom. It often includes extra links, contact info, and copyright." data-ar="التذييل هو الجزء الختامي في الأسفل. غالباً يحتوي على روابط إضافية ومعلومات تواصل وحقوق النشر."><span class="en">Footer</span><span class="ar">التذييل</span></button>
+                  </div>
+                </div>
+                <div class="interactive-side">
+                  <div class="interactive-output" aria-live="polite"></div>
+                  <div class="callout info">
+                    <strong><span class="en">Why this matters</span><span class="ar">لماذا هذا مهم؟</span></strong>
+                    <div class="bilingual">
+                      <p class="en">When you start coding, you should begin seeing pages as reusable parts instead of one confusing screen.</p>
+                      <p class="ar">عندما تبدأ البرمجة، يجب أن ترى الصفحة كأجزاء قابلة لإعادة الاستخدام بدل أن تراها شاشة مربكة واحدة.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="visual-card" data-interactive-card>
+              <div class="bilingual">
+                <div class="en">
+                  <h3>2) How a website reaches your screen</h3>
+                  <p class="muted">This is the journey from typing a web address to seeing the page.</p>
+                </div>
+                <div class="ar">
+                  <h3>٢) كيف يصل الموقع إلى شاشتك</h3>
+                  <p class="muted">هذه هي الرحلة من كتابة عنوان الموقع حتى ظهور الصفحة.</p>
+                </div>
+              </div>
+
+              <div class="visual-top">
+                <div>
+                  <div class="diagram-stage">
+                    <svg viewBox="0 0 720 250" role="img" aria-label="Website request flow diagram">
+                      <line x1="110" y1="126" x2="610" y2="126" stroke="#c9d8f1" stroke-width="8" stroke-linecap="round"/>
+                      <circle id="flow-browser" class="diagram-shape" cx="100" cy="126" r="48"/>
+                      <text class="diagram-text" x="73" y="120">Browser</text>
+                      <text class="diagram-text" x="78" y="140">المتصفح</text>
+                      <circle id="flow-request" class="diagram-shape" cx="250" cy="126" r="48"/>
+                      <text class="diagram-text" x="221" y="120">Request</text>
+                      <text class="diagram-text" x="221" y="140">طلب</text>
+                      <circle id="flow-server" class="diagram-shape" cx="400" cy="126" r="48"/>
+                      <text class="diagram-text" x="377" y="120">Server</text>
+                      <text class="diagram-text" x="377" y="140">خادم</text>
+                      <circle id="flow-files" class="diagram-shape" cx="550" cy="126" r="48"/>
+                      <text class="diagram-text" x="534" y="112">Files</text>
+                      <text class="diagram-text" x="522" y="132">HTML/CSS/JS</text>
+                      <text class="diagram-text" x="526" y="152">ملفات</text>
+                      <circle id="flow-render" class="diagram-shape" cx="680" cy="126" r="32"/>
+                      <text class="diagram-text" x="658" y="130">View</text>
+                      <text class="diagram-text" x="664" y="210">Page appears on screen / تظهر الصفحة</text>
+                    </svg>
+                    <div class="diagram-note"><span class="en">Read the journey from left to right.</span><span class="ar">اقرأ الرحلة من اليسار إلى اليمين.</span></div>
+                  </div>
+                  <div class="hotspot-buttons" style="margin-top:12px;">
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="flow-browser" data-label-en="Browser" data-label-ar="المتصفح" data-en="The browser is the app you use to open websites, such as Chrome or Edge. It is your viewing tool." data-ar="المتصفح هو التطبيق الذي تستخدمه لفتح المواقع مثل Chrome أو Edge. وهو أداة العرض لديك."><span class="en">Browser</span><span class="ar">المتصفح</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="flow-request" data-label-en="Request" data-label-ar="الطلب" data-en="When you type a web address or click a link, the browser sends a request asking for the page files." data-ar="عندما تكتب عنوان الموقع أو تضغط رابطاً، يرسل المتصفح طلباً يطلب فيه ملفات الصفحة."><span class="en">Request</span><span class="ar">الطلب</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="flow-server" data-label-en="Server" data-label-ar="الخادم" data-en="The server is a computer that stores website files and sends them back when someone asks for them." data-ar="الخادم هو حاسوب يخزن ملفات الموقع ويرسلها عندما يطلبها أحد."><span class="en">Server</span><span class="ar">الخادم</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="flow-files" data-label-en="Files" data-label-ar="الملفات" data-en="The important files are usually HTML for structure, CSS for style, and JavaScript for behavior." data-ar="الملفات المهمة عادة هي HTML للهيكل وCSS للتصميم وJavaScript للسلوك."><span class="en">Files</span><span class="ar">الملفات</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="flow-render" data-label-en="Render" data-label-ar="العرض" data-en="The browser reads the files and renders them into the visual page you finally see on the screen." data-ar="يقرأ المتصفح الملفات ثم يحولها إلى الصفحة المرئية التي تراها أخيراً على الشاشة."><span class="en">Render</span><span class="ar">العرض</span></button>
+                  </div>
+                </div>
+                <div class="interactive-side">
+                  <div class="interactive-output" aria-live="polite"></div>
+                  <div class="callout success">
+                    <strong><span class="en">Beginner shortcut</span><span class="ar">اختصار للمبتدئ</span></strong>
+                    <div class="bilingual">
+                      <p class="en">If you remember only one thing, remember this: the browser shows files that came from somewhere.</p>
+                      <p class="ar">إذا أردت أن تتذكر شيئاً واحداً فقط فتذكر هذا: المتصفح يعرض ملفات جاءت من مكان ما.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="visual-card" data-interactive-card>
+              <div class="bilingual">
+                <div class="en">
+                  <h3>3) Your project folder anatomy</h3>
+                  <p class="muted">This visual shows how one beginner project can stay clean and easy to manage.</p>
+                </div>
+                <div class="ar">
+                  <h3>٣) مكوّنات مجلد المشروع</h3>
+                  <p class="muted">هذا الشكل يوضح كيف يبقى مشروع المبتدئ منظماً وسهل الإدارة.</p>
+                </div>
+              </div>
+
+              <div class="visual-top">
+                <div>
+                  <div class="diagram-stage">
+                    <div class="folder-window" aria-label="Project folder explorer mockup">
+                      <div class="folder-topbar">web-development-course &gt; chapter-01</div>
+                      <div id="folder-assets" class="folder-row folder-target"><strong>📁 assets</strong><span><span class="en">images, icons</span><span class="ar">صور، أيقونات</span></span></div>
+                      <div id="folder-index" class="folder-row folder-target"><strong>📄 index.html</strong><span><span class="en">page structure</span><span class="ar">هيكل الصفحة</span></span></div>
+                      <div id="folder-style" class="folder-row folder-target"><strong>📄 style.css</strong><span><span class="en">design</span><span class="ar">التصميم</span></span></div>
+                      <div id="folder-script" class="folder-row folder-target"><strong>📄 script.js</strong><span><span class="en">behavior</span><span class="ar">السلوك</span></span></div>
+                      <div id="folder-readme" class="folder-row folder-target"><strong>📄 README.txt</strong><span><span class="en">notes</span><span class="ar">ملاحظات</span></span></div>
+                    </div>
+                    <div class="diagram-note"><span class="en">Good folders reduce confusion later.</span><span class="ar">المجلدات الجيدة تقلل الارتباك لاحقاً.</span></div>
+                  </div>
+                  <div class="hotspot-buttons" style="margin-top:12px;">
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="folder-assets" data-label-en="assets folder" data-label-ar="مجلد assets" data-en="The assets folder is a home for images, icons, and other supporting files. It keeps media separate from code." data-ar="مجلد assets هو مكان للصور والأيقونات والملفات المساندة. وهو يفصل الوسائط عن الكود."><span class="en">assets</span><span class="ar">assets</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="folder-index" data-label-en="index.html" data-label-ar="ملف index.html" data-en="index.html is usually the starting page. It contains the page structure and the main content tags." data-ar="غالباً يكون index.html هو صفحة البداية. ويحتوي على هيكل الصفحة وعناصر المحتوى الأساسية."><span class="en">index.html</span><span class="ar">index.html</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="folder-style" data-label-en="style.css" data-label-ar="ملف style.css" data-en="style.css controls colors, spacing, layout, fonts, and the overall visual look of the page." data-ar="style.css يتحكم في الألوان والمسافات والتخطيط والخطوط والشكل العام للصفحة."><span class="en">style.css</span><span class="ar">style.css</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="folder-script" data-label-en="script.js" data-label-ar="ملف script.js" data-en="script.js adds behavior like button clicks, menu opening, validation, and dynamic content changes." data-ar="script.js يضيف السلوك مثل ضغط الأزرار وفتح القوائم والتحقق من البيانات وتغيير المحتوى بشكل ديناميكي."><span class="en">script.js</span><span class="ar">script.js</span></button>
+                    <button type="button" class="hotspot-btn" data-hotspot data-target="folder-readme" data-label-en="README notes" data-label-ar="ملاحظات README" data-en="A small notes file is useful when you want to remember what the project does or what to improve next." data-ar="ملف الملاحظات الصغير مفيد عندما تريد أن تتذكر وظيفة المشروع أو ما الذي ستطوره لاحقاً."><span class="en">README</span><span class="ar">README</span></button>
+                  </div>
+                </div>
+                <div class="interactive-side">
+                  <div class="interactive-output" aria-live="polite"></div>
+                  <div class="callout warn">
+                    <strong><span class="en">Avoid messy projects</span><span class="ar">تجنب المشاريع الفوضوية</span></strong>
+                    <div class="bilingual">
+                      <p class="en">Do not mix random screenshots, downloaded files, and code files in one messy Desktop folder.</p>
+                      <p class="ar">لا تخلط لقطات الشاشة والملفات المحمّلة وملفات الكود في مجلد فوضوي واحد على سطح المكتب.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
 
         <details class="lesson" id="pc-basics">
           <summary>
@@ -2312,6 +2657,42 @@ git config --global user.email "you@example.com"</code></pre>
         callback();
       }
 
+
+
+      function initInteractiveCards() {
+        document.querySelectorAll('[data-interactive-card]').forEach((card) => {
+          const buttons = Array.from(card.querySelectorAll('[data-hotspot]'));
+          const output = card.querySelector('.interactive-output');
+          const shapes = Array.from(card.querySelectorAll('.diagram-shape, .folder-target'));
+
+          function activate(button) {
+            buttons.forEach((btn) => btn.classList.toggle('active', btn === button));
+            const target = button.dataset.target;
+            shapes.forEach((shape) => {
+              shape.classList.toggle('active', shape.id === target);
+            });
+            if (output) {
+              output.innerHTML = `
+                <div class="en">
+                  <h4>${button.dataset.labelEn || ''}</h4>
+                  <p>${button.dataset.en || ''}</p>
+                </div>
+                <div class="ar">
+                  <h4>${button.dataset.labelAr || ''}</h4>
+                  <p>${button.dataset.ar || ''}</p>
+                </div>
+              `;
+            }
+          }
+
+          buttons.forEach((button) => {
+            button.addEventListener('click', () => activate(button));
+          });
+
+          if (buttons[0]) activate(buttons[0]);
+        });
+      }
+
       function initQuiz() {
         document.querySelectorAll(".quiz-card").forEach((card) => {
           const answer = card.dataset.answer;
@@ -2382,6 +2763,7 @@ git config --global user.email "you@example.com"</code></pre>
         document.addEventListener('scroll', updateActive, { passive: true });
       }
 
+      initInteractiveCards();
       initQuiz();
       initActiveToc();
       setMode(localStorage.getItem(LANG_KEY) || "both");
