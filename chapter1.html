@@ -719,6 +719,388 @@
       .copy-btn { position: static; margin: 10px; width: calc(100% - 20px); }
     }
 
+
+
+    /* Mobile UX upgrade: course-app feel, easier taps, cleaner reading */
+    @media (max-width: 760px) {
+      :root {
+        --mobile-gutter: 14px;
+      }
+
+      body {
+        background: #f7f9fc;
+        font-size: 14px;
+        line-height: 1.75;
+        padding-bottom: env(safe-area-inset-bottom);
+      }
+
+      .shell,
+      .topbar-inner {
+        width: calc(100% - 24px);
+      }
+
+      .topbar {
+        border-bottom-color: #e9edf5;
+      }
+
+      .topbar-inner {
+        padding: 10px 0 8px;
+        gap: 10px;
+      }
+
+      .brand {
+        width: 100%;
+        justify-content: space-between;
+      }
+
+      .brand > div:last-child {
+        font-size: .86rem;
+      }
+
+      .logo {
+        width: 34px;
+        height: 34px;
+        border-radius: 10px;
+        font-size: .86rem;
+      }
+
+      .controls {
+        width: 100%;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        padding: 2px 0 4px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .controls::-webkit-scrollbar {
+        display: none;
+      }
+
+      button,
+      .button {
+        min-height: 42px;
+        padding: 10px 14px;
+        font-size: .86rem;
+        box-shadow: 0 4px 12px rgba(15,23,42,.06);
+      }
+
+      .tiny {
+        flex: 0 0 auto;
+        min-height: 38px;
+        padding: 8px 12px;
+      }
+
+      .hero {
+        padding: 18px 0 10px;
+      }
+
+      .hero-grid {
+        gap: 14px;
+      }
+
+      .hero-card,
+      .floating-card,
+      .section-card,
+      details.lesson,
+      .quiz-card,
+      .task-card {
+        padding: 16px;
+        border-radius: 18px;
+        box-shadow: 0 6px 18px rgba(15,23,42,.05);
+      }
+
+      .eyebrow {
+        font-size: .72rem;
+        padding: 5px 10px;
+      }
+
+      h1 {
+        font-size: clamp(1.55rem, 9vw, 2.15rem);
+        max-width: 100%;
+      }
+
+      h2 {
+        font-size: 1.18rem;
+      }
+
+      h3 {
+        font-size: .98rem;
+      }
+
+      .lead,
+      p,
+      li,
+      td,
+      th,
+      label,
+      summary {
+        font-size: .9rem;
+      }
+
+      html[data-mode="both"] .bilingual {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      html[data-mode="both"] .bilingual > .ar {
+        padding-top: 10px;
+        border-top: 1px dashed #dce3ed;
+      }
+
+      .section-card.dark html[data-mode="both"] .bilingual > .ar,
+      .section-card.dark .bilingual > .ar {
+        border-top-color: rgba(255,255,255,.18);
+      }
+
+      .chapter-meta {
+        margin-top: 14px;
+      }
+
+      .meta-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+        padding: 10px 0;
+      }
+
+      .progress-wrap {
+        position: sticky;
+        top: 92px;
+        z-index: 15;
+        margin-top: 14px;
+        padding: 12px;
+        border-radius: 15px;
+        background: rgba(249, 251, 255, .96);
+        backdrop-filter: blur(12px);
+      }
+
+      .bar {
+        height: 8px;
+      }
+
+      main {
+        padding-top: 8px;
+      }
+
+      .chapter-layout {
+        gap: 14px;
+      }
+
+      .sidebar {
+        position: sticky;
+        top: 86px;
+        z-index: 12;
+        padding: 12px;
+        border-radius: 16px;
+        background: rgba(255,255,255,.96);
+        backdrop-filter: blur(12px);
+      }
+
+      .sidebar h2 {
+        display: none;
+      }
+
+      .toc {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .toc::-webkit-scrollbar {
+        display: none;
+      }
+
+      .toc li {
+        flex: 0 0 auto;
+      }
+
+      .toc a {
+        white-space: nowrap;
+        padding: 8px 11px;
+        font-size: .8rem;
+        background: #f7f9fc;
+        border-color: #edf1f6;
+      }
+
+      .content {
+        gap: 14px;
+      }
+
+      summary {
+        align-items: flex-start;
+        gap: 12px;
+      }
+
+      summary h2 {
+        margin-bottom: 0;
+      }
+
+      summary::after {
+        width: 30px;
+        height: 30px;
+        margin-top: 0;
+      }
+
+      .lesson-body {
+        margin-top: 14px;
+        padding-top: 14px;
+        gap: 14px;
+      }
+
+      .grid-2,
+      .grid-3 {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .mini-card,
+      .callout {
+        padding: 14px;
+        border-radius: 15px;
+      }
+
+      .tool-table,
+      .tool-table tbody,
+      .tool-table tr,
+      .tool-table td {
+        display: block;
+        width: 100%;
+      }
+
+      .tool-table thead {
+        display: none;
+      }
+
+      .tool-table tr {
+        border-bottom: 1px solid var(--line);
+        padding: 10px 0;
+      }
+
+      .tool-table tr:last-child {
+        border-bottom: 0;
+      }
+
+      .tool-table td {
+        padding: 7px 12px;
+        border-bottom: 0;
+      }
+
+      .tool-table td:first-child {
+        font-weight: 800;
+        color: #0f172a;
+      }
+
+      .checklist {
+        gap: 9px;
+      }
+
+      .check-item {
+        padding: 13px;
+        gap: 10px;
+        border-radius: 14px;
+      }
+
+      .check-item input {
+        inline-size: 22px;
+        block-size: 22px;
+        margin-top: 2px;
+      }
+
+      .quiz-options button {
+        min-height: 48px;
+        padding: 13px 14px;
+        border-radius: 14px;
+        text-align: start;
+      }
+
+      .codebox {
+        border-radius: 14px;
+      }
+
+      .codebox pre {
+        padding: 14px 12px;
+        font-size: .8rem;
+      }
+
+      .copy-btn {
+        position: static;
+        margin: 10px 10px 0;
+        width: calc(100% - 20px);
+        justify-content: center;
+        min-height: 38px;
+      }
+
+      .pill-list {
+        gap: 7px;
+      }
+
+      .pill-list li {
+        font-size: .76rem;
+        padding: 6px 9px;
+      }
+
+      .footer {
+        padding: 20px 0 32px;
+      }
+
+      .dialog-inner {
+        padding: 18px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .shell,
+      .topbar-inner {
+        width: calc(100% - 18px);
+      }
+
+      .hero-card,
+      .floating-card,
+      .section-card,
+      details.lesson,
+      .quiz-card,
+      .task-card {
+        padding: 14px;
+        border-radius: 16px;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.08rem;
+      }
+
+      .lead,
+      p,
+      li,
+      td,
+      th,
+      label,
+      summary {
+        font-size: .86rem;
+      }
+
+      .progress-wrap {
+        top: 88px;
+      }
+
+      .sidebar {
+        top: 82px;
+      }
+
+      .brand > div:last-child {
+        max-width: calc(100vw - 76px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+
     @media print {
       body { background: white; color: black; }
       body::before,
