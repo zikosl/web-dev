@@ -1,0 +1,2074 @@
+<!doctype html>
+<html lang="en" data-mode="both">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chapter 1 — Web Development Foundations & Windows Setup | الفصل الأول</title>
+  <meta name="description" content="Interactive bilingual English/Arabic chapter for beginner frontend web development foundations on Windows." />
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #172033;
+      --card: #ffffff;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --ink: #111827;
+      --soft: #f8fafc;
+      --line: #dbe4ef;
+      --accent: #38bdf8;
+      --accent-2: #22c55e;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --radius: 22px;
+      --shadow: 0 20px 50px rgba(2, 6, 23, .22);
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, "Noto Sans Arabic", "Tahoma", sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, .22), transparent 34rem),
+        radial-gradient(circle at top right, rgba(34, 197, 94, .15), transparent 30rem),
+        linear-gradient(135deg, #0f172a, #111827 48%, #1e293b);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,.6), transparent 80%);
+    }
+
+    a {
+      color: #0369a1;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 3px;
+    }
+
+    a:hover { text-decoration-style: wavy; }
+
+    .shell {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, .82);
+      border-bottom: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .topbar-inner {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -.02em;
+      white-space: nowrap;
+    }
+
+    .logo {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #082f49;
+      font-weight: 1000;
+      box-shadow: 0 10px 30px rgba(56,189,248,.25);
+    }
+
+    .controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    button,
+    .button {
+      border: 0;
+      font: inherit;
+      font-weight: 800;
+      cursor: pointer;
+      border-radius: 999px;
+      padding: 10px 14px;
+      background: #e2e8f0;
+      color: #0f172a;
+      transition: transform .16s ease, box-shadow .16s ease, background .16s ease;
+      box-shadow: 0 6px 20px rgba(2,6,23,.12);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    button:hover,
+    .button:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 28px rgba(2,6,23,.18);
+    }
+
+    button:focus-visible,
+    a:focus-visible,
+    input:focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 3px;
+    }
+
+    .ghost {
+      background: rgba(255,255,255,.10);
+      color: white;
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #082f49;
+    }
+
+    .tiny {
+      font-size: .88rem;
+      padding: 8px 12px;
+    }
+
+    .hero {
+      padding: 70px 0 40px;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .floating-card {
+      background: rgba(255, 255, 255, .10);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: calc(var(--radius) + 10px);
+      padding: 30px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(56,189,248,.13);
+      color: #e0f2fe;
+      font-weight: 850;
+      font-size: .93rem;
+      border: 1px solid rgba(125,211,252,.28);
+    }
+
+    h1, h2, h3 {
+      line-height: 1.15;
+      margin: 0 0 14px;
+      letter-spacing: -.035em;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      max-width: 12ch;
+    }
+
+    h2 {
+      font-size: clamp(1.55rem, 2.2vw, 2.25rem);
+      color: #0f172a;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      color: #0f172a;
+    }
+
+    p { margin: 0 0 12px; }
+
+    .lead {
+      font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+      color: #cbd5e1;
+      max-width: 70ch;
+    }
+
+    .chapter-meta {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .meta-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,.12);
+    }
+
+    .meta-row strong {
+      color: white;
+    }
+
+    .meta-row span {
+      color: #cbd5e1;
+    }
+
+    .progress-wrap {
+      margin-top: 20px;
+      background: rgba(15, 23, 42, .7);
+      border-radius: 18px;
+      padding: 14px;
+      border: 1px solid rgba(255,255,255,.12);
+    }
+
+    .progress-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: white;
+      font-weight: 900;
+    }
+
+    .bar {
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      background: rgba(255,255,255,.12);
+    }
+
+    .bar > span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      transition: width .35s ease;
+    }
+
+    main {
+      background: var(--soft);
+      color: var(--ink);
+      border-radius: 38px 38px 0 0;
+      margin-top: 20px;
+      padding: 36px 0 70px;
+      position: relative;
+    }
+
+    .chapter-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 82px;
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 12px 34px rgba(15,23,42,.08);
+    }
+
+    .sidebar h2 {
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+    }
+
+    .toc {
+      display: grid;
+      gap: 8px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    .toc a {
+      display: block;
+      color: #334155;
+      text-decoration: none;
+      padding: 9px 10px;
+      border-radius: 12px;
+      font-weight: 750;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      background: #e0f2fe;
+      color: #075985;
+    }
+
+    .content {
+      display: grid;
+      gap: 22px;
+    }
+
+    .section-card,
+    details.lesson,
+    .quiz-card,
+    .task-card {
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: 0 10px 28px rgba(15,23,42,.07);
+    }
+
+    .section-card.dark {
+      background: linear-gradient(135deg, #0f172a, #172033);
+      color: white;
+      border-color: rgba(255,255,255,.12);
+    }
+
+    .section-card.dark h2,
+    .section-card.dark h3 {
+      color: white;
+    }
+
+    .muted {
+      color: #64748b;
+    }
+
+    .dark .muted {
+      color: #cbd5e1;
+    }
+
+    .bilingual {
+      display: block;
+      gap: 14px;
+    }
+
+    html[data-mode="both"] .bilingual {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    html[data-mode="en"] .ar,
+    html[data-mode="ar"] .en {
+      display: none !important;
+    }
+
+    html[data-mode="ar"] .section-card,
+    html[data-mode="ar"] details.lesson,
+    html[data-mode="ar"] .quiz-card,
+    html[data-mode="ar"] .task-card,
+    html[data-mode="ar"] .sidebar,
+    html[data-mode="ar"] .hero-card,
+    html[data-mode="ar"] .floating-card {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .ar {
+      direction: rtl;
+      text-align: right;
+      font-family: "Noto Sans Arabic", "Segoe UI", Tahoma, Arial, sans-serif;
+    }
+
+    summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: #0f172a;
+    }
+
+    summary::-webkit-details-marker { display: none; }
+
+    summary::after {
+      content: "+";
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #075985;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      font-weight: 1000;
+    }
+
+    details[open] summary::after {
+      content: "−";
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .lesson-body {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .mini-card {
+      padding: 18px;
+      background: #f8fafc;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .mini-card h3 {
+      font-size: 1.05rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tag {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: .78rem;
+      font-weight: 900;
+      background: #dbeafe;
+      color: #1e40af;
+      margin-bottom: 10px;
+    }
+
+    .tag.green {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .tag.orange {
+      background: #ffedd5;
+      color: #9a3412;
+    }
+
+    .callout {
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid;
+      display: grid;
+      gap: 6px;
+    }
+
+    .callout.info {
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .callout.warn {
+      background: #fffbeb;
+      border-color: #fde68a;
+    }
+
+    .callout.success {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .callout strong {
+      display: block;
+      color: #0f172a;
+    }
+
+    .codebox {
+      position: relative;
+      background: #0b1220;
+      color: #e2e8f0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .codebox pre {
+      margin: 0;
+      padding: 18px;
+      overflow-x: auto;
+      font-size: .95rem;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(255,255,255,.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,.2);
+      padding: 7px 10px;
+      font-size: .8rem;
+    }
+
+    html[data-mode="ar"] .copy-btn {
+      right: auto;
+      left: 10px;
+    }
+
+    .checklist {
+      display: grid;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .check-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #f8fafc;
+    }
+
+    .check-item input {
+      inline-size: 22px;
+      block-size: 22px;
+      margin-top: 2px;
+      accent-color: #22c55e;
+    }
+
+    .quiz-options {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .quiz-options button {
+      width: 100%;
+      justify-content: flex-start;
+      border-radius: 16px;
+      background: #f8fafc;
+      color: #0f172a;
+      border: 1px solid var(--line);
+      box-shadow: none;
+      font-weight: 750;
+    }
+
+    html[data-mode="ar"] .quiz-options button {
+      justify-content: flex-end;
+    }
+
+    .quiz-options button.correct {
+      background: #dcfce7;
+      border-color: #86efac;
+      color: #166534;
+    }
+
+    .quiz-options button.wrong {
+      background: #fee2e2;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+
+    .feedback {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      display: none;
+      font-weight: 800;
+    }
+
+    .feedback.show {
+      display: block;
+    }
+
+    .feedback.correct {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .feedback.wrong {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .tool-table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      background: white;
+    }
+
+    .tool-table th,
+    .tool-table td {
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+
+    .tool-table th {
+      background: #f1f5f9;
+      color: #0f172a;
+      font-weight: 900;
+    }
+
+    .tool-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    html[data-mode="ar"] .tool-table th,
+    html[data-mode="ar"] .tool-table td {
+      text-align: right;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 0;
+      margin: 12px 0 0;
+      list-style: none;
+    }
+
+    .pill-list li {
+      padding: 8px 11px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #075985;
+      font-weight: 850;
+      font-size: .88rem;
+    }
+
+    .source-list {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-inline-start: 20px;
+    }
+
+    .footer {
+      padding: 34px 0;
+      color: #cbd5e1;
+      text-align: center;
+    }
+
+    dialog {
+      border: 0;
+      border-radius: 26px;
+      padding: 0;
+      max-width: min(92vw, 560px);
+      box-shadow: 0 30px 70px rgba(2, 6, 23, .35);
+    }
+
+    dialog::backdrop {
+      background: rgba(15, 23, 42, .68);
+      backdrop-filter: blur(5px);
+    }
+
+    .dialog-inner {
+      padding: 26px;
+      background: white;
+      color: #0f172a;
+      border-radius: 26px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .chapter-layout,
+      .grid-2,
+      .grid-3,
+      html[data-mode="both"] .bilingual {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+      }
+
+      h1 {
+        max-width: none;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .controls {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .meta-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .hero-card,
+      .floating-card,
+      .section-card,
+      details.lesson,
+      .quiz-card,
+      .task-card {
+        padding: 18px;
+        border-radius: 18px;
+      }
+
+      .tool-table,
+      .tool-table tbody,
+      .tool-table tr,
+      .tool-table td {
+        display: block;
+      }
+
+      .tool-table thead {
+        display: none;
+      }
+
+      .tool-table td {
+        border-bottom: 0;
+      }
+
+      .tool-table tr {
+        border-bottom: 1px solid var(--line);
+        padding: 8px 0;
+      }
+    }
+
+    @media print {
+      body {
+        background: white;
+        color: black;
+      }
+
+      .topbar,
+      .sidebar,
+      .copy-btn,
+      .button,
+      button {
+        display: none !important;
+      }
+
+      main {
+        border-radius: 0;
+      }
+
+      .section-card,
+      details.lesson,
+      .quiz-card,
+      .task-card {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+
+      details.lesson {
+        display: block;
+      }
+
+      details.lesson[open] > summary ~ * {
+        display: block;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar" aria-label="Chapter controls">
+    <div class="topbar-inner">
+      <div class="brand">
+        <div class="logo" aria-hidden="true">01</div>
+        <div>
+          <div class="en">Frontend Foundations</div>
+          <div class="ar" dir="rtl">أساسيات الواجهة الأمامية</div>
+        </div>
+      </div>
+
+      <div class="controls" aria-label="Language and page controls">
+        <button class="tiny ghost" data-mode-button="en" type="button">English</button>
+        <button class="tiny ghost" data-mode-button="ar" type="button">العربية</button>
+        <button class="tiny primary" data-mode-button="both" type="button">EN + AR</button>
+        <button class="tiny ghost" id="printBtn" type="button">
+          <span class="en">Print</span><span class="ar">طباعة</span>
+        </button>
+        <button class="tiny ghost" id="resetBtn" type="button">
+          <span class="en">Reset</span><span class="ar">إعادة</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell hero-grid">
+      <div class="hero-card">
+        <span class="eyebrow">
+          <span class="en">Chapter 1 · Beginner Friendly · Windows</span>
+          <span class="ar">الفصل الأول · للمبتدئين · ويندوز</span>
+        </span>
+
+        <div class="bilingual" style="margin-top: 22px;">
+          <div class="en">
+            <h1>Web Development Foundations & Windows Setup</h1>
+            <p class="lead">Before you write HTML, you need to understand your tools, your computer workspace, and how frontend development works. This chapter prepares your PC and your mind for modern web development.</p>
+          </div>
+          <div class="ar">
+            <h1>أساسيات تطوير الويب وتجهيز ويندوز</h1>
+            <p class="lead">قبل أن تكتب HTML، يجب أن تفهم أدواتك، طريقة تنظيم ملفاتك، وكيف يعمل تطوير الواجهة الأمامية. هذا الفصل يجهّز حاسوبك وعقلك لتعلّم تطوير الويب بطريقة حديثة.</p>
+          </div>
+        </div>
+
+        <div class="chapter-meta" aria-label="Chapter metadata">
+          <div class="meta-row">
+            <strong><span class="en">Level</span><span class="ar">المستوى</span></strong>
+            <span><span class="en">Absolute beginner, but already uses a PC normally</span><span class="ar">مبتدئ تماماً، لكنه يستعمل الحاسوب بشكل عادي</span></span>
+          </div>
+          <div class="meta-row">
+            <strong><span class="en">Focus</span><span class="ar">التركيز</span></strong>
+            <span><span class="en">Frontend first: browser, editor, terminal, Node.js, Git, project folders</span><span class="ar">الواجهة الأمامية أولاً: المتصفح، محرر الكود، الطرفية، Node.js، Git، ومجلدات المشاريع</span></span>
+          </div>
+          <div class="meta-row">
+            <strong><span class="en">Output</span><span class="ar">النتيجة</span></strong>
+            <span><span class="en">A clean Windows setup and a ready course folder</span><span class="ar">إعداد ويندوز بشكل منظم ومجلد جاهز للكورس</span></span>
+          </div>
+        </div>
+
+        <div class="progress-wrap" aria-label="Chapter progress">
+          <div class="progress-head">
+            <span><span class="en">Chapter progress</span><span class="ar">تقدم الفصل</span></span>
+            <span id="progressText">0%</span>
+          </div>
+          <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+        </div>
+
+        <p style="margin-top: 20px;">
+          <a class="button primary" href="#chapter-start">
+            <span class="en">Start Chapter</span>
+            <span class="ar">ابدأ الفصل</span>
+          </a>
+        </p>
+      </div>
+
+      <aside class="floating-card" aria-label="What this chapter includes">
+        <div class="bilingual">
+          <div class="en">
+            <h2 style="color:white;">What you will learn</h2>
+            <ul>
+              <li>What web development means in simple words.</li>
+              <li>What frontend developers actually build.</li>
+              <li>How files, folders, and extensions matter in coding.</li>
+              <li>Which programs to install on Windows.</li>
+              <li>How to verify your setup with simple commands.</li>
+              <li>How to use AI safely while learning.</li>
+            </ul>
+          </div>
+          <div class="ar">
+            <h2 style="color:white;">ماذا ستتعلم؟</h2>
+            <ul>
+              <li>معنى تطوير الويب بكلمات بسيطة.</li>
+              <li>ماذا يبني مطور الواجهة الأمامية فعلاً.</li>
+              <li>أهمية الملفات والمجلدات والامتدادات في البرمجة.</li>
+              <li>ما البرامج التي تثبتها على ويندوز.</li>
+              <li>كيف تتأكد أن الإعداد يعمل بأوامر بسيطة.</li>
+              <li>كيف تستعمل الذكاء الاصطناعي أثناء التعلم بدون اعتماد كامل عليه.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout success" style="margin-top: 18px;">
+          <strong><span class="en">No old workflow</span><span class="ar">لا نعتمد على طرق قديمة</span></strong>
+          <div class="bilingual">
+            <p class="en">We will not start with Notepad, jQuery-first lessons, or random desktop files. We will use a modern, clean, beginner-safe workflow.</p>
+            <p class="ar">لن نبدأ بـ Notepad، ولن نعتمد على jQuery من البداية، ولن نضع الملفات عشوائياً على سطح المكتب. سنستعمل طريقة حديثة ومنظمة وآمنة للمبتدئين.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <main id="chapter-start">
+    <div class="shell chapter-layout">
+      <nav class="sidebar" aria-label="Chapter table of contents">
+        <h2><span class="en">Chapter map</span><span class="ar">خريطة الفصل</span></h2>
+        <ul class="toc">
+          <li><a href="#mindset"><span class="en">1. Mindset</span><span class="ar">١. طريقة التفكير</span></a></li>
+          <li><a href="#web-basics"><span class="en">2. Web basics</span><span class="ar">٢. أساسيات الويب</span></a></li>
+          <li><a href="#pc-basics"><span class="en">3. PC basics for coding</span><span class="ar">٣. أساسيات الحاسوب للبرمجة</span></a></li>
+          <li><a href="#tools"><span class="en">4. Required programs</span><span class="ar">٤. البرامج المطلوبة</span></a></li>
+          <li><a href="#setup"><span class="en">5. Windows setup</span><span class="ar">٥. تجهيز ويندوز</span></a></li>
+          <li><a href="#commands"><span class="en">6. Setup commands</span><span class="ar">٦. أوامر التأكد</span></a></li>
+          <li><a href="#ai"><span class="en">7. AI small talk</span><span class="ar">٧. حديث قصير عن الذكاء الاصطناعي</span></a></li>
+          <li><a href="#quiz"><span class="en">8. Quiz</span><span class="ar">٨. اختبار قصير</span></a></li>
+          <li><a href="#final-task"><span class="en">9. Final checklist</span><span class="ar">٩. القائمة النهائية</span></a></li>
+        </ul>
+      </nav>
+
+      <div class="content">
+        <section class="section-card dark" id="mindset">
+          <div class="bilingual">
+            <div class="en">
+              <h2>1. First, think like a beginner developer</h2>
+              <p>A developer is not someone who memorizes everything. A developer is someone who knows how to build, test, search, fix, and improve step by step.</p>
+              <p>In this course, mistakes are not a problem. Mistakes are proof that your brain is touching real code.</p>
+            </div>
+            <div class="ar">
+              <h2>١. أولاً، فكّر كمطور مبتدئ</h2>
+              <p>المطور ليس شخصاً يحفظ كل شيء. المطور هو شخص يعرف كيف يبني، يجرّب، يبحث، يصلح، ويحسّن خطوة بخطوة.</p>
+              <p>في هذا الكورس، الأخطاء ليست مشكلة. الأخطاء دليل أن عقلك بدأ يتعامل مع الكود الحقيقي.</p>
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-top: 18px;">
+            <div class="mini-card">
+              <span class="tag"><span class="en">Rule 1</span><span class="ar">قاعدة ١</span></span>
+              <div class="bilingual">
+                <p class="en"><strong>Do not memorize everything.</strong><br>Understand the idea, then practice.</p>
+                <p class="ar"><strong>لا تحفظ كل شيء.</strong><br>افهم الفكرة، ثم طبّق.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <span class="tag green"><span class="en">Rule 2</span><span class="ar">قاعدة ٢</span></span>
+              <div class="bilingual">
+                <p class="en"><strong>Read errors slowly.</strong><br>The error message is not your enemy.</p>
+                <p class="ar"><strong>اقرأ الأخطاء بهدوء.</strong><br>رسالة الخطأ ليست عدوك.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <span class="tag orange"><span class="en">Rule 3</span><span class="ar">قاعدة ٣</span></span>
+              <div class="bilingual">
+                <p class="en"><strong>Organize your files.</strong><br>Messy files create messy learning.</p>
+                <p class="ar"><strong>نظّم ملفاتك.</strong><br>الملفات الفوضوية تجعل التعلم فوضوياً.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <details class="lesson" id="web-basics" open>
+          <summary>
+            <h2><span class="en">2. What is web development?</span><span class="ar">٢. ما هو تطوير الويب؟</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p><strong>Web development</strong> means building things that run in a web browser: websites, landing pages, dashboards, online stores, portfolios, web apps, admin panels, and more.</p>
+                <p>When you open a website, your browser receives files, reads them, and shows the result on the screen.</p>
+              </div>
+              <div class="ar">
+                <p><strong>تطوير الويب</strong> يعني بناء أشياء تعمل داخل المتصفح: مواقع، صفحات هبوط، لوحات تحكم، متاجر إلكترونية، بورتفوليو، تطبيقات ويب، ولوحات إدارة.</p>
+                <p>عندما تفتح موقعاً، يستقبل المتصفح ملفات، يقرأها، ثم يعرض النتيجة على الشاشة.</p>
+              </div>
+            </div>
+
+            <div class="grid-3">
+              <div class="mini-card">
+                <h3>HTML</h3>
+                <div class="bilingual">
+                  <p class="en">The structure: headings, paragraphs, buttons, links, images, forms.</p>
+                  <p class="ar">الهيكل: عناوين، فقرات، أزرار، روابط، صور، ونماذج.</p>
+                </div>
+              </div>
+              <div class="mini-card">
+                <h3>CSS</h3>
+                <div class="bilingual">
+                  <p class="en">The design: colors, layout, spacing, responsive screens.</p>
+                  <p class="ar">التصميم: الألوان، التخطيط، المسافات، والتجاوب مع الشاشات.</p>
+                </div>
+              </div>
+              <div class="mini-card">
+                <h3>JavaScript</h3>
+                <div class="bilingual">
+                  <p class="en">The behavior: clicks, menus, forms, data, dynamic changes.</p>
+                  <p class="ar">السلوك: النقرات، القوائم، النماذج، البيانات، والتغييرات الديناميكية.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <strong><span class="en">Frontend first</span><span class="ar">الواجهة الأمامية أولاً</span></strong>
+              <div class="bilingual">
+                <p class="en">This course starts with the part users see and touch: the frontend. Later, when the basics are strong, backend ideas become easier.</p>
+                <p class="ar">هذا الكورس يبدأ بالجزء الذي يراه المستخدم ويتفاعل معه: الواجهة الأمامية. لاحقاً، عندما تصبح الأساسيات قوية، ستصبح أفكار الخلفية أسهل.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">3. Website, web app, frontend, backend</span><span class="ar">٣. موقع، تطبيق ويب، واجهة أمامية، خلفية</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Website</h3>
+                    <p>A website usually presents information: a company page, blog, restaurant menu, personal portfolio.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>موقع Website</h3>
+                    <p>الموقع غالباً يعرض معلومات: صفحة شركة، مدونة، قائمة مطعم، أو بورتفوليو شخصي.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Web app</h3>
+                    <p>A web app lets users do more actions: login, save data, manage tasks, send messages, buy products.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>تطبيق ويب Web App</h3>
+                    <p>تطبيق الويب يسمح للمستخدم بعمل أشياء أكثر: تسجيل الدخول، حفظ البيانات، إدارة المهام، إرسال الرسائل، أو الشراء.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Frontend</h3>
+                    <p>The visible part: layout, buttons, forms, navigation, animations, and user experience.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>الواجهة الأمامية Frontend</h3>
+                    <p>الجزء المرئي: التخطيط، الأزرار، النماذج، التنقل، الحركة، وتجربة المستخدم.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Backend</h3>
+                    <p>The behind-the-scenes part: databases, authentication, servers, APIs, and security logic.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>الخلفية Backend</h3>
+                    <p>الجزء الذي يعمل خلف الكواليس: قواعد البيانات، تسجيل الدخول، الخوادم، APIs، ومنطق الحماية.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout success">
+              <strong><span class="en">Simple example</span><span class="ar">مثال بسيط</span></strong>
+              <div class="bilingual">
+                <p class="en">In a login page, the input fields and button are frontend. Checking the password in a database is backend.</p>
+                <p class="ar">في صفحة تسجيل الدخول، حقول الإدخال والزر هي واجهة أمامية. التأكد من كلمة المرور داخل قاعدة بيانات هو خلفية.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson" id="pc-basics">
+          <summary>
+            <h2><span class="en">4. PC basics that matter for coding</span><span class="ar">٤. أساسيات الحاسوب المهمة للبرمجة</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>You already use a PC normally. Good. Now you need to use it like a developer: clear folders, clear names, visible file extensions, and no random project files everywhere.</p>
+              </div>
+              <div class="ar">
+                <p>أنت تستعمل الحاسوب بشكل عادي. ممتاز. الآن تحتاج أن تستعمله كمطور: مجلدات واضحة، أسماء واضحة، إظهار امتدادات الملفات، وعدم نشر ملفات المشاريع عشوائياً في كل مكان.</p>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Files</h3>
+                    <p>A file is one saved item. Examples: <code>index.html</code>, <code>style.css</code>, <code>logo.png</code>.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>الملفات</h3>
+                    <p>الملف هو عنصر محفوظ واحد. أمثلة: <code>index.html</code>، <code>style.css</code>، <code>logo.png</code>.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Folders</h3>
+                    <p>A folder groups files together. A project folder keeps the project clean and easy to open in VS Code.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>المجلدات</h3>
+                    <p>المجلد يجمع الملفات معاً. مجلد المشروع يجعل العمل منظماً وسهل الفتح داخل VS Code.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <table class="tool-table" aria-label="Common file extensions">
+              <thead>
+                <tr>
+                  <th><span class="en">Extension</span><span class="ar">الامتداد</span></th>
+                  <th><span class="en">Meaning</span><span class="ar">المعنى</span></th>
+                  <th><span class="en">Used for</span><span class="ar">يُستعمل في</span></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>.html</code></td>
+                  <td><span class="en">HTML document</span><span class="ar">ملف HTML</span></td>
+                  <td><span class="en">Page structure</span><span class="ar">هيكل الصفحة</span></td>
+                </tr>
+                <tr>
+                  <td><code>.css</code></td>
+                  <td><span class="en">CSS stylesheet</span><span class="ar">ملف تنسيق CSS</span></td>
+                  <td><span class="en">Design and layout</span><span class="ar">التصميم والتخطيط</span></td>
+                </tr>
+                <tr>
+                  <td><code>.js</code></td>
+                  <td><span class="en">JavaScript file</span><span class="ar">ملف JavaScript</span></td>
+                  <td><span class="en">Interactivity and logic</span><span class="ar">التفاعل والمنطق</span></td>
+                </tr>
+                <tr>
+                  <td><code>.json</code></td>
+                  <td><span class="en">Data/config file</span><span class="ar">ملف بيانات أو إعدادات</span></td>
+                  <td><span class="en">Project settings, package info</span><span class="ar">إعدادات المشروع ومعلومات الحزم</span></td>
+                </tr>
+                <tr>
+                  <td><code>.png</code> / <code>.jpg</code> / <code>.svg</code></td>
+                  <td><span class="en">Image files</span><span class="ar">ملفات صور</span></td>
+                  <td><span class="en">Photos, icons, logos</span><span class="ar">صور، أيقونات، شعارات</span></td>
+                </tr>
+                <tr>
+                  <td><code>.zip</code></td>
+                  <td><span class="en">Compressed folder</span><span class="ar">مجلد مضغوط</span></td>
+                  <td><span class="en">Sharing or downloading projects</span><span class="ar">مشاركة أو تحميل المشاريع</span></td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="callout warn">
+              <strong><span class="en">Important Windows habit</span><span class="ar">عادة مهمة في ويندوز</span></strong>
+              <div class="bilingual">
+                <p class="en">Turn on file extensions in File Explorer. This helps you see the difference between <code>index.html</code> and <code>index.html.txt</code>.</p>
+                <p class="ar">فعّل إظهار امتدادات الملفات في مستكشف الملفات. هذا يساعدك على معرفة الفرق بين <code>index.html</code> و <code>index.html.txt</code>.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">5. Your project folder system</span><span class="ar">٥. نظام مجلدات المشاريع</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>Do not save course projects randomly on the Desktop. Create one main folder and put every chapter inside it.</p>
+              </div>
+              <div class="ar">
+                <p>لا تحفظ مشاريع الكورس عشوائياً على سطح المكتب. أنشئ مجلداً رئيسياً واحداً وضع داخله كل فصل.</p>
+              </div>
+            </div>
+
+            <div class="codebox">
+              <button class="copy-btn" type="button" data-copy="C:\Users\YourName\Documents\web-development-course">Copy</button>
+              <pre><code>C:\Users\YourName\Documents\web-development-course
+
+web-development-course/
+│
+├── chapter-01/
+├── chapter-02/
+├── practice/
+└── projects/</code></pre>
+            </div>
+
+            <div class="grid-2">
+              <div class="callout success">
+                <strong><span class="en">Good names</span><span class="ar">أسماء جيدة</span></strong>
+                <div class="bilingual">
+                  <p class="en"><code>my-first-page</code><br><code>portfolio-project</code><br><code>chapter-02-html-basics</code></p>
+                  <p class="ar"><code>my-first-page</code><br><code>portfolio-project</code><br><code>chapter-02-html-basics</code></p>
+                </div>
+              </div>
+              <div class="callout warn">
+                <strong><span class="en">Avoid names like</span><span class="ar">تجنب أسماء مثل</span></strong>
+                <div class="bilingual">
+                  <p class="en"><code>new folder</code><br><code>test final final 2</code><br><code>موقع جديد !!!</code></p>
+                  <p class="ar"><code>new folder</code><br><code>test final final 2</code><br><code>موقع جديد !!!</code></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <strong><span class="en">Developer naming tip</span><span class="ar">نصيحة تسمية للمطورين</span></strong>
+              <div class="bilingual">
+                <p class="en">Use lowercase English names with hyphens: <code>web-development-course</code>. This keeps paths easier for tools and commands.</p>
+                <p class="ar">استعمل أسماء إنجليزية بحروف صغيرة ومع شرطات: <code>web-development-course</code>. هذا يجعل المسارات أسهل للأدوات والأوامر.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <section class="section-card" id="tools">
+          <div class="bilingual">
+            <div class="en">
+              <h2>6. Required programs for this course</h2>
+              <p>These are the tools we need in the beginning. We keep the setup light but modern.</p>
+            </div>
+            <div class="ar">
+              <h2>٦. البرامج المطلوبة لهذا الكورس</h2>
+              <p>هذه هي الأدوات التي نحتاجها في البداية. سنحافظ على إعداد خفيف لكن حديث.</p>
+            </div>
+          </div>
+
+          <table class="tool-table" aria-label="Required programs">
+            <thead>
+              <tr>
+                <th><span class="en">Tool</span><span class="ar">الأداة</span></th>
+                <th><span class="en">Why we use it</span><span class="ar">لماذا نستخدمها؟</span></th>
+                <th><span class="en">Beginner note</span><span class="ar">ملاحظة للمبتدئ</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Microsoft Edge / Google Chrome</strong></td>
+                <td><span class="en">To open and test web pages, and to use DevTools.</span><span class="ar">لفتح وتجربة صفحات الويب واستعمال أدوات المطور.</span></td>
+                <td><span class="en">Edge is already on Windows. Chrome is also fine.</span><span class="ar">Edge موجود أصلاً في ويندوز. Chrome مناسب أيضاً.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Visual Studio Code</strong></td>
+                <td><span class="en">The code editor where you write and organize projects.</span><span class="ar">محرر الكود الذي تكتب وتنظم فيه المشاريع.</span></td>
+                <td><span class="en">We will call it VS Code.</span><span class="ar">سنختصره باسم VS Code.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Windows Terminal / PowerShell</strong></td>
+                <td><span class="en">To run commands like checking versions or starting projects.</span><span class="ar">لتشغيل أوامر مثل التأكد من الإصدارات أو تشغيل المشاريع.</span></td>
+                <td><span class="en">You do not need to be a command expert.</span><span class="ar">لا تحتاج أن تكون خبير أوامر.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Node.js LTS</strong></td>
+                <td><span class="en">To run modern JavaScript tools used by frontend developers.</span><span class="ar">لتشغيل أدوات JavaScript الحديثة التي يستعملها مطورو الواجهة الأمامية.</span></td>
+                <td><span class="en">Choose the version marked LTS.</span><span class="ar">اختر النسخة المكتوب عليها LTS.</span></td>
+              </tr>
+              <tr>
+                <td><strong>Git</strong></td>
+                <td><span class="en">To track project changes and save your work history.</span><span class="ar">لتتبع تغييرات المشروع وحفظ تاريخ العمل.</span></td>
+                <td><span class="en">Git is not GitHub. Git is the tool; GitHub is an online platform.</span><span class="ar">Git ليس GitHub. Git أداة، وGitHub منصة على الإنترنت.</span></td>
+              </tr>
+              <tr>
+                <td><strong>GitHub account</strong></td>
+                <td><span class="en">To store projects online and build a portfolio later.</span><span class="ar">لحفظ المشاريع على الإنترنت وبناء بورتفوليو لاحقاً.</span></td>
+                <td><span class="en">We will use it more after the basics.</span><span class="ar">سنستعمله أكثر بعد الأساسيات.</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout info" style="margin-top: 18px;">
+            <strong><span class="en">Optional tools later</span><span class="ar">أدوات اختيارية لاحقاً</span></strong>
+            <ul class="pill-list">
+              <li>Figma</li>
+              <li>Postman / Bruno</li>
+              <li>Notion / Obsidian</li>
+              <li>GitHub Copilot / ChatGPT / Cursor</li>
+              <li>Vite</li>
+            </ul>
+          </div>
+        </section>
+
+        <details class="lesson" id="setup" open>
+          <summary>
+            <h2><span class="en">7. Windows setup steps</span><span class="ar">٧. خطوات تجهيز ويندوز</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>Follow these steps in order. Do not rush. A clean setup saves hours of confusion later.</p>
+              </div>
+              <div class="ar">
+                <p>اتبع هذه الخطوات بالترتيب. لا تستعجل. الإعداد المنظم يوفر عليك ساعات من الارتباك لاحقاً.</p>
+              </div>
+            </div>
+
+            <div class="checklist">
+              <label class="check-item">
+                <input type="checkbox" data-task="browser" />
+                <span>
+                  <strong><span class="en">Use a modern browser</span><span class="ar">استعمل متصفحاً حديثاً</span></strong><br>
+                  <span class="en">Microsoft Edge is already installed on Windows. Google Chrome is also okay.</span>
+                  <span class="ar">Microsoft Edge موجود في ويندوز. Google Chrome مناسب أيضاً.</span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="vscode" />
+                <span>
+                  <strong><span class="en">Install Visual Studio Code</span><span class="ar">ثبّت Visual Studio Code</span></strong><br>
+                  <span class="en">Download from the official VS Code website. Keep the default options unless you know what you are changing.</span>
+                  <span class="ar">حمّله من الموقع الرسمي لـ VS Code. اترك الخيارات الافتراضية إذا لم تكن تعرف سبب تغييرها.</span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="node" />
+                <span>
+                  <strong><span class="en">Install Node.js LTS</span><span class="ar">ثبّت Node.js LTS</span></strong><br>
+                  <span class="en">Choose the LTS version because it is the stable choice for most learners and projects.</span>
+                  <span class="ar">اختر نسخة LTS لأنها الخيار المستقر لمعظم المتعلمين والمشاريع.</span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="git" />
+                <span>
+                  <strong><span class="en">Install Git for Windows</span><span class="ar">ثبّت Git for Windows</span></strong><br>
+                  <span class="en">Use the official Git for Windows installer. Default settings are fine for beginners.</span>
+                  <span class="ar">استعمل مثبت Git for Windows الرسمي. الإعدادات الافتراضية مناسبة للمبتدئين.</span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="github" />
+                <span>
+                  <strong><span class="en">Create or prepare your GitHub account</span><span class="ar">أنشئ أو جهّز حساب GitHub</span></strong><br>
+                  <span class="en">You will use it later to publish projects and build your portfolio.</span>
+                  <span class="ar">ستستعمله لاحقاً لنشر المشاريع وبناء البورتفوليو.</span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="folder" />
+                <span>
+                  <strong><span class="en">Create the course folder</span><span class="ar">أنشئ مجلد الكورس</span></strong><br>
+                  <span class="en">Recommended: <code>Documents/web-development-course</code></span>
+                  <span class="ar">المقترح: <code>Documents/web-development-course</code></span>
+                </span>
+              </label>
+
+              <label class="check-item">
+                <input type="checkbox" data-task="extensions" />
+                <span>
+                  <strong><span class="en">Install beginner VS Code extensions</span><span class="ar">ثبّت إضافات VS Code للمبتدئين</span></strong><br>
+                  <span class="en">Start with: Live Preview, Prettier, Error Lens, and maybe Arabic Language Pack if needed.</span>
+                  <span class="ar">ابدأ بـ: Live Preview، Prettier، Error Lens، وربما Arabic Language Pack إذا احتجته.</span>
+                </span>
+              </label>
+            </div>
+
+            <div class="callout warn">
+              <strong><span class="en">Common beginner problem</span><span class="ar">مشكلة شائعة عند المبتدئين</span></strong>
+              <div class="bilingual">
+                <p class="en">If <code>node -v</code> or <code>git -v</code> does not work after installation, close VS Code and the terminal, then open them again. Sometimes Windows needs a fresh terminal session.</p>
+                <p class="ar">إذا لم يعمل الأمر <code>node -v</code> أو <code>git -v</code> بعد التثبيت، أغلق VS Code والطرفية ثم افتحهما من جديد. أحياناً يحتاج ويندوز جلسة طرفية جديدة.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson" id="commands" open>
+          <summary>
+            <h2><span class="en">8. Verify your setup with commands</span><span class="ar">٨. تأكد من الإعداد بالأوامر</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>Open VS Code, then open the terminal inside VS Code. Run these commands one by one. The exact version numbers do not need to match your teacher's computer.</p>
+              </div>
+              <div class="ar">
+                <p>افتح VS Code، ثم افتح الطرفية داخل VS Code. شغّل هذه الأوامر واحداً تلو الآخر. أرقام الإصدارات لا يجب أن تكون مثل جهاز المدرّس تماماً.</p>
+              </div>
+            </div>
+
+            <div class="grid-3">
+              <div class="codebox">
+                <button class="copy-btn" type="button" data-copy="node -v">Copy</button>
+                <pre><code>node -v</code></pre>
+              </div>
+              <div class="codebox">
+                <button class="copy-btn" type="button" data-copy="npm -v">Copy</button>
+                <pre><code>npm -v</code></pre>
+              </div>
+              <div class="codebox">
+                <button class="copy-btn" type="button" data-copy="git -v">Copy</button>
+                <pre><code>git -v</code></pre>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>What does <code>-v</code> mean?</h3>
+                    <p>It means “version”. When you type <code>node -v</code>, you ask: “Which Node.js version is installed?”</p>
+                  </div>
+                  <div class="ar">
+                    <h3>ماذا يعني <code>-v</code>؟</h3>
+                    <p>يعني “version” أي الإصدار. عندما تكتب <code>node -v</code> فأنت تسأل: “ما إصدار Node.js المثبت؟”</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>What result is good?</h3>
+                    <p>If you see a version number, the tool is installed. If you see “not recognized”, the tool is missing or the terminal needs restart.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>ما النتيجة الجيدة؟</h3>
+                    <p>إذا رأيت رقم إصدار، فالأداة مثبتة. إذا ظهرت رسالة “not recognized”، فالأداة غير مثبتة أو تحتاج إلى إعادة فتح الطرفية.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <strong><span class="en">Useful Git identity commands</span><span class="ar">أوامر مفيدة لهوية Git</span></strong>
+              <div class="bilingual">
+                <p class="en">Later, Git needs your name and email to label your saved changes.</p>
+                <p class="ar">لاحقاً، يحتاج Git إلى اسمك وبريدك حتى يضعهما على التغييرات المحفوظة.</p>
+              </div>
+              <div class="codebox">
+                <button class="copy-btn" type="button" data-copy='git config --global user.name "Your Name"
+git config --global user.email "you@example.com"'>Copy</button>
+                <pre><code>git config --global user.name "Your Name"
+git config --global user.email "you@example.com"</code></pre>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">9. What is the terminal?</span><span class="ar">٩. ما هي الطرفية؟</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>The terminal is a place where you talk to your computer by typing commands. It looks scary at first, but in this course we will use simple commands only.</p>
+                <p>Think of it like a search box for actions: instead of clicking many menus, you type one clear instruction.</p>
+              </div>
+              <div class="ar">
+                <p>الطرفية هي مكان تتحدث فيه مع الحاسوب بكتابة أوامر. تبدو مخيفة في البداية، لكن في هذا الكورس سنستعمل أوامر بسيطة فقط.</p>
+                <p>تخيّلها كصندوق بحث للأفعال: بدل أن تضغط على قوائم كثيرة، تكتب تعليمة واضحة واحدة.</p>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Beginner commands later</h3>
+                    <p><code>cd</code> move between folders</p>
+                    <p><code>dir</code> list files on Windows</p>
+                    <p><code>mkdir</code> create a folder</p>
+                  </div>
+                  <div class="ar">
+                    <h3>أوامر بسيطة لاحقاً</h3>
+                    <p><code>cd</code> للتنقل بين المجلدات</p>
+                    <p><code>dir</code> لعرض الملفات في ويندوز</p>
+                    <p><code>mkdir</code> لإنشاء مجلد</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Important rule</h3>
+                    <p>Do not copy random commands from the internet if you do not understand what they do.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>قاعدة مهمة</h3>
+                    <p>لا تنسخ أوامر عشوائية من الإنترنت إذا لم تفهم ماذا تفعل.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">10. Browser DevTools: your testing room</span><span class="ar">١٠. أدوات المطور في المتصفح: غرفة الاختبار</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>The browser is not only for visiting websites. For a frontend developer, it is also a testing tool.</p>
+                <p>You will use DevTools to inspect HTML, test CSS, read console errors, check mobile screens, and understand network requests later.</p>
+              </div>
+              <div class="ar">
+                <p>المتصفح ليس فقط لزيارة المواقع. بالنسبة لمطور الواجهة الأمامية، هو أيضاً أداة اختبار.</p>
+                <p>ستستعمل أدوات المطور لفحص HTML، تجربة CSS، قراءة أخطاء Console، اختبار شاشات الهاتف، وفهم طلبات الشبكة لاحقاً.</p>
+              </div>
+            </div>
+
+            <div class="callout success">
+              <strong><span class="en">How to open DevTools</span><span class="ar">كيف تفتح أدوات المطور؟</span></strong>
+              <div class="bilingual">
+                <p class="en">Press <kbd>F12</kbd>, or right-click the page and choose <strong>Inspect</strong>.</p>
+                <p class="ar">اضغط <kbd>F12</kbd>، أو اضغط بزر الفأرة الأيمن على الصفحة واختر <strong>Inspect</strong>.</p>
+              </div>
+            </div>
+
+            <ul class="pill-list">
+              <li>Elements</li>
+              <li>Console</li>
+              <li>Sources</li>
+              <li>Network</li>
+              <li>Application</li>
+              <li>Lighthouse</li>
+            </ul>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">11. What are Node.js, npm, and Vite?</span><span class="ar">١١. ما هي Node.js و npm و Vite؟</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>At the beginning, HTML files can open directly in the browser. But modern frontend projects often need tools. Node.js lets those tools run on your computer.</p>
+              </div>
+              <div class="ar">
+                <p>في البداية، يمكن فتح ملفات HTML مباشرة في المتصفح. لكن مشاريع الواجهة الأمامية الحديثة تحتاج غالباً إلى أدوات. Node.js يسمح لهذه الأدوات بالعمل على حاسوبك.</p>
+              </div>
+            </div>
+
+            <div class="grid-3">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Node.js</h3>
+                    <p>A JavaScript runtime. For us, it helps run frontend tools locally.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>Node.js</h3>
+                    <p>بيئة تشغيل JavaScript. بالنسبة لنا، تساعد على تشغيل أدوات الواجهة الأمامية محلياً.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>npm</h3>
+                    <p>A package manager. It helps install JavaScript tools and libraries.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>npm</h3>
+                    <p>مدير حزم. يساعد على تثبيت أدوات ومكتبات JavaScript.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Vite</h3>
+                    <p>A modern frontend tool we will use later to create faster development projects.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>Vite</h3>
+                    <p>أداة حديثة للواجهة الأمامية سنستعملها لاحقاً لإنشاء مشاريع تطوير أسرع.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout warn">
+              <strong><span class="en">Do not worry</span><span class="ar">لا تقلق</span></strong>
+              <div class="bilingual">
+                <p class="en">You do not need to master Node.js in Chapter 1. You only need to install it and understand why it exists.</p>
+                <p class="ar">لا تحتاج إلى إتقان Node.js في الفصل الأول. تحتاج فقط إلى تثبيته وفهم سبب وجوده.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson">
+          <summary>
+            <h2><span class="en">12. Git and GitHub in simple words</span><span class="ar">١٢. Git و GitHub بكلمات بسيطة</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="grid-2">
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>Git</h3>
+                    <p>Git saves the history of your project. It helps you see what changed, go back if needed, and work professionally.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>Git</h3>
+                    <p>Git يحفظ تاريخ مشروعك. يساعدك على معرفة ما الذي تغيّر، الرجوع عند الحاجة، والعمل بطريقة احترافية.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mini-card">
+                <div class="bilingual">
+                  <div class="en">
+                    <h3>GitHub</h3>
+                    <p>GitHub is a website where you can store Git projects online and share them with others.</p>
+                  </div>
+                  <div class="ar">
+                    <h3>GitHub</h3>
+                    <p>GitHub هو موقع يمكنك فيه حفظ مشاريع Git على الإنترنت ومشاركتها مع الآخرين.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="callout info">
+              <strong><span class="en">Memory example</span><span class="ar">مثال بسيط للتذكر</span></strong>
+              <div class="bilingual">
+                <p class="en">Git is like “save game history” for your project. GitHub is like “cloud storage for that history”.</p>
+                <p class="ar">Git يشبه “حفظ مراحل اللعبة” لمشروعك. GitHub يشبه “التخزين السحابي لذلك التاريخ”.</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <details class="lesson" id="ai">
+          <summary>
+            <h2><span class="en">13. Small talk: Can AI help me learn?</span><span class="ar">١٣. حديث قصير: هل يساعدني الذكاء الاصطناعي؟</span></h2>
+          </summary>
+          <div class="lesson-body">
+            <div class="bilingual">
+              <div class="en">
+                <p>Yes. AI can explain errors, give examples, simplify hard words, and help you practice. But AI should not replace your learning.</p>
+                <p>The goal is not “AI writes everything for me.” The goal is “AI helps me understand while I build.”</p>
+              </div>
+              <div class="ar">
+                <p>نعم. يمكن للذكاء الاصطناعي أن يشرح الأخطاء، يعطي أمثلة، يبسط الكلمات الصعبة، ويساعدك على التدريب. لكن لا يجب أن يستبدل تعلمك.</p>
+                <p>الهدف ليس “الذكاء الاصطناعي يكتب كل شيء بدلاً مني”. الهدف هو “الذكاء الاصطناعي يساعدني على الفهم وأنا أبني”.</p>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="callout success">
+                <strong><span class="en">Good AI use</span><span class="ar">استخدام جيد للذكاء الاصطناعي</span></strong>
+                <div class="bilingual">
+                  <p class="en">“Explain this error like I am a beginner.”<br>“Give me 3 practice tasks for HTML forms.”</p>
+                  <p class="ar">“اشرح هذا الخطأ كأنني مبتدئ.”<br>“أعطني ٣ تمارين على HTML forms.”</p>
+                </div>
+              </div>
+              <div class="callout warn">
+                <strong><span class="en">Bad AI use</span><span class="ar">استخدام سيئ للذكاء الاصطناعي</span></strong>
+                <div class="bilingual">
+                  <p class="en">“Build the whole project for me, and I will not read it.”</p>
+                  <p class="ar">“ابنِ المشروع كاملاً بدلاً مني، ولن أقرأه.”</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </details>
+
+        <section class="section-card">
+          <div class="bilingual">
+            <div class="en">
+              <h2>14. Modern HTML used inside this chapter</h2>
+              <p>This course page itself uses modern browser features. You do not need to understand all of them now, but you will meet them later.</p>
+            </div>
+            <div class="ar">
+              <h2>١٤. HTML الحديث المستعمل داخل هذا الفصل</h2>
+              <p>صفحة الكورس نفسها تستعمل ميزات حديثة في المتصفح. لا تحتاج إلى فهمها كلها الآن، لكنك ستتعرف عليها لاحقاً.</p>
+            </div>
+          </div>
+
+          <div class="grid-3" style="margin-top: 16px;">
+            <div class="mini-card">
+              <h3><code>&lt;details&gt;</code></h3>
+              <div class="bilingual">
+                <p class="en">Used for expandable lesson sections.</p>
+                <p class="ar">تُستعمل لأقسام الدروس التي تفتح وتغلق.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3><code>&lt;progress&gt;</code> idea</h3>
+              <div class="bilingual">
+                <p class="en">Here we use a custom progress bar to show learning progress.</p>
+                <p class="ar">هنا نستعمل شريط تقدم مخصصاً لإظهار تقدم التعلم.</p>
+              </div>
+            </div>
+            <div class="mini-card">
+              <h3><code>&lt;dialog&gt;</code></h3>
+              <div class="bilingual">
+                <p class="en">Used for the final “ready” message.</p>
+                <p class="ar">يُستعمل لرسالة “أنت جاهز” في النهاية.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="callout info" style="margin-top: 16px;">
+            <strong><span class="en">Lesson preview</span><span class="ar">لمحة عن الدروس القادمة</span></strong>
+            <div class="bilingual">
+              <p class="en">Later, you will learn how this page is built: HTML for structure, CSS for design, and JavaScript for progress, copy buttons, and quizzes.</p>
+              <p class="ar">لاحقاً، ستتعلم كيف بُنيت هذه الصفحة: HTML للهيكل، CSS للتصميم، و JavaScript للتقدم وأزرار النسخ والاختبارات.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="quiz">
+          <div class="bilingual">
+            <div class="en">
+              <h2>15. Mini quiz</h2>
+              <p>Choose the best answer. This quiz is for understanding, not memorizing.</p>
+            </div>
+            <div class="ar">
+              <h2>١٥. اختبار قصير</h2>
+              <p>اختر أفضل إجابة. هذا الاختبار للفهم وليس للحفظ.</p>
+            </div>
+          </div>
+
+          <div class="quiz-card" data-answer="b">
+            <div class="bilingual">
+              <p class="en"><strong>Question 1:</strong> What is VS Code mainly used for?</p>
+              <p class="ar"><strong>السؤال ١:</strong> ما الاستخدام الأساسي لـ VS Code؟</p>
+            </div>
+            <div class="quiz-options">
+              <button type="button" data-choice="a"><span class="en">A. Browsing websites only</span><span class="ar">أ. تصفح المواقع فقط</span></button>
+              <button type="button" data-choice="b"><span class="en">B. Writing and organizing code</span><span class="ar">ب. كتابة وتنظيم الكود</span></button>
+              <button type="button" data-choice="c"><span class="en">C. Editing photos</span><span class="ar">ج. تعديل الصور</span></button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-card" data-answer="c">
+            <div class="bilingual">
+              <p class="en"><strong>Question 2:</strong> Which file usually contains page structure?</p>
+              <p class="ar"><strong>السؤال ٢:</strong> أي ملف يحتوي عادةً على هيكل الصفحة؟</p>
+            </div>
+            <div class="quiz-options">
+              <button type="button" data-choice="a"><span class="en">A. <code>style.css</code></span><span class="ar">أ. <code>style.css</code></span></button>
+              <button type="button" data-choice="b"><span class="en">B. <code>script.js</code></span><span class="ar">ب. <code>script.js</code></span></button>
+              <button type="button" data-choice="c"><span class="en">C. <code>index.html</code></span><span class="ar">ج. <code>index.html</code></span></button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-card" data-answer="a">
+            <div class="bilingual">
+              <p class="en"><strong>Question 3:</strong> What does <code>node -v</code> do?</p>
+              <p class="ar"><strong>السؤال ٣:</strong> ماذا يفعل الأمر <code>node -v</code>؟</p>
+            </div>
+            <div class="quiz-options">
+              <button type="button" data-choice="a"><span class="en">A. Shows the installed Node.js version</span><span class="ar">أ. يعرض إصدار Node.js المثبت</span></button>
+              <button type="button" data-choice="b"><span class="en">B. Deletes Node.js</span><span class="ar">ب. يحذف Node.js</span></button>
+              <button type="button" data-choice="c"><span class="en">C. Opens Google Chrome</span><span class="ar">ج. يفتح Google Chrome</span></button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+
+          <div class="quiz-card" data-answer="b">
+            <div class="bilingual">
+              <p class="en"><strong>Question 4:</strong> Which statement is correct?</p>
+              <p class="ar"><strong>السؤال ٤:</strong> أي عبارة صحيحة؟</p>
+            </div>
+            <div class="quiz-options">
+              <button type="button" data-choice="a"><span class="en">A. Git and GitHub are exactly the same thing.</span><span class="ar">أ. Git و GitHub هما نفس الشيء تماماً.</span></button>
+              <button type="button" data-choice="b"><span class="en">B. Git tracks changes; GitHub stores projects online.</span><span class="ar">ب. Git يتتبع التغييرات، و GitHub يحفظ المشاريع على الإنترنت.</span></button>
+              <button type="button" data-choice="c"><span class="en">C. Git is used only for design colors.</span><span class="ar">ج. Git يستعمل فقط لألوان التصميم.</span></button>
+            </div>
+            <div class="feedback" aria-live="polite"></div>
+          </div>
+        </section>
+
+        <section class="task-card" id="final-task">
+          <div class="bilingual">
+            <div class="en">
+              <h2>16. Final task before Chapter 2</h2>
+              <p>Complete this checklist. When all items are checked, you are ready to start HTML basics.</p>
+            </div>
+            <div class="ar">
+              <h2>١٦. المهمة النهائية قبل الفصل الثاني</h2>
+              <p>أكمل هذه القائمة. عندما تحدد كل العناصر، ستكون جاهزاً لبدء أساسيات HTML.</p>
+            </div>
+          </div>
+
+          <div class="checklist">
+            <label class="check-item">
+              <input type="checkbox" data-task="final-browser" />
+              <span><span class="en">I can open this chapter in a browser.</span><span class="ar">أستطيع فتح هذا الفصل في المتصفح.</span></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" data-task="final-vscode" />
+              <span><span class="en">VS Code is installed and opens correctly.</span><span class="ar">VS Code مثبت ويفتح بشكل صحيح.</span></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" data-task="final-folder" />
+              <span><span class="en">I created <code>web-development-course</code> inside Documents.</span><span class="ar">أنشأت مجلد <code>web-development-course</code> داخل Documents.</span></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" data-task="final-node" />
+              <span><span class="en"><code>node -v</code> and <code>npm -v</code> show version numbers.</span><span class="ar">الأمران <code>node -v</code> و <code>npm -v</code> يعرضان أرقام إصدارات.</span></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" data-task="final-git" />
+              <span><span class="en"><code>git -v</code> shows a version number.</span><span class="ar">الأمر <code>git -v</code> يعرض رقم إصدار.</span></span>
+            </label>
+            <label class="check-item">
+              <input type="checkbox" data-task="final-devtools" />
+              <span><span class="en">I know how to open browser DevTools using F12 or Inspect.</span><span class="ar">أعرف كيف أفتح أدوات المطور باستعمال F12 أو Inspect.</span></span>
+            </label>
+          </div>
+
+          <div class="callout success" style="margin-top: 18px;">
+            <strong><span class="en">When finished</span><span class="ar">عند الانتهاء</span></strong>
+            <div class="bilingual">
+              <p class="en">You are ready for Chapter 2: HTML Basics — structure, tags, text, links, images, and your first page.</p>
+              <p class="ar">أنت جاهز للفصل الثاني: أساسيات HTML — الهيكل، الوسوم، النصوص، الروابط، الصور، وأول صفحة لك.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="section-card" id="sources">
+          <div class="bilingual">
+            <div class="en">
+              <h2>Official resources used</h2>
+              <p>Use official pages when installing tools. Avoid random download sites.</p>
+            </div>
+            <div class="ar">
+              <h2>المراجع الرسمية المستعملة</h2>
+              <p>استعمل الصفحات الرسمية عند تثبيت الأدوات. تجنب مواقع التحميل العشوائية.</p>
+            </div>
+          </div>
+
+          <ol class="source-list">
+            <li><a href="https://code.visualstudio.com/docs/setup/windows" target="_blank" rel="noopener">Visual Studio Code on Windows</a></li>
+            <li><a href="https://code.visualstudio.com/docs/getstarted/getting-started" target="_blank" rel="noopener">Getting started with VS Code</a></li>
+            <li><a href="https://nodejs.org/en/download" target="_blank" rel="noopener">Node.js official download page</a></li>
+            <li><a href="https://git-scm.com/install/windows" target="_blank" rel="noopener">Git for Windows official install page</a></li>
+            <li><a href="https://code.visualstudio.com/docs/sourcecontrol/overview" target="_blank" rel="noopener">VS Code Source Control overview</a></li>
+            <li><a href="https://vite.dev/guide/" target="_blank" rel="noopener">Vite official guide</a></li>
+            <li><a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API" target="_blank" rel="noopener">MDN: modern popover UI patterns</a></li>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="shell">
+      <div class="bilingual">
+        <p class="en">Chapter 1 complete. Next: HTML Basics.</p>
+        <p class="ar">انتهى الفصل الأول. التالي: أساسيات HTML.</p>
+      </div>
+    </div>
+  </footer>
+
+  <dialog id="readyDialog">
+    <div class="dialog-inner">
+      <div class="bilingual">
+        <div class="en">
+          <h2>Great work — you are ready!</h2>
+          <p>Your setup checklist is complete. You can now move to Chapter 2 and start writing HTML with confidence.</p>
+        </div>
+        <div class="ar">
+          <h2>عمل ممتاز — أنت جاهز!</h2>
+          <p>قائمة الإعداد اكتملت. يمكنك الآن الانتقال إلى الفصل الثاني وبدء كتابة HTML بثقة.</p>
+        </div>
+      </div>
+      <div class="dialog-actions">
+        <button type="button" class="primary" id="closeDialog">
+          <span class="en">Continue</span>
+          <span class="ar">متابعة</span>
+        </button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      const html = document.documentElement;
+      const progressText = document.getElementById("progressText");
+      const progressBar = document.getElementById("progressBar");
+      const checkboxes = Array.from(document.querySelectorAll("[data-task]"));
+      const dialog = document.getElementById("readyDialog");
+      const closeDialog = document.getElementById("closeDialog");
+      const STORAGE_KEY = "frontend_chapter_01_progress_v1";
+      const LANG_KEY = "frontend_chapter_01_lang_v1";
+      let dialogShown = false;
+
+      function loadProgress() {
+        try {
+          return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+        } catch (error) {
+          return {};
+        }
+      }
+
+      function saveProgress() {
+        const data = {};
+        checkboxes.forEach((box) => {
+          data[box.dataset.task] = box.checked;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }
+
+      function updateProgress() {
+        const checked = checkboxes.filter((box) => box.checked).length;
+        const total = checkboxes.length || 1;
+        const percent = Math.round((checked / total) * 100);
+        progressText.textContent = percent + "%";
+        progressBar.style.width = percent + "%";
+        saveProgress();
+
+        if (percent === 100 && !dialogShown && dialog && typeof dialog.showModal === "function") {
+          dialogShown = true;
+          dialog.showModal();
+        }
+      }
+
+      function setMode(mode) {
+        html.dataset.mode = mode;
+        localStorage.setItem(LANG_KEY, mode);
+        document.querySelectorAll("[data-mode-button]").forEach((btn) => {
+          btn.classList.toggle("primary", btn.dataset.modeButton === mode);
+          btn.classList.toggle("ghost", btn.dataset.modeButton !== mode);
+        });
+      }
+
+      function copyText(text, button) {
+        const original = button.textContent;
+        const done = html.dataset.mode === "ar" ? "تم النسخ" : "Copied";
+
+        function markDone() {
+          button.textContent = done;
+          setTimeout(() => {
+            button.textContent = original;
+          }, 1200);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+          navigator.clipboard.writeText(text).then(markDone).catch(() => fallbackCopy(text, markDone));
+        } else {
+          fallbackCopy(text, markDone);
+        }
+      }
+
+      function fallbackCopy(text, callback) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.style.position = "fixed";
+        textarea.style.opacity = "0";
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand("copy");
+        } catch (error) {
+          console.warn("Copy failed", error);
+        }
+        textarea.remove();
+        callback();
+      }
+
+      function initQuiz() {
+        document.querySelectorAll(".quiz-card").forEach((card) => {
+          const answer = card.dataset.answer;
+          const feedback = card.querySelector(".feedback");
+          card.querySelectorAll("[data-choice]").forEach((button) => {
+            button.addEventListener("click", () => {
+              const correct = button.dataset.choice === answer;
+              card.querySelectorAll("[data-choice]").forEach((btn) => {
+                btn.classList.remove("correct", "wrong");
+              });
+              button.classList.add(correct ? "correct" : "wrong");
+              feedback.className = "feedback show " + (correct ? "correct" : "wrong");
+              feedback.innerHTML = correct
+                ? '<span class="en">Correct! Good understanding.</span><span class="ar" dir="rtl">صحيح! فهم ممتاز.</span>'
+                : '<span class="en">Not exactly. Try again and read the section above.</span><span class="ar" dir="rtl">ليس تماماً. حاول مرة أخرى واقرأ القسم أعلاه.</span>';
+            });
+          });
+        });
+      }
+
+      const savedProgress = loadProgress();
+      checkboxes.forEach((box) => {
+        box.checked = Boolean(savedProgress[box.dataset.task]);
+        box.addEventListener("change", updateProgress);
+      });
+
+      document.querySelectorAll("[data-mode-button]").forEach((button) => {
+        button.addEventListener("click", () => setMode(button.dataset.modeButton));
+      });
+
+      document.querySelectorAll("[data-copy]").forEach((button) => {
+        button.addEventListener("click", () => copyText(button.dataset.copy, button));
+      });
+
+      document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+      document.getElementById("resetBtn").addEventListener("click", () => {
+        checkboxes.forEach((box) => {
+          box.checked = false;
+        });
+        localStorage.removeItem(STORAGE_KEY);
+        dialogShown = false;
+        updateProgress();
+      });
+
+      if (closeDialog) {
+        closeDialog.addEventListener("click", () => dialog.close());
+      }
+
+      initQuiz();
+      setMode(localStorage.getItem(LANG_KEY) || "both");
+      updateProgress();
+    }());
+  </script>
+</body>
+</html>
