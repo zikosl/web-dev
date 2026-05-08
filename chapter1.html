@@ -39,6 +39,7 @@
 
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
+    section[id], details[id], main[id], nav[id] { scroll-margin-top: 140px; }
 
     body {
       margin: 0;
@@ -1265,6 +1266,202 @@
       }
     }
 
+
+
+    .mobile-dock {
+      display: none;
+    }
+
+    .mobile-progress-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      background: #eff5ff;
+      border: 1px solid #d6e4ff;
+      color: var(--accent);
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    .lang-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #f8fafc;
+      border: 1px solid #e7edf5;
+      border-radius: 999px;
+      padding: 4px;
+    }
+
+    .utility-group {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .controls {
+      row-gap: 8px;
+    }
+
+    @media (max-width: 760px) {
+      section[id], details[id], main[id], nav[id] { scroll-margin-top: 168px; }
+
+      .controls {
+        display: grid;
+        grid-template-columns: 1fr;
+        width: 100%;
+      }
+
+      .lang-group,
+      .utility-group {
+        width: 100%;
+      }
+
+      .lang-group {
+        justify-content: space-between;
+      }
+
+      .lang-group button {
+        flex: 1 1 0;
+      }
+
+      .utility-group {
+        overflow-x: auto;
+        padding-bottom: 2px;
+        scrollbar-width: none;
+      }
+
+      .utility-group::-webkit-scrollbar {
+        display: none;
+      }
+
+      .utility-group button {
+        flex: 0 0 auto;
+      }
+
+      .topbar-inner {
+        gap: 12px;
+      }
+
+      .progress-wrap {
+        top: 128px;
+      }
+
+      .sidebar {
+        top: 122px;
+      }
+
+      .visual-card {
+        padding: 14px;
+      }
+
+      .diagram-stage {
+        padding: 10px;
+        min-height: auto;
+      }
+
+      .diagram-text {
+        font-size: 11px;
+      }
+
+      .interactive-output {
+        min-height: 132px;
+        padding: 14px;
+      }
+
+      .hotspot-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .hotspot-btn {
+        width: 100%;
+        min-height: 44px;
+        text-align: center;
+        justify-content: center;
+        border-radius: 14px;
+      }
+
+      .folder-row {
+        grid-template-columns: 1fr;
+        gap: 4px;
+      }
+
+      .mobile-dock {
+        position: fixed;
+        left: 12px;
+        right: 12px;
+        bottom: max(12px, env(safe-area-inset-bottom));
+        z-index: 40;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 8px;
+        padding: 8px;
+        border-radius: 20px;
+        border: 1px solid rgba(220, 228, 239, .95);
+        background: rgba(255,255,255,.96);
+        backdrop-filter: blur(14px);
+        box-shadow: 0 14px 36px rgba(15, 23, 42, .12);
+      }
+
+      .mobile-dock a,
+      .mobile-dock button {
+        min-height: 46px;
+        padding: 9px 8px;
+        border-radius: 14px;
+        border: 1px solid #e6edf7;
+        background: #f8fbff;
+        box-shadow: none;
+        text-decoration: none;
+        color: #0f172a;
+        font-size: .74rem;
+        font-weight: 800;
+        line-height: 1.2;
+      }
+
+      .mobile-dock .progress-chip {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+      }
+
+      .footer {
+        padding-bottom: 110px;
+      }
+    }
+
+    @media (max-width: 420px) {
+      section[id], details[id], main[id], nav[id] { scroll-margin-top: 176px; }
+
+      .progress-wrap {
+        top: 138px;
+      }
+
+      .sidebar {
+        top: 132px;
+      }
+
+      .hotspot-buttons {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-dock {
+        left: 8px;
+        right: 8px;
+        gap: 6px;
+        padding: 6px;
+      }
+
+      .mobile-dock a,
+      .mobile-dock button {
+        font-size: .7rem;
+        padding: 8px 6px;
+      }
+    }
+
     @media print {
       body { background: white; color: black; }
       body::before,
@@ -1295,15 +1492,20 @@
       </div>
 
       <div class="controls" aria-label="Language and page controls">
-        <button class="tiny ghost" data-mode-button="en" type="button">English</button>
-        <button class="tiny ghost" data-mode-button="ar" type="button">العربية</button>
-        <button class="tiny primary" data-mode-button="both" type="button">EN + AR</button>
-        <button class="tiny ghost" id="printBtn" type="button">
-          <span class="en">Print</span><span class="ar">طباعة</span>
-        </button>
-        <button class="tiny ghost" id="resetBtn" type="button">
-          <span class="en">Reset</span><span class="ar">إعادة</span>
-        </button>
+        <div class="lang-group">
+          <button class="tiny ghost" data-mode-button="en" type="button">English</button>
+          <button class="tiny ghost" data-mode-button="ar" type="button">العربية</button>
+          <button class="tiny primary" data-mode-button="both" type="button">EN + AR</button>
+        </div>
+        <div class="utility-group">
+          <span class="mobile-progress-pill"><span class="en">Progress</span><span class="ar">التقدم</span> <span id="topProgressText">0%</span></span>
+          <button class="tiny ghost" id="printBtn" type="button">
+            <span class="en">Print</span><span class="ar">طباعة</span>
+          </button>
+          <button class="tiny ghost" id="resetBtn" type="button">
+            <span class="en">Reset</span><span class="ar">إعادة</span>
+          </button>
+        </div>
       </div>
     </div>
   </header>
@@ -2542,6 +2744,15 @@ git config --global user.email "you@example.com"</code></pre>
     </div>
   </main>
 
+
+
+  <nav class="mobile-dock" aria-label="Mobile quick navigation">
+    <a href="#chapter-start"><span class="en">Top</span><span class="ar">الأعلى</span></a>
+    <a href="#visual-lab"><span class="en">Visuals</span><span class="ar">الصور</span></a>
+    <a href="#quiz"><span class="en">Quiz</span><span class="ar">الاختبار</span></a>
+    <button type="button" class="progress-chip" id="mobileProgressBtn"><span class="en">Progress</span><span class="ar">التقدم</span> <span id="mobileProgressText">0%</span></button>
+  </nav>
+
   <footer class="footer">
     <div class="shell">
       <div class="bilingual">
@@ -2576,6 +2787,8 @@ git config --global user.email "you@example.com"</code></pre>
     (function () {
       const html = document.documentElement;
       const progressText = document.getElementById("progressText");
+      const topProgressText = document.getElementById("topProgressText");
+      const mobileProgressText = document.getElementById("mobileProgressText");
       const progressBar = document.getElementById("progressBar");
       const checkboxes = Array.from(document.querySelectorAll("[data-task]"));
       const dialog = document.getElementById("readyDialog");
@@ -2605,6 +2818,8 @@ git config --global user.email "you@example.com"</code></pre>
         const total = checkboxes.length || 1;
         const percent = Math.round((checked / total) * 100);
         progressText.textContent = percent + "%";
+        if (topProgressText) topProgressText.textContent = percent + "%";
+        if (mobileProgressText) mobileProgressText.textContent = percent + "%";
         progressBar.style.width = percent + "%";
         saveProgress();
 
@@ -2728,6 +2943,14 @@ git config --global user.email "you@example.com"</code></pre>
       });
 
       document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+      const mobileProgressBtn = document.getElementById("mobileProgressBtn");
+      if (mobileProgressBtn) {
+        mobileProgressBtn.addEventListener("click", () => {
+          const progressSection = document.querySelector(".progress-wrap");
+          if (progressSection) progressSection.scrollIntoView({ behavior: "smooth", block: "start" });
+        });
+      }
 
       document.getElementById("resetBtn").addEventListener("click", () => {
         checkboxes.forEach((box) => {
