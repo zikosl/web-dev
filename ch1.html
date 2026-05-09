@@ -1,0 +1,1218 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 1 – Web Dev Bootcamp / تعلم تطوير الويب</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2235;
+    --card: #151c2e;
+    --card2: #1e2a40;
+    --border: rgba(99,179,237,0.15);
+    --border2: rgba(99,179,237,0.3);
+    --accent: #63b3ed;
+    --accent2: #4299e1;
+    --accent3: #90cdf4;
+    --green: #68d391;
+    --amber: #f6ad55;
+    --red: #fc8181;
+    --purple: #b794f4;
+    --teal: #4fd1c5;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --code-bg: #0d1117;
+    --code-border: rgba(99,179,237,0.2);
+    --tag-bg: rgba(99,179,237,0.1);
+    --tag-text: #90cdf4;
+    --glow: rgba(66,153,225,0.3);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Space Grotesk', sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+    min-height: 100vh;
+  }
+
+  .ar { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; text-align: right; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(135deg, #0a0e1a 0%, #0f1929 50%, #0a1628 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    left: -20%;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(66,153,225,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+  }
+  .chapter-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border2);
+    color: var(--accent3);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 50px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 1.5rem;
+  }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); box-shadow: 0 0 6px var(--green); }
+  .hero-title {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    line-height: 1.15;
+    background: linear-gradient(135deg, #e2e8f0 0%, #90cdf4 50%, #63b3ed 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.5rem;
+  }
+  .hero-title-ar {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: 700;
+    direction: rtl;
+    background: linear-gradient(135deg, #b794f4 0%, #90cdf4 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    color: var(--text2);
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin-bottom: 0.5rem;
+  }
+  .hero-desc-ar {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    direction: rtl;
+    color: var(--text2);
+    font-size: 1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-bottom: 2rem;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 13px;
+    color: var(--text2);
+  }
+  .meta-icon { font-size: 16px; color: var(--accent); }
+
+  /* ─── PROGRESS / TOC ─── */
+  .toc-bar {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .toc-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .toc-inner::-webkit-scrollbar { display: none; }
+  .toc-btn {
+    flex-shrink: 0;
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-size: 12px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 500;
+    padding: 14px 12px;
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.2s;
+  }
+  .toc-btn:hover { color: var(--accent3); }
+  .toc-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ─── MAIN LAYOUT ─── */
+  .main { max-width: 900px; margin: 0 auto; padding: 3rem 2rem; }
+
+  /* ─── SECTION ─── */
+  .section {
+    margin-bottom: 4rem;
+    scroll-margin-top: 60px;
+  }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .section-num {
+    flex-shrink: 0;
+    width: 44px; height: 44px;
+    border-radius: 12px;
+    background: var(--tag-bg);
+    border: 1px solid var(--border2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .section-titles { flex: 1; }
+  .section-title-en {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .section-title-ar {
+    font-family: 'IBM Plex Sans Arabic', sans-serif;
+    font-size: 1.1rem;
+    color: var(--text2);
+    direction: rtl;
+  }
+
+  /* ─── CARDS ─── */
+  .card-grid { display: grid; gap: 1rem; }
+  .card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .card:hover { border-color: var(--border2); transform: translateY(-2px); }
+
+  .card-icon {
+    width: 40px; height: 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    margin-bottom: 0.75rem;
+  }
+  .icon-blue { background: rgba(66,153,225,0.15); }
+  .icon-green { background: rgba(104,211,145,0.15); }
+  .icon-purple { background: rgba(183,148,244,0.15); }
+  .icon-amber { background: rgba(246,173,85,0.15); }
+  .icon-teal { background: rgba(79,209,197,0.15); }
+  .icon-red { background: rgba(252,129,129,0.15); }
+
+  .card-title-en { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 3px; }
+  .card-title-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: var(--text2); direction: rtl; margin-bottom: 0.75rem; }
+  .card-body { font-size: 0.9rem; color: var(--text2); margin-bottom: 0.6rem; }
+  .card-body-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: var(--text3); direction: rtl; }
+
+  /* ─── BILINGUAL CALLOUT ─── */
+  .bilingual {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+  .bilingual .divider { background: var(--border); width: 1px; }
+  .bi-en { font-size: 0.95rem; color: var(--text); }
+  .bi-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.95rem; color: var(--text); direction: rtl; text-align: right; }
+  .bi-label { font-size: 11px; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--text3); margin-bottom: 6px; }
+
+  /* ─── INFO BOX ─── */
+  .infobox {
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .infobox.tip { background: rgba(104,211,145,0.07); border: 1px solid rgba(104,211,145,0.25); }
+  .infobox.warn { background: rgba(246,173,85,0.07); border: 1px solid rgba(246,173,85,0.25); }
+  .infobox.info { background: rgba(66,153,225,0.07); border: 1px solid rgba(66,153,225,0.25); }
+  .infobox-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .infobox.tip .infobox-icon { color: var(--green); }
+  .infobox.warn .infobox-icon { color: var(--amber); }
+  .infobox.info .infobox-icon { color: var(--accent); }
+  .infobox-en { font-size: 0.9rem; color: var(--text); margin-bottom: 5px; }
+  .infobox-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.88rem; color: var(--text2); direction: rtl; text-align: right; }
+
+  /* ─── SPEC TABLE ─── */
+  .spec-table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+  .spec-table th {
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text3);
+    padding: 10px 16px;
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+  }
+  .spec-table td {
+    padding: 12px 16px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
+    vertical-align: top;
+  }
+  .spec-table tr:last-child td { border-bottom: none; }
+  .spec-table tr:hover td { background: var(--card); }
+  .spec-table .ar-cell { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; text-align: right; color: var(--text2); font-size: 0.85rem; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 50px; }
+  .badge-green { background: rgba(104,211,145,0.15); color: var(--green); }
+  .badge-amber { background: rgba(246,173,85,0.15); color: var(--amber); }
+  .badge-red { background: rgba(252,129,129,0.15); color: var(--red); }
+  .badge-blue { background: rgba(66,153,225,0.15); color: var(--accent3); }
+
+  /* ─── CODE BLOCK ─── */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .code-label {
+    font-size: 11px;
+    color: var(--text3);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .c-cmd { color: var(--teal); }
+  .c-str { color: var(--green); }
+  .c-cmt { color: var(--text3); }
+  .c-kw { color: var(--purple); }
+
+  /* ─── PROGRAM CARD ─── */
+  .prog-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .prog-card:hover { border-color: var(--border2); }
+  .prog-logo {
+    width: 48px; height: 48px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+  .prog-body { flex: 1; }
+  .prog-name { font-weight: 600; font-size: 1rem; color: var(--text); }
+  .prog-name-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.82rem; color: var(--text2); direction: rtl; margin-bottom: 6px; }
+  .prog-desc { font-size: 0.88rem; color: var(--text2); margin-bottom: 4px; }
+  .prog-desc-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.84rem; color: var(--text3); direction: rtl; }
+  .prog-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .prog-tag { font-size: 11px; background: var(--tag-bg); color: var(--tag-text); border: 1px solid rgba(99,179,237,0.2); padding: 2px 10px; border-radius: 50px; }
+
+  /* ─── STEP LIST ─── */
+  .step-list { display: flex; flex-direction: column; gap: 1rem; }
+  .step {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: var(--tag-bg);
+    border: 1px solid var(--border2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .step-content { flex: 1; padding-top: 5px; }
+  .step-title { font-weight: 600; font-size: 0.95rem; color: var(--text); margin-bottom: 2px; }
+  .step-title-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.85rem; color: var(--text2); direction: rtl; margin-bottom: 4px; }
+  .step-desc { font-size: 0.88rem; color: var(--text2); }
+  .step-desc-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.84rem; color: var(--text3); direction: rtl; }
+
+  /* ─── FOLDER TREE ─── */
+  .folder-tree {
+    background: var(--code-bg);
+    border: 1px solid var(--code-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    font-family: 'Courier New', monospace;
+    font-size: 13.5px;
+    line-height: 2;
+  }
+  .ft-folder { color: var(--amber); }
+  .ft-file-html { color: var(--red); }
+  .ft-file-css { color: var(--accent); }
+  .ft-file-js { color: var(--amber); }
+  .ft-file-img { color: var(--green); }
+  .ft-cmt { color: var(--text3); font-size: 12px; }
+  .ft-line { display: flex; gap: 10px; align-items: center; }
+
+  /* ─── QUIZ ─── */
+  .quiz-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin-top: 2rem;
+  }
+  .quiz-title { font-weight: 700; font-size: 1rem; margin-bottom: 0.3rem; color: var(--accent3); }
+  .quiz-title-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.9rem; color: var(--text2); direction: rtl; margin-bottom: 1rem; }
+  .quiz-q { font-size: 0.95rem; color: var(--text); margin-bottom: 0.8rem; font-weight: 500; }
+  .quiz-q-ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.88rem; color: var(--text2); direction: rtl; margin-bottom: 1rem; }
+  .quiz-options { display: flex; flex-direction: column; gap: 8px; }
+  .quiz-opt {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 16px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--text2);
+    transition: all 0.2s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+  }
+  .quiz-opt:hover { border-color: var(--accent); color: var(--text); }
+  .quiz-opt.correct { border-color: var(--green); background: rgba(104,211,145,0.07); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: rgba(252,129,129,0.07); color: var(--red); }
+  .quiz-opt .ar-part { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; font-size: 0.82rem; color: var(--text3); }
+  .quiz-feedback { margin-top: 12px; font-size: 0.9rem; display: none; padding: 10px 14px; border-radius: 8px; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.ok { background: rgba(104,211,145,0.1); border: 1px solid rgba(104,211,145,0.3); color: var(--green); }
+  .quiz-feedback.nope { background: rgba(252,129,129,0.1); border: 1px solid rgba(252,129,129,0.3); color: var(--red); }
+  .quiz-feedback .ar { color: inherit; font-size: 0.85rem; margin-top: 4px; }
+
+  /* ─── FLOW DIAGRAM ─── */
+  .flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 1rem 0;
+  }
+  .flow-node {
+    background: var(--card);
+    border: 1px solid var(--border2);
+    border-radius: 10px;
+    padding: 10px 16px;
+    text-align: center;
+    min-width: 90px;
+  }
+  .flow-node .en { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+  .flow-node .ar { font-family: 'IBM Plex Sans Arabic', sans-serif; font-size: 0.78rem; color: var(--text2); direction: rtl; }
+  .flow-node.blue { border-color: rgba(66,153,225,0.4); background: rgba(66,153,225,0.07); }
+  .flow-node.green { border-color: rgba(104,211,145,0.4); background: rgba(104,211,145,0.07); }
+  .flow-node.purple { border-color: rgba(183,148,244,0.4); background: rgba(183,148,244,0.07); }
+  .flow-node.amber { border-color: rgba(246,173,85,0.4); background: rgba(246,173,85,0.07); }
+  .flow-arrow { color: var(--text3); font-size: 18px; flex-shrink: 0; }
+
+  /* ─── EXT CARDS ─── */
+  .ext-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 10px 14px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .ext-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ─── FOOTER ─── */
+  .footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 2rem;
+    text-align: center;
+    color: var(--text3);
+    font-size: 13px;
+  }
+  .footer .ar { font-family: 'IBM Plex Sans Arabic', sans-serif; direction: rtl; margin-top: 4px; }
+
+  /* ─── PROGRESS BAR ─── */
+  .progress-wrap {
+    background: var(--bg3);
+    border-bottom: 1px solid var(--border);
+    height: 3px;
+  }
+  .progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent2), var(--teal));
+    transition: width 0.3s;
+    width: 0%;
+  }
+
+  @media (max-width: 600px) {
+    .bilingual { grid-template-columns: 1fr; }
+    .bilingual .divider { display: none; }
+    .hero-inner { padding: 2.5rem 1.25rem 2rem; }
+    .main { padding: 2rem 1.25rem; }
+    .flow { flex-direction: column; align-items: flex-start; }
+    .flow-arrow { transform: rotate(90deg); }
+  }
+</style>
+</head>
+<body>
+
+<!-- PROGRESS -->
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="chapter-badge"><div class="dot"></div> Chapter 1 — الفصل الأول</div>
+    <h1 class="hero-title">Web Development Fundamentals</h1>
+    <h2 class="hero-title-ar">أساسيات تطوير الويب</h2>
+    <p class="hero-desc">Everything you need to know before writing a single line of code. Setup, tools, and how the web actually works.</p>
+    <p class="hero-desc-ar">كل ما تحتاج معرفته قبل أن تكتب أول سطر كود — الإعداد، الأدوات، وكيف يعمل الويب فعلاً.</p>
+    <div class="hero-meta">
+      <span class="meta-item">📖 <span>6 Sections</span></span>
+      <span class="meta-item">⏱️ <span>~45 min read</span></span>
+      <span class="meta-item">🎯 <span>Beginner Friendly</span></span>
+      <span class="meta-item">🌐 <span>EN / عربي</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<nav class="toc-bar">
+  <div class="toc-inner">
+    <button class="toc-btn active" onclick="scrollTo('s1')">1. What is Web Dev?</button>
+    <button class="toc-btn" onclick="scrollTo('s2')">2. How the Internet Works</button>
+    <button class="toc-btn" onclick="scrollTo('s3')">3. PC Requirements</button>
+    <button class="toc-btn" onclick="scrollTo('s4')">4. Essential Programs</button>
+    <button class="toc-btn" onclick="scrollTo('s5')">5. VS Code Setup</button>
+    <button class="toc-btn" onclick="scrollTo('s6')">6. File Structure</button>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main class="main">
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 1 — What is Web Development
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s1">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-titles">
+        <div class="section-title-en">What is Web Development?</div>
+        <div class="section-title-ar">ما هو تطوير الويب؟</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">Web development is the process of building websites and web applications that live on the internet. Think of every website you've ever visited — someone built that using code. It's one of the most in-demand skills in the world right now.</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">تطوير الويب هو عملية بناء مواقع وتطبيقات الويب التي تعيش على الإنترنت. فكّر في كل موقع زرته من قبل — شخص ما بناه باستخدام الكود. إنها واحدة من أكثر المهارات طلباً في العالم الآن.</p>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-3" style="margin-top: 1.5rem;">
+      <div class="card">
+        <div class="card-icon icon-blue">🌐</div>
+        <div class="card-title-en">Frontend Dev</div>
+        <div class="card-title-ar">تطوير الواجهة الأمامية</div>
+        <p class="card-body">What the user sees and interacts with. Buttons, colors, layouts, animations.</p>
+        <p class="card-body-ar">ما يراه المستخدم ويتفاعل معه. أزرار، ألوان، تخطيطات، رسوم متحركة.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-purple">⚙️</div>
+        <div class="card-title-en">Backend Dev</div>
+        <div class="card-title-ar">تطوير الواجهة الخلفية</div>
+        <p class="card-body">The "engine" behind the site. Databases, servers, user logins, data processing.</p>
+        <p class="card-body-ar">المحرك خلف الموقع. قواعد بيانات، خوادم، تسجيل دخول، معالجة البيانات.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-teal">🔗</div>
+        <div class="card-title-en">Full-Stack Dev</div>
+        <div class="card-title-ar">تطوير متكامل</div>
+        <p class="card-body">A developer who does both — the full picture from UI to database.</p>
+        <p class="card-body-ar">مطور يفعل كليهما — الصورة الكاملة من الواجهة إلى قاعدة البيانات.</p>
+      </div>
+    </div>
+
+    <div class="infobox tip" style="margin-top:1.5rem">
+      <span class="infobox-icon">💡</span>
+      <div>
+        <p class="infobox-en"><strong>This course focuses on Frontend first.</strong> You'll learn HTML, CSS, and JavaScript — the three core languages of the web. Everything else builds on top of these.</p>
+        <p class="infobox-ar">هذا الكورس يركز على الواجهة الأمامية أولاً. ستتعلم HTML وCSS وJavaScript — اللغات الثلاث الأساسية للويب. كل شيء آخر يبنى فوق هؤلاء.</p>
+      </div>
+    </div>
+
+    <!-- Mini Quiz 1 -->
+    <div class="quiz-box">
+      <div class="quiz-title">✏️ Quick Check</div>
+      <div class="quiz-title-ar">اختبار سريع</div>
+      <p class="quiz-q">What does a Frontend developer mainly build?</p>
+      <p class="quiz-q-ar">ماذا يبني مطور الواجهة الأمامية بشكل رئيسي؟</p>
+      <div class="quiz-options" id="q1">
+        <button class="quiz-opt" onclick="answer(this,'q1',false)">
+          <span>Databases and servers <span class="ar-part">قواعد البيانات والخوادم</span></span>
+        </button>
+        <button class="quiz-opt" onclick="answer(this,'q1',true)">
+          <span>The visible interface users interact with <span class="ar-part">الواجهة المرئية التي يتفاعل معها المستخدمون</span></span>
+        </button>
+        <button class="quiz-opt" onclick="answer(this,'q1',false)">
+          <span>Mobile apps only <span class="ar-part">تطبيقات الجوال فقط</span></span>
+        </button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 2 — How the Internet Works
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s2">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-titles">
+        <div class="section-title-en">How the Internet & Browser Work</div>
+        <div class="section-title-ar">كيف يعمل الإنترنت والمتصفح</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">When you type a website address, your browser sends a request through the internet to a server. That server sends back files (HTML, CSS, JS), and your browser reads them and shows you the webpage. It all happens in milliseconds!</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">عندما تكتب عنوان موقع، يرسل متصفحك طلباً عبر الإنترنت إلى خادم. يُرسل الخادم ملفات (HTML، CSS، JS)، ويقرأها متصفحك ويعرض لك صفحة الويب. كل هذا يحدث في ميلي ثانية!</p>
+      </div>
+    </div>
+
+    <div style="margin: 1.5rem 0;">
+      <p style="font-size:0.85rem; color:var(--text3); margin-bottom:10px; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Request Flow — مسار الطلب</p>
+      <div class="flow">
+        <div class="flow-node blue"><div class="en">🧑 You</div><div class="ar">أنت</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node amber"><div class="en">🌐 Browser</div><div class="ar">المتصفح</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node purple"><div class="en">🔌 DNS</div><div class="ar">خادم الأسماء</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node green"><div class="en">🖥️ Server</div><div class="ar">الخادم</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node blue"><div class="en">📄 Files</div><div class="ar">الملفات</div></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node amber"><div class="en">🖥️ Screen</div><div class="ar">الشاشة</div></div>
+      </div>
+    </div>
+
+    <div class="card-grid card-grid-2">
+      <div class="card">
+        <div class="card-icon icon-red">📄</div>
+        <div class="card-title-en">HTML — Structure</div>
+        <div class="card-title-ar">HTML — الهيكل</div>
+        <p class="card-body">The skeleton of a webpage. Headings, paragraphs, buttons, images — all defined in HTML.</p>
+        <p class="card-body-ar">هيكل صفحة الويب. العناوين، الفقرات، الأزرار، الصور — كل ذلك يُعرَّف في HTML.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-blue">🎨</div>
+        <div class="card-title-en">CSS — Style</div>
+        <div class="card-title-ar">CSS — التصميم</div>
+        <p class="card-body">Makes things look good. Colors, fonts, sizes, spacing, animations.</p>
+        <p class="card-body-ar">يجعل الأشياء تبدو جميلة. ألوان، خطوط، أحجام، مسافات، رسوم متحركة.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-amber">⚡</div>
+        <div class="card-title-en">JavaScript — Behavior</div>
+        <div class="card-title-ar">JavaScript — السلوك</div>
+        <p class="card-body">Makes pages interactive. Clicks, popups, forms, live updates, apps.</p>
+        <p class="card-body-ar">يجعل الصفحات تفاعلية. نقرات، نوافذ، نماذج، تحديثات مباشرة، تطبيقات.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">📦</div>
+        <div class="card-title-en">The Browser</div>
+        <div class="card-title-ar">المتصفح</div>
+        <p class="card-body">Chrome, Firefox, Safari, Edge — they all read these three languages and display webpages.</p>
+        <p class="card-body-ar">Chrome، Firefox، Safari، Edge — تقرأ هذه اللغات الثلاث وتعرض صفحات الويب.</p>
+      </div>
+    </div>
+
+    <div class="infobox info" style="margin-top:1rem">
+      <span class="infobox-icon">ℹ️</span>
+      <div>
+        <p class="infobox-en"><strong>Use Google Chrome as your main browser</strong> during this course. Its Developer Tools (F12) are the best in the industry for learning and debugging.</p>
+        <p class="infobox-ar">استخدم Google Chrome كمتصفحك الرئيسي خلال هذا الكورس. أدوات المطور فيه (F12) هي الأفضل في الصناعة للتعلم واكتشاف الأخطاء.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 3 — PC Requirements
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s3">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-titles">
+        <div class="section-title-en">PC Requirements & Specs</div>
+        <div class="section-title-ar">متطلبات ومواصفات الحاسوب</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">The good news: you don't need an expensive machine to start web development. A mid-range PC or laptop from the last 5–7 years will work just fine. Here's what you need:</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">الخبر الجيد: لا تحتاج جهازاً غالياً لبدء تطوير الويب. حاسوب أو لابتوب متوسط المستوى من آخر 5-7 سنوات سيعمل بشكل ممتاز. إليك ما تحتاجه:</p>
+      </div>
+    </div>
+
+    <table class="spec-table" style="margin-top:1.25rem; background: var(--card); border-radius: 14px; overflow: hidden; border: 1px solid var(--border);">
+      <thead>
+        <tr>
+          <th>Component</th>
+          <th>Minimum</th>
+          <th>Recommended</th>
+          <th style="text-align:right" class="ar-cell">المكوّن</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>RAM</strong></td>
+          <td><span class="badge badge-amber">4 GB</span></td>
+          <td><span class="badge badge-green">8 GB+</span></td>
+          <td class="ar-cell">ذاكرة الوصول العشوائي</td>
+        </tr>
+        <tr>
+          <td><strong>Storage</strong></td>
+          <td><span class="badge badge-amber">50 GB free</span></td>
+          <td><span class="badge badge-green">SSD 256 GB+</span></td>
+          <td class="ar-cell">مساحة التخزين</td>
+        </tr>
+        <tr>
+          <td><strong>Processor</strong></td>
+          <td><span class="badge badge-amber">Intel i3 / AMD Ryzen 3</span></td>
+          <td><span class="badge badge-green">i5/i7 or Ryzen 5/7</span></td>
+          <td class="ar-cell">المعالج</td>
+        </tr>
+        <tr>
+          <td><strong>Operating System</strong></td>
+          <td><span class="badge badge-blue">Windows 10</span></td>
+          <td><span class="badge badge-green">Windows 11 / macOS / Linux</span></td>
+          <td class="ar-cell">نظام التشغيل</td>
+        </tr>
+        <tr>
+          <td><strong>Screen</strong></td>
+          <td><span class="badge badge-amber">13"</span></td>
+          <td><span class="badge badge-green">15"+ or external monitor</span></td>
+          <td class="ar-cell">الشاشة</td>
+        </tr>
+        <tr>
+          <td><strong>Internet</strong></td>
+          <td><span class="badge badge-amber">Any connection</span></td>
+          <td><span class="badge badge-green">Stable broadband</span></td>
+          <td class="ar-cell">الإنترنت</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="infobox tip" style="margin-top:1rem">
+      <span class="infobox-icon">✅</span>
+      <div>
+        <p class="infobox-en"><strong>Windows or Mac?</strong> Both work perfectly. Most tutorials work on either. If you're on Windows, we recommend installing <strong>Windows Terminal</strong> for a better command-line experience.</p>
+        <p class="infobox-ar"><strong>ويندوز أم ماك؟</strong> كلاهما يعمل بشكل مثالي. معظم الدروس تعمل على الاثنين. إذا كنت على ويندوز، ننصح بتثبيت Windows Terminal لتجربة سطر أوامر أفضل.</p>
+      </div>
+    </div>
+
+    <div class="infobox warn" style="margin-top:0.75rem">
+      <span class="infobox-icon">⚠️</span>
+      <div>
+        <p class="infobox-en"><strong>Chromebooks:</strong> Limited support. Some tools don't work well on ChromeOS. If possible, use a Windows or Mac machine.</p>
+        <p class="infobox-ar"><strong>Chromebooks:</strong> دعم محدود. بعض الأدوات لا تعمل بشكل جيد على ChromeOS. استخدم جهاز Windows أو Mac إن أمكن.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 4 — Essential Programs
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s4">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-titles">
+        <div class="section-title-en">Essential Programs to Install</div>
+        <div class="section-title-ar">البرامج الضرورية للتثبيت</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">Before you write any code, you need the right tools installed. Think of these as your developer's toolkit — they're all free, modern, and industry-standard in 2025.</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">قبل أن تكتب أي كود، تحتاج إلى الأدوات المناسبة. فكّر فيها كصندوق أدوات المطور — كلها مجانية وحديثة ومعيارية في الصناعة عام 2025.</p>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top:1.5rem; gap:0.75rem;">
+
+      <div class="prog-card">
+        <div class="prog-logo" style="background:rgba(0,122,255,0.15); color:#3b82f6;">VS</div>
+        <div class="prog-body">
+          <div class="prog-name">Visual Studio Code</div>
+          <div class="prog-name-ar">محرر الأكواد</div>
+          <p class="prog-desc">The most popular code editor in the world. Free, fast, and packed with features.</p>
+          <p class="prog-desc-ar">أشهر محرر أكواد في العالم. مجاني، سريع، ومليء بالميزات.</p>
+          <div class="prog-tags">
+            <span class="prog-tag">code.visualstudio.com</span>
+            <span class="prog-tag">Free</span>
+            <span class="prog-tag">Win/Mac/Linux</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-card">
+        <div class="prog-logo" style="background:rgba(255,193,7,0.15); color:#f59e0b;">N</div>
+        <div class="prog-body">
+          <div class="prog-name">Node.js (LTS Version)</div>
+          <div class="prog-name-ar">بيئة تشغيل JavaScript</div>
+          <p class="prog-desc">Lets you run JavaScript outside the browser and use thousands of developer tools and packages.</p>
+          <p class="prog-desc-ar">يتيح تشغيل JavaScript خارج المتصفح واستخدام آلاف أدوات وحزم المطورين.</p>
+          <div class="prog-tags">
+            <span class="prog-tag">nodejs.org</span>
+            <span class="prog-tag">Always get LTS</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-card">
+        <div class="prog-logo" style="background:rgba(234,88,12,0.15); color:#ea580c;">G</div>
+        <div class="prog-body">
+          <div class="prog-name">Google Chrome</div>
+          <div class="prog-name-ar">المتصفح الرئيسي للتطوير</div>
+          <p class="prog-desc">Your primary development browser. Comes with the best built-in developer tools (DevTools).</p>
+          <p class="prog-desc-ar">متصفحك الرئيسي للتطوير. يأتي بأفضل أدوات مطور مدمجة (DevTools).</p>
+          <div class="prog-tags">
+            <span class="prog-tag">google.com/chrome</span>
+            <span class="prog-tag">DevTools = F12</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-card">
+        <div class="prog-logo" style="background:rgba(240,80,50,0.15); color:#ef4444;">Git</div>
+        <div class="prog-body">
+          <div class="prog-name">Git</div>
+          <div class="prog-name-ar">نظام تتبع الإصدارات</div>
+          <p class="prog-desc">Version control — saves your code history, lets you undo changes, and collaborate with others.</p>
+          <p class="prog-desc-ar">التحكم بالإصدارات — يحفظ تاريخ كودك، يتيح التراجع عن التغييرات، والتعاون مع الآخرين.</p>
+          <div class="prog-tags">
+            <span class="prog-tag">git-scm.com</span>
+            <span class="prog-tag">Essential</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="prog-card">
+        <div class="prog-logo" style="background:rgba(99,179,237,0.15); color:var(--accent);">🐙</div>
+        <div class="prog-body">
+          <div class="prog-name">GitHub Account</div>
+          <div class="prog-name-ar">حساب GitHub</div>
+          <p class="prog-desc">Free online platform to store and share your code. Think of it as Google Drive for code.</p>
+          <p class="prog-desc-ar">منصة مجانية لتخزين ومشاركة الكود. فكّر فيها كـ Google Drive للكود.</p>
+          <div class="prog-tags">
+            <span class="prog-tag">github.com</span>
+            <span class="prog-tag">Free account</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 5 — VS Code Setup
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s5">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-titles">
+        <div class="section-title-en">Setting Up VS Code + Extensions</div>
+        <div class="section-title-ar">إعداد VS Code والإضافات</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">VS Code is powerful out of the box, but extensions make it even better. These are small add-ons that improve your coding experience. Here are the must-haves for web development.</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">VS Code قوي من البداية، لكن الإضافات تجعله أفضل. هي إضافات صغيرة تحسن تجربة الكتابة. إليك الإضافات الأساسية لتطوير الويب.</p>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem; color:var(--text3); margin: 1.5rem 0 0.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Must-Have Extensions — إضافات أساسية</p>
+    <div class="card-grid" style="gap:0.7rem;">
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#f59e0b;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">Prettier – Code Formatter</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Auto-formats your code to look clean. Essential. / يُنسّق كودك تلقائياً ليبدو نظيفاً.</div>
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#ef4444;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">Live Server</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Opens your webpage live in browser as you code. / يفتح صفحتك في المتصفح مباشرة أثناء الكتابة.</div>
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#3b82f6;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">ESLint</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Highlights JavaScript errors before you run code. / يبرز أخطاء JavaScript قبل تشغيل الكود.</div>
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#10b981;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">Auto Rename Tag</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Rename an HTML opening tag and closing updates automatically. / تغيير العلامة الافتتاحية يُحدّث الختامية تلقائياً.</div>
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#8b5cf6;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">GitLens</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Supercharges Git inside VS Code. See who changed what. / يُحسّن Git داخل VS Code. اعرف من غيّر ماذا.</div>
+        </div>
+      </div>
+      <div class="ext-card">
+        <div class="ext-dot" style="background:#ec4899;"></div>
+        <div>
+          <div style="font-weight:600; font-size:0.9rem;">indent-rainbow</div>
+          <div style="font-size:0.82rem; color:var(--text2);">Colors your indentation levels — makes nested code readable. / يلوّن مستويات المسافة لقراءة الكود المتداخل.</div>
+        </div>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem; color:var(--text3); margin: 2rem 0 0.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Installing Extensions — تثبيت الإضافات</p>
+    <div class="step-list">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <div class="step-title">Open VS Code</div>
+          <div class="step-title-ar">افتح VS Code</div>
+          <p class="step-desc">Launch the application after installing it from code.visualstudio.com</p>
+          <p class="step-desc-ar">شغّل التطبيق بعد تثبيته من code.visualstudio.com</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <div class="step-title">Go to Extensions Panel</div>
+          <div class="step-title-ar">اذهب إلى لوحة الإضافات</div>
+          <p class="step-desc">Click the Extensions icon on the left sidebar, or press <code style="background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px;">Ctrl + Shift + X</code></p>
+          <p class="step-desc-ar">انقر على أيقونة الإضافات في الشريط الجانبي، أو اضغط <code style="background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px;">Ctrl + Shift + X</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <div class="step-title">Search and Install</div>
+          <div class="step-title-ar">ابحث وثبّت</div>
+          <p class="step-desc">Type the extension name, click it from results, then click the green "Install" button.</p>
+          <p class="step-desc-ar">اكتب اسم الإضافة، انقر عليها من النتائج، ثم انقر زر "Install" الأخضر.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <div class="step-title">Set Prettier as Default Formatter</div>
+          <div class="step-title-ar">اجعل Prettier المُنسّق الافتراضي</div>
+          <p class="step-desc">Press <code style="background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px;">Ctrl + Shift + P</code> → type "Format Document" → choose Prettier. Also enable "Format on Save" in Settings.</p>
+          <p class="step-desc-ar">اضغط <code style="background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:13px;">Ctrl + Shift + P</code> → اكتب "Format Document" → اختر Prettier. فعّل أيضاً "Format on Save" في الإعدادات.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="code-block" style="margin-top:1.5rem">
+      <div class="code-label">VS Code — Useful Keyboard Shortcuts / اختصارات لوحة المفاتيح</div>
+      <div><span class="c-cmt"># Open integrated terminal / فتح الطرفية المدمجة</span></div>
+      <div><span class="c-cmd">Ctrl + `</span>  <span class="c-cmt">(backtick key)</span></div>
+      <br>
+      <div><span class="c-cmt"># Quick file open / فتح ملف سريع</span></div>
+      <div><span class="c-cmd">Ctrl + P</span></div>
+      <br>
+      <div><span class="c-cmt"># Command palette / لوحة الأوامر</span></div>
+      <div><span class="c-cmd">Ctrl + Shift + P</span></div>
+      <br>
+      <div><span class="c-cmt"># Multi-line cursor / مؤشر متعدد الأسطر</span></div>
+      <div><span class="c-cmd">Alt + Click</span></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SECTION 6 — File Structure
+  ════════════════════════════════════════════ -->
+  <section class="section" id="s6">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-titles">
+        <div class="section-title-en">File System & Folder Structure</div>
+        <div class="section-title-ar">نظام الملفات وهيكل المجلدات</div>
+      </div>
+    </div>
+
+    <div class="bilingual">
+      <div>
+        <div class="bi-label">English</div>
+        <p class="bi-en">Before you start a project, organize your files properly. A messy file structure = a headache later. Every web project has a standard structure — learn it now and follow it always.</p>
+      </div>
+      <div class="divider"></div>
+      <div>
+        <div class="bi-label" style="text-align:right">العربية</div>
+        <p class="bi-ar">قبل بدء أي مشروع، نظّم ملفاتك بشكل صحيح. الهيكل الفوضوي = صداع لاحقاً. لكل مشروع ويب هيكل معياري — تعلّمه الآن واتّبعه دائماً.</p>
+      </div>
+    </div>
+
+    <p style="font-size:0.85rem; color:var(--text3); margin: 1.5rem 0 0.75rem; font-weight:600; letter-spacing:1px; text-transform:uppercase;">Standard Project Structure — هيكل مشروع معياري</p>
+    <div class="folder-tree">
+      <div class="ft-line"><span class="ft-folder">📁 my-first-project/</span> <span class="ft-cmt">← root folder / المجلد الجذر</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-folder">📁 css/</span></div>
+      <div class="ft-line" style="padding-left:40px"><span class="ft-file-css">📄 style.css</span> <span class="ft-cmt">← all your styles</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-folder">📁 js/</span></div>
+      <div class="ft-line" style="padding-left:40px"><span class="ft-file-js">📄 script.js</span> <span class="ft-cmt">← all your scripts</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-folder">📁 images/</span></div>
+      <div class="ft-line" style="padding-left:40px"><span class="ft-file-img">🖼️ logo.png</span></div>
+      <div class="ft-line" style="padding-left:40px"><span class="ft-file-img">🖼️ hero.jpg</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-file-html">📄 index.html</span> <span class="ft-cmt">← always the homepage / الصفحة الرئيسية دائماً</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-file-html">📄 about.html</span></div>
+      <div class="ft-line" style="padding-left:20px"><span class="ft-cmt">📄 README.md ← describe your project</span></div>
+    </div>
+
+    <div class="card-grid card-grid-2" style="margin-top:1.5rem;">
+      <div class="card">
+        <div class="card-icon icon-red">📌</div>
+        <div class="card-title-en">Golden Rules</div>
+        <div class="card-title-ar">القواعد الذهبية</div>
+        <p class="card-body">• <code style="font-size:12px; background:var(--code-bg); padding:1px 5px; border-radius:3px;">index.html</code> is always the homepage<br>
+        • No spaces in file names (use <code style="font-size:12px; background:var(--code-bg); padding:1px 5px; border-radius:3px;">-</code> instead)<br>
+        • Always lowercase file names<br>
+        • Keep one folder per project</p>
+        <p class="card-body-ar">• index.html دائماً هو الصفحة الرئيسية<br>
+        • لا مسافات في أسماء الملفات (استخدم - بدلاً)<br>
+        • أسماء الملفات دائماً بأحرف صغيرة<br>
+        • مجلد واحد لكل مشروع</p>
+      </div>
+      <div class="card">
+        <div class="card-icon icon-green">🛠️</div>
+        <div class="card-title-en">Opening a Project in VS Code</div>
+        <div class="card-title-ar">فتح مشروع في VS Code</div>
+        <p class="card-body">Method 1: Drag the project folder onto VS Code.<br>
+        Method 2: <code style="font-size:12px; background:var(--code-bg); padding:1px 5px; border-radius:3px;">File → Open Folder</code><br>
+        Method 3: Right-click folder → "Open with VS Code"</p>
+        <p class="card-body-ar">الطريقة 1: اسحب مجلد المشروع على VS Code.<br>
+        الطريقة 2: File → Open Folder<br>
+        الطريقة 3: انقر بزر الفأرة الأيمن → "Open with VS Code"</p>
+      </div>
+    </div>
+
+    <div class="infobox tip" style="margin-top:1rem">
+      <span class="infobox-icon">💡</span>
+      <div>
+        <p class="infobox-en"><strong>Create a "Projects" folder</strong> on your Desktop or Documents and keep all your web projects inside it. Example: <code style="background:var(--code-bg); padding:1px 6px; border-radius:4px; font-size:13px;">C:\Users\YourName\Desktop\Projects\</code></p>
+        <p class="infobox-ar"><strong>أنشئ مجلد "Projects"</strong> على سطح المكتب أو في المستندات واحتفظ بجميع مشاريع الويب فيه. مثال: <code style="background:var(--code-bg); padding:2px 6px; border-radius:4px; font-size:12px; direction:ltr; display:inline-block;">C:\Users\YourName\Desktop\Projects\</code></p>
+      </div>
+    </div>
+
+    <!-- Final Quiz -->
+    <div class="quiz-box">
+      <div class="quiz-title">✏️ Chapter 1 Final Check</div>
+      <div class="quiz-title-ar">الاختبار الختامي للفصل الأول</div>
+      <p class="quiz-q">Which file is always the homepage of a website?</p>
+      <p class="quiz-q-ar">أي ملف هو دائماً الصفحة الرئيسية للموقع؟</p>
+      <div class="quiz-options" id="q2">
+        <button class="quiz-opt" onclick="answer(this,'q2',false)">
+          <span>home.html <span class="ar-part">الصفحة الرئيسية</span></span>
+        </button>
+        <button class="quiz-opt" onclick="answer(this,'q2',true)">
+          <span>index.html <span class="ar-part">الملف الافتراضي</span></span>
+        </button>
+        <button class="quiz-opt" onclick="answer(this,'q2',false)">
+          <span>main.html <span class="ar-part">الملف الرئيسي</span></span>
+        </button>
+        <button class="quiz-opt" onclick="answer(this,'q2',false)">
+          <span>start.html <span class="ar-part">ملف البداية</span></span>
+        </button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb"></div>
+    </div>
+  </section>
+
+  <!-- ─── CHAPTER SUMMARY ─── -->
+  <div style="background: linear-gradient(135deg, rgba(66,153,225,0.08) 0%, rgba(79,209,197,0.05) 100%); border: 1px solid var(--border2); border-radius: 16px; padding: 2rem; margin-bottom: 3rem;">
+    <div style="font-size:1.1rem; font-weight:700; color:var(--accent3); margin-bottom: 0.4rem;">✅ Chapter 1 Complete!</div>
+    <div style="font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; font-size:0.95rem; color:var(--text2); margin-bottom:1.25rem;">تهانينا! أنهيت الفصل الأول بنجاح 🎉</div>
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:10px;">
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> What web development is
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> How browsers & internet work
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> PC requirements checked
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> Essential programs installed
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> VS Code + extensions ready
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; font-size:0.9rem; color:var(--text2);">
+        <span style="color:var(--green);">✓</span> File structure understood
+      </div>
+    </div>
+    <div style="margin-top:1.25rem; font-size:0.95rem; font-weight:600; color:var(--text);">Up next: <span style="color:var(--accent);">Chapter 2 — Your First HTML Page 🚀</span></div>
+    <div style="font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; font-size:0.88rem; color:var(--text2); margin-top:4px;">الفصل القادم: أول صفحة HTML لك</div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>Web Dev Bootcamp — Chapter 1 · Built with ❤️ · 2025</div>
+  <div class="ar">كورس تطوير الويب — الفصل الأول</div>
+</footer>
+
+<script>
+  // ─── SCROLL PROGRESS ───
+  window.addEventListener('scroll', () => {
+    const doc = document.documentElement;
+    const scrolled = (doc.scrollTop / (doc.scrollHeight - doc.clientHeight)) * 100;
+    document.getElementById('progressBar').style.width = Math.min(scrolled, 100) + '%';
+  });
+
+  // ─── TOC ACTIVE ───
+  const sections = ['s1','s2','s3','s4','s5','s6'];
+  const btns = document.querySelectorAll('.toc-btn');
+  window.addEventListener('scroll', () => {
+    let current = 0;
+    sections.forEach((id, i) => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 100) current = i;
+    });
+    btns.forEach((b, i) => b.classList.toggle('active', i === current));
+  });
+
+  function scrollTo(id) {
+    document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ─── QUIZ ───
+  function answer(btn, qid, correct) {
+    const container = document.getElementById(qid);
+    const opts = container.querySelectorAll('.quiz-opt');
+    opts.forEach(o => {
+      o.style.pointerEvents = 'none';
+      if (o === btn) o.classList.add(correct ? 'correct' : 'wrong');
+      if (correct && o !== btn && o.getAttribute('onclick').includes('true')) {
+        // don't highlight other
+      }
+    });
+    const fb = document.getElementById(qid + '-fb');
+    fb.classList.add('show');
+    if (correct) {
+      fb.classList.add('ok');
+      fb.innerHTML = '✅ Correct! Great job.<br><span class="ar">صحيح! عمل رائع.</span>';
+    } else {
+      fb.classList.add('nope');
+      fb.innerHTML = '❌ Not quite — try to read the section again.<br><span class="ar">ليس تماماً — حاول قراءة القسم مرة أخرى.</span>';
+      // show correct
+      opts.forEach(o => {
+        if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+          o.classList.add('correct');
+        }
+      });
+    }
+  }
+</script>
+</body>
+</html>
