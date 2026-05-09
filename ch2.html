@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 2 – HTML / تعلم تطوير الويب</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #111827;
+    --bg3: #1a2235;
+    --card: #151c2e;
+    --card2: #1e2a40;
+    --border: rgba(251,191,36,0.15);
+    --border2: rgba(251,191,36,0.3);
+    --accent: #fbbf24;
+    --accent2: #f59e0b;
+    --accent3: #fcd34d;
+    --green: #34d399;
+    --blue: #60a5fa;
+    --red: #f87171;
+    --purple: #c084fc;
+    --teal: #2dd4bf;
+    --pink: #f472b6;
+    --text: #e2e8f0;
+    --text2: #94a3b8;
+    --text3: #64748b;
+    --code-bg: #0d1117;
+    --code-border: rgba(251,191,36,0.2);
+    --tag-bg: rgba(251,191,36,0.08);
+    --tag-text: #fcd34d;
+    --glow: rgba(251,191,36,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:var(--bg); color:var(--text); font-family:'Space Grotesk',sans-serif; line-height:1.7; font-size:16px; }
+  .ar { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; text-align:right; }
+
+  /* PROGRESS */
+  .progress-wrap { background:var(--bg3); height:3px; }
+  .progress-bar { height:100%; background:linear-gradient(90deg,var(--accent2),var(--teal)); transition:width .3s; width:0%; }
+
+  /* HERO */
+  .hero { background:linear-gradient(135deg,#0a0e1a 0%,#12100a 50%,#0a0e1a 100%); border-bottom:1px solid var(--border); padding:0; position:relative; overflow:hidden; }
+  .hero::before { content:''; position:absolute; top:-40%; right:-10%; width:500px; height:500px; background:radial-gradient(circle,rgba(251,191,36,0.06) 0%,transparent 70%); pointer-events:none; }
+  .hero-inner { max-width:920px; margin:0 auto; padding:4rem 2rem 3rem; position:relative; }
+  .chapter-badge { display:inline-flex; align-items:center; gap:8px; background:var(--tag-bg); border:1px solid var(--border2); color:var(--accent3); font-size:12px; font-weight:600; padding:6px 14px; border-radius:50px; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:1.5rem; }
+  .dot { width:6px; height:6px; border-radius:50%; background:var(--accent); box-shadow:0 0 6px var(--accent); }
+  .hero-title { font-size:clamp(2rem,5vw,3.2rem); font-weight:700; line-height:1.15; background:linear-gradient(135deg,#e2e8f0 0%,#fcd34d 50%,#f59e0b 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:.4rem; }
+  .hero-title-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:clamp(1.5rem,4vw,2.3rem); font-weight:700; direction:rtl; background:linear-gradient(135deg,#c084fc 0%,#fcd34d 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; margin-bottom:1.5rem; }
+  .hero-desc { color:var(--text2); font-size:1.05rem; max-width:600px; margin-bottom:.5rem; }
+  .hero-desc-ar { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; color:var(--text2); font-size:1rem; max-width:600px; margin-left:auto; margin-bottom:2rem; }
+  .hero-meta { display:flex; flex-wrap:wrap; gap:1.5rem; align-items:center; }
+  .meta-item { display:flex; align-items:center; gap:6px; font-size:13px; color:var(--text2); }
+
+  /* TOC */
+  .toc-bar { background:var(--bg2); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+  .toc-inner { max-width:920px; margin:0 auto; padding:0 2rem; display:flex; align-items:center; gap:4px; overflow-x:auto; scrollbar-width:none; }
+  .toc-inner::-webkit-scrollbar { display:none; }
+  .toc-btn { flex-shrink:0; background:none; border:none; color:var(--text2); font-size:12px; font-family:'Space Grotesk',sans-serif; font-weight:500; padding:14px 12px; cursor:pointer; white-space:nowrap; border-bottom:2px solid transparent; transition:all .2s; }
+  .toc-btn:hover { color:var(--accent3); }
+  .toc-btn.active { color:var(--accent); border-bottom-color:var(--accent); }
+
+  /* MAIN */
+  .main { max-width:920px; margin:0 auto; padding:3rem 2rem; }
+  .section { margin-bottom:4rem; scroll-margin-top:60px; }
+  .section-header { display:flex; align-items:flex-start; gap:1.2rem; margin-bottom:2rem; padding-bottom:1.5rem; border-bottom:1px solid var(--border); }
+  .section-num { flex-shrink:0; width:44px; height:44px; border-radius:12px; background:var(--tag-bg); border:1px solid var(--border2); display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:var(--accent); }
+  .section-titles { flex:1; }
+  .section-title-en { font-size:1.5rem; font-weight:700; color:var(--text); margin-bottom:3px; }
+  .section-title-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:1.1rem; color:var(--text2); direction:rtl; }
+
+  /* BILINGUAL */
+  .bilingual { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.5rem; margin:1rem 0; display:grid; grid-template-columns:1fr 1px 1fr; gap:1.5rem; align-items:start; }
+  .bilingual .divider { background:var(--border); }
+  .bi-en { font-size:.95rem; color:var(--text); }
+  .bi-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.95rem; color:var(--text); direction:rtl; text-align:right; }
+  .bi-label { font-size:11px; font-weight:600; letter-spacing:1px; text-transform:uppercase; color:var(--text3); margin-bottom:6px; }
+
+  /* INFOBOX */
+  .infobox { border-radius:12px; padding:1.25rem 1.5rem; margin:1rem 0; display:flex; gap:1rem; align-items:flex-start; }
+  .infobox.tip { background:rgba(52,211,153,0.07); border:1px solid rgba(52,211,153,0.25); }
+  .infobox.warn { background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.25); }
+  .infobox.info { background:rgba(96,165,250,0.07); border:1px solid rgba(96,165,250,0.25); }
+  .infobox-icon { font-size:20px; flex-shrink:0; margin-top:2px; }
+  .infobox.tip .infobox-icon { color:var(--green); }
+  .infobox.warn .infobox-icon { color:var(--accent); }
+  .infobox.info .infobox-icon { color:var(--blue); }
+  .infobox-en { font-size:.9rem; color:var(--text); margin-bottom:5px; }
+  .infobox-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.88rem; color:var(--text2); direction:rtl; text-align:right; }
+
+  /* CODE */
+  .code-block { background:var(--code-bg); border:1px solid var(--code-border); border-radius:12px; padding:1.25rem 1.5rem; margin:1rem 0; overflow-x:auto; font-family:'Courier New',monospace; font-size:14px; line-height:1.9; position:relative; }
+  .code-label { font-size:11px; color:var(--text3); font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+  .code-copy { font-size:11px; background:var(--tag-bg); border:1px solid var(--border); color:var(--tag-text); padding:3px 10px; border-radius:6px; cursor:pointer; font-family:'Space Grotesk',sans-serif; transition:all .2s; }
+  .code-copy:hover { background:var(--border2); }
+  .ct { color:var(--red); }       /* tag */
+  .ca { color:var(--blue); }      /* attr name */
+  .cv { color:var(--green); }     /* attr value */
+  .cc { color:var(--text3); }     /* comment */
+  .ck { color:var(--purple); }    /* keyword */
+  .cs { color:var(--accent3); }   /* string */
+  .cn { color:var(--teal); }      /* number / special */
+
+  /* CARDS */
+  .card-grid { display:grid; gap:1rem; }
+  .card-grid-2 { grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+  .card-grid-3 { grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); }
+  .card { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.25rem 1.5rem; transition:border-color .2s,transform .2s; }
+  .card:hover { border-color:var(--border2); transform:translateY(-2px); }
+  .card-icon { width:38px; height:38px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:18px; margin-bottom:.75rem; }
+  .icon-y { background:rgba(251,191,36,0.12); }
+  .icon-b { background:rgba(96,165,250,0.12); }
+  .icon-g { background:rgba(52,211,153,0.12); }
+  .icon-p { background:rgba(192,132,252,0.12); }
+  .icon-t { background:rgba(45,212,191,0.12); }
+  .icon-r { background:rgba(248,113,113,0.12); }
+  .card-title-en { font-weight:600; font-size:1rem; color:var(--text); margin-bottom:2px; }
+  .card-title-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.84rem; color:var(--text2); direction:rtl; margin-bottom:.75rem; }
+  .card-body { font-size:.88rem; color:var(--text2); margin-bottom:.5rem; }
+  .card-body-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.84rem; color:var(--text3); direction:rtl; }
+
+  /* TAG ANATOMY */
+  .tag-anatomy { background:var(--code-bg); border:1px solid var(--code-border); border-radius:14px; padding:2rem; margin:1.5rem 0; text-align:center; }
+  .tag-anat-code { font-family:'Courier New',monospace; font-size:clamp(16px,3vw,26px); letter-spacing:1px; margin-bottom:1.5rem; display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:2px; }
+  .ta-bracket { color:var(--text3); }
+  .ta-tag { color:var(--red); font-weight:700; }
+  .ta-attr { color:var(--blue); }
+  .ta-eq { color:var(--text3); }
+  .ta-val { color:var(--green); }
+  .ta-content { color:var(--text); }
+  .ta-slash { color:var(--text3); }
+  .ta-labels { display:flex; flex-wrap:wrap; justify-content:center; gap:1rem; margin-top:.5rem; }
+  .ta-label { font-size:12px; display:flex; align-items:center; gap:6px; }
+  .ta-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+
+  /* ELEMENT TABLE */
+  .el-table { width:100%; border-collapse:collapse; background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; margin:1rem 0; }
+  .el-table th { text-align:left; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:1px; color:var(--text3); padding:10px 16px; background:var(--bg3); border-bottom:1px solid var(--border); }
+  .el-table td { padding:11px 16px; font-size:.88rem; border-bottom:1px solid var(--border); color:var(--text); vertical-align:middle; }
+  .el-table tr:last-child td { border-bottom:none; }
+  .el-table tr:hover td { background:var(--bg3); }
+  .el-table .ar-td { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; text-align:right; color:var(--text2); font-size:.83rem; }
+  .tag-pill { display:inline-block; background:rgba(248,113,113,0.12); color:var(--red); border:1px solid rgba(248,113,113,0.25); padding:1px 9px; border-radius:6px; font-family:'Courier New',monospace; font-size:13px; }
+  .badge { display:inline-block; font-size:11px; font-weight:600; padding:2px 10px; border-radius:50px; }
+  .badge-g { background:rgba(52,211,153,0.12); color:var(--green); }
+  .badge-b { background:rgba(96,165,250,0.12); color:var(--blue); }
+  .badge-y { background:rgba(251,191,36,0.12); color:var(--accent3); }
+  .badge-p { background:rgba(192,132,252,0.12); color:var(--purple); }
+
+  /* STEP LIST */
+  .step-list { display:flex; flex-direction:column; gap:.9rem; }
+  .step { display:flex; gap:1rem; align-items:flex-start; }
+  .step-num { flex-shrink:0; width:30px; height:30px; border-radius:50%; background:var(--tag-bg); border:1px solid var(--border2); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:var(--accent); }
+  .step-content { flex:1; padding-top:4px; }
+  .step-title { font-weight:600; font-size:.95rem; color:var(--text); margin-bottom:2px; }
+  .step-title-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.84rem; color:var(--text2); direction:rtl; margin-bottom:4px; }
+  .step-desc { font-size:.87rem; color:var(--text2); }
+  .step-desc-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.83rem; color:var(--text3); direction:rtl; }
+
+  /* QUIZ */
+  .quiz-box { background:var(--card); border:1px solid var(--border); border-radius:14px; padding:1.5rem; margin-top:2rem; }
+  .quiz-title { font-weight:700; font-size:1rem; margin-bottom:.3rem; color:var(--accent3); }
+  .quiz-title-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.9rem; color:var(--text2); direction:rtl; margin-bottom:1rem; }
+  .quiz-q { font-size:.95rem; color:var(--text); margin-bottom:.5rem; font-weight:500; }
+  .quiz-q-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.88rem; color:var(--text2); direction:rtl; margin-bottom:1rem; }
+  .quiz-options { display:flex; flex-direction:column; gap:8px; }
+  .quiz-opt { background:var(--bg3); border:1px solid var(--border); border-radius:10px; padding:10px 16px; cursor:pointer; font-size:.88rem; color:var(--text2); transition:all .2s; display:flex; justify-content:space-between; align-items:center; gap:8px; font-family:'Space Grotesk',sans-serif; text-align:left; }
+  .quiz-opt:hover { border-color:var(--accent); color:var(--text); }
+  .quiz-opt.correct { border-color:var(--green); background:rgba(52,211,153,0.07); color:var(--green); }
+  .quiz-opt.wrong { border-color:var(--red); background:rgba(248,113,113,0.07); color:var(--red); }
+  .quiz-opt .ar-part { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; font-size:.8rem; color:var(--text3); }
+  .quiz-feedback { margin-top:10px; font-size:.88rem; display:none; padding:10px 14px; border-radius:8px; }
+  .quiz-feedback.show { display:block; }
+  .quiz-feedback.ok { background:rgba(52,211,153,0.1); border:1px solid rgba(52,211,153,0.3); color:var(--green); }
+  .quiz-feedback.nope { background:rgba(248,113,113,0.1); border:1px solid rgba(248,113,113,0.3); color:var(--red); }
+  .quiz-feedback .fb-ar { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; display:block; font-size:.84rem; margin-top:5px; color:inherit; }
+
+  /* LIVE PREVIEW */
+  .live-wrap { background:var(--code-bg); border:1px solid var(--code-border); border-radius:14px; overflow:hidden; margin:1rem 0; }
+  .live-header { display:flex; align-items:center; justify-content:space-between; padding:10px 16px; background:var(--bg3); border-bottom:1px solid var(--border); }
+  .live-dots { display:flex; gap:6px; }
+  .live-dot { width:10px; height:10px; border-radius:50%; }
+  .live-label { font-size:11px; color:var(--text3); font-weight:600; letter-spacing:1px; text-transform:uppercase; }
+  .live-code { padding:1.25rem 1.5rem; font-family:'Courier New',monospace; font-size:13.5px; line-height:1.9; overflow-x:auto; border-bottom:1px solid var(--border); }
+  .live-preview { background:#fff; padding:1.25rem 1.5rem; }
+  .live-preview * { font-family:Georgia,serif; color:#111; }
+  .live-preview h1 { font-size:24px; margin-bottom:8px; }
+  .live-preview h2 { font-size:20px; margin-bottom:6px; }
+  .live-preview h3 { font-size:17px; margin-bottom:6px; }
+  .live-preview p { font-size:15px; margin-bottom:10px; line-height:1.6; }
+  .live-preview ul, .live-preview ol { margin:8px 0 10px 20px; font-size:15px; }
+  .live-preview a { color:#1a56db; }
+  .live-preview img { max-width:100%; border-radius:4px; }
+  .live-preview strong { font-weight:700; }
+  .live-preview em { font-style:italic; }
+  .live-preview blockquote { border-left:3px solid #ddd; padding-left:12px; color:#555; margin:10px 0; font-style:italic; }
+  .live-preview table { border-collapse:collapse; font-size:14px; }
+  .live-preview th, .live-preview td { border:1px solid #ddd; padding:6px 12px; }
+  .live-preview th { background:#f5f5f5; }
+  .live-preview form { display:flex; flex-direction:column; gap:10px; max-width:320px; }
+  .live-preview label { font-size:14px; font-weight:600; }
+  .live-preview input, .live-preview select, .live-preview textarea { font-size:14px; padding:6px 10px; border:1px solid #ccc; border-radius:4px; font-family:sans-serif; }
+  .live-preview button { font-size:14px; padding:8px 16px; background:#1a56db; color:#fff; border:none; border-radius:4px; cursor:pointer; font-family:sans-serif; }
+  .preview-label { font-size:11px; color:var(--text3); font-weight:600; letter-spacing:1px; text-transform:uppercase; padding:8px 16px 4px; background:var(--bg3); }
+
+  /* SEMANTIC DIAGRAM */
+  .semantic-wrap { background:var(--code-bg); border:1px solid var(--code-border); border-radius:14px; padding:1.5rem; margin:1.25rem 0; }
+  .sem-page { border:2px solid rgba(251,191,36,0.3); border-radius:10px; overflow:hidden; font-family:'Courier New',monospace; font-size:13px; }
+  .sem-row { display:flex; }
+  .sem-block { padding:10px 14px; border:1px solid rgba(255,255,255,0.06); display:flex; flex-direction:column; justify-content:center; }
+  .sem-tag { font-size:11px; font-weight:700; letter-spacing:1px; margin-bottom:2px; }
+  .sem-desc { font-size:11px; color:var(--text3); }
+  .sem-desc-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:11px; color:var(--text3); direction:rtl; }
+
+  /* FORM ANATOMY */
+  .form-anat { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin:1.25rem 0; }
+  .fa-field { background:var(--card); border:1px solid var(--border); border-radius:12px; padding:1rem; }
+  .fa-name { font-weight:600; font-size:.9rem; color:var(--accent3); margin-bottom:3px; }
+  .fa-name-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.82rem; color:var(--text2); direction:rtl; margin-bottom:8px; }
+  .fa-code { font-family:'Courier New',monospace; font-size:12px; background:var(--code-bg); padding:6px 10px; border-radius:6px; color:var(--green); margin-bottom:6px; overflow-x:auto; white-space:nowrap; }
+  .fa-desc { font-size:.83rem; color:var(--text2); }
+  .fa-desc-ar { font-family:'IBM Plex Sans Arabic',sans-serif; font-size:.8rem; color:var(--text3); direction:rtl; }
+
+  /* SUMMARY */
+  .summary-box { background:linear-gradient(135deg,rgba(251,191,36,0.06) 0%,rgba(45,212,191,0.04) 100%); border:1px solid var(--border2); border-radius:16px; padding:2rem; margin-bottom:3rem; }
+
+  /* FOOTER */
+  .footer { background:var(--bg2); border-top:1px solid var(--border); padding:2rem; text-align:center; color:var(--text3); font-size:13px; }
+  .footer .ar { font-family:'IBM Plex Sans Arabic',sans-serif; direction:rtl; margin-top:4px; }
+
+  @media (max-width:600px) {
+    .bilingual,.form-anat { grid-template-columns:1fr; }
+    .bilingual .divider { display:none; }
+    .hero-inner,.main { padding-left:1.25rem; padding-right:1.25rem; }
+    .tag-anat-code { font-size:14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div class="chapter-badge"><div class="dot"></div> Chapter 2 — الفصل الثاني</div>
+    <h1 class="hero-title">HTML — The Language of the Web</h1>
+    <h2 class="hero-title-ar">HTML — لغة الويب</h2>
+    <p class="hero-desc">Learn to write real HTML from scratch — structure, text, links, images, forms, and modern semantic code.</p>
+    <p class="hero-desc-ar">تعلّم كتابة HTML حقيقية من الصفر — هيكل، نصوص، روابط، صور، نماذج، وكود دلالي حديث.</p>
+    <div class="hero-meta">
+      <span class="meta-item">📖 <span>6 Sections</span></span>
+      <span class="meta-item">⏱️ <span>~60 min</span></span>
+      <span class="meta-item">💻 <span>Live Code Examples</span></span>
+      <span class="meta-item">🌐 <span>EN / عربي</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- TOC -->
+<nav class="toc-bar">
+  <div class="toc-inner">
+    <button class="toc-btn active" onclick="goTo('s1')">1. Tags &amp; Elements</button>
+    <button class="toc-btn" onclick="goTo('s2')">2. Page Structure</button>
+    <button class="toc-btn" onclick="goTo('s3')">3. Text Elements</button>
+    <button class="toc-btn" onclick="goTo('s4')">4. Links &amp; Images</button>
+    <button class="toc-btn" onclick="goTo('s5')">5. Forms &amp; Inputs</button>
+    <button class="toc-btn" onclick="goTo('s6')">6. Semantic HTML</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ══════════════════════════════════
+     S1 — TAGS, ELEMENTS, ATTRIBUTES
+══════════════════════════════════ -->
+<section class="section" id="s1">
+  <div class="section-header">
+    <div class="section-num">01</div>
+    <div class="section-titles">
+      <div class="section-title-en">HTML Basics — Tags, Elements &amp; Attributes</div>
+      <div class="section-title-ar">أساسيات HTML — الوسوم، العناصر والسمات</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">HTML stands for <strong>HyperText Markup Language</strong>. It's not a programming language — it's a markup language. You use it to <em>describe</em> the content of a page using tags. Every visible element on a webpage is an HTML element.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">HTML اختصار لـ HyperText Markup Language. إنها ليست لغة برمجة — بل لغة وسوم. تستخدمها <em>لوصف</em> محتوى الصفحة باستخدام الوسوم. كل عنصر مرئي في صفحة الويب هو عنصر HTML.</p>
+    </div>
+  </div>
+
+  <!-- TAG ANATOMY -->
+  <p style="font-size:.85rem;color:var(--text3);margin:1.5rem 0 .75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Anatomy of an HTML Tag — تشريح وسم HTML</p>
+  <div class="tag-anatomy">
+    <div class="tag-anat-code">
+      <span class="ta-bracket">&lt;</span><span class="ta-tag">a</span>&nbsp;<span class="ta-attr">href</span><span class="ta-eq">=</span><span class="ta-val">"https://example.com"</span><span class="ta-bracket">&gt;</span>
+      <span class="ta-content">&nbsp;Visit Site&nbsp;</span>
+      <span class="ta-bracket">&lt;</span><span class="ta-slash">/</span><span class="ta-tag">a</span><span class="ta-bracket">&gt;</span>
+    </div>
+    <div class="ta-labels">
+      <div class="ta-label"><div class="ta-dot" style="background:var(--red)"></div><span style="color:var(--red)">Tag name</span> — <span style="font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--text2)">اسم الوسم</span></div>
+      <div class="ta-label"><div class="ta-dot" style="background:var(--blue)"></div><span style="color:var(--blue)">Attribute</span> — <span style="font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--text2)">السمة</span></div>
+      <div class="ta-label"><div class="ta-dot" style="background:var(--green)"></div><span style="color:var(--green)">Value</span> — <span style="font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--text2)">القيمة</span></div>
+      <div class="ta-label"><div class="ta-dot" style="background:var(--text)"></div><span style="color:var(--text)">Content</span> — <span style="font-family:'IBM Plex Sans Arabic',sans-serif;color:var(--text2)">المحتوى</span></div>
+    </div>
+  </div>
+
+  <div class="card-grid card-grid-3" style="margin-top:1.25rem">
+    <div class="card">
+      <div class="card-icon icon-r">🏷️</div>
+      <div class="card-title-en">Opening Tag</div>
+      <div class="card-title-ar">وسم الفتح</div>
+      <p class="card-body">Starts the element. Example: <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;p&gt;</code></p>
+      <p class="card-body-ar">يبدأ العنصر. مثال: <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;p&gt;</code></p>
+    </div>
+    <div class="card">
+      <div class="card-icon icon-r">🔚</div>
+      <div class="card-title-en">Closing Tag</div>
+      <div class="card-title-ar">وسم الإغلاق</div>
+      <p class="card-body">Ends the element. Always has a <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">/</code> before the name: <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;/p&gt;</code></p>
+      <p class="card-body-ar">ينهي العنصر. يحتوي دائماً على <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">/</code> قبل الاسم.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon icon-b">⚡</div>
+      <div class="card-title-en">Self-Closing Tag</div>
+      <div class="card-title-ar">وسم ذاتي الإغلاق</div>
+      <p class="card-body">Some tags have no content and close themselves: <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;img&gt;</code> <code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;br&gt;</code></p>
+      <p class="card-body-ar">بعض الوسوم بلا محتوى وتغلق نفسها: مثل img وbr وinput.</p>
+    </div>
+  </div>
+
+  <!-- Common tags table -->
+  <p style="font-size:.85rem;color:var(--text3);margin:2rem 0 .75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Most Common HTML Tags — أكثر وسوم HTML شيوعاً</p>
+  <table class="el-table">
+    <thead><tr><th>Tag</th><th>Purpose</th><th>Example</th><th style="text-align:right">الغرض</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag-pill">&lt;h1&gt;–&lt;h6&gt;</span></td><td>Headings (h1 = biggest)</td><td style="color:var(--text3);font-size:12px">&lt;h1&gt;Hello&lt;/h1&gt;</td><td class="ar-td">عناوين (h1 الأكبر)</td></tr>
+      <tr><td><span class="tag-pill">&lt;p&gt;</span></td><td>Paragraph of text</td><td style="color:var(--text3);font-size:12px">&lt;p&gt;Text...&lt;/p&gt;</td><td class="ar-td">فقرة نصية</td></tr>
+      <tr><td><span class="tag-pill">&lt;a&gt;</span></td><td>Hyperlink</td><td style="color:var(--text3);font-size:12px">&lt;a href="..."&gt;</td><td class="ar-td">رابط تشعبي</td></tr>
+      <tr><td><span class="tag-pill">&lt;img&gt;</span></td><td>Image</td><td style="color:var(--text3);font-size:12px">&lt;img src="..."&gt;</td><td class="ar-td">صورة</td></tr>
+      <tr><td><span class="tag-pill">&lt;div&gt;</span></td><td>Generic container block</td><td style="color:var(--text3);font-size:12px">&lt;div&gt;...&lt;/div&gt;</td><td class="ar-td">حاوية كتلية عامة</td></tr>
+      <tr><td><span class="tag-pill">&lt;span&gt;</span></td><td>Generic inline container</td><td style="color:var(--text3);font-size:12px">&lt;span&gt;...&lt;/span&gt;</td><td class="ar-td">حاوية مضمّنة عامة</td></tr>
+      <tr><td><span class="tag-pill">&lt;ul&gt; / &lt;ol&gt;</span></td><td>Lists (unordered / ordered)</td><td style="color:var(--text3);font-size:12px">&lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</td><td class="ar-td">قوائم (غير مرتبة / مرتبة)</td></tr>
+      <tr><td><span class="tag-pill">&lt;form&gt;</span></td><td>User input form</td><td style="color:var(--text3);font-size:12px">&lt;form&gt;...&lt;/form&gt;</td><td class="ar-td">نموذج إدخال المستخدم</td></tr>
+      <tr><td><span class="tag-pill">&lt;button&gt;</span></td><td>Clickable button</td><td style="color:var(--text3);font-size:12px">&lt;button&gt;Click&lt;/button&gt;</td><td class="ar-td">زر قابل للنقر</td></tr>
+    </tbody>
+  </table>
+
+  <div class="quiz-box">
+    <div class="quiz-title">✏️ Quick Check</div>
+    <div class="quiz-title-ar">اختبار سريع</div>
+    <p class="quiz-q">What is the correct closing tag for a paragraph?</p>
+    <p class="quiz-q-ar">ما هو وسم الإغلاق الصحيح للفقرة؟</p>
+    <div class="quiz-options" id="q1">
+      <button class="quiz-opt" onclick="answer(this,'q1',false)"><span>&lt;p/&gt; <span class="ar-part">وسم خاطئ</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q1',false)"><span>&lt;/&gt;p <span class="ar-part">وسم خاطئ</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q1',true)"><span>&lt;/p&gt; <span class="ar-part">الإجابة الصحيحة</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q1',false)"><span>&lt;end p&gt; <span class="ar-part">وسم خاطئ</span></span></button>
+    </div>
+    <div class="quiz-feedback" id="q1-fb"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     S2 — PAGE STRUCTURE
+══════════════════════════════════ -->
+<section class="section" id="s2">
+  <div class="section-header">
+    <div class="section-num">02</div>
+    <div class="section-titles">
+      <div class="section-title-en">Page Structure — head, body &amp; meta tags</div>
+      <div class="section-title-ar">هيكل الصفحة — head وbody والوسوم الوصفية</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">Every HTML file follows the same structure. Think of it like a human body: the <code style="font-size:13px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;head&gt;</code> is the brain (invisible settings), and the <code style="font-size:13px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;body&gt;</code> is what people actually see.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">كل ملف HTML يتبع نفس الهيكل. فكّر فيه كجسم الإنسان: <code style="font-size:13px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;head&gt;</code> هو الدماغ (إعدادات غير مرئية)، و<code style="font-size:13px;background:var(--code-bg);padding:1px 6px;border-radius:4px">&lt;body&gt;</code> هو ما يراه الناس فعلاً.</p>
+    </div>
+  </div>
+
+  <div class="live-wrap">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">index.html — Boilerplate Template / القالب الأساسي</div>
+      <button class="code-copy" onclick="copyCode('boiler')">Copy</button>
+    </div>
+    <div class="live-code" id="boiler">
+<span class="cc">&lt;!-- Every HTML file starts with this --&gt;</span>
+<span class="ct">&lt;!DOCTYPE</span> <span class="ca">html</span><span class="ct">&gt;</span>
+<span class="ct">&lt;html</span> <span class="ca">lang</span><span class="cv">="en"</span><span class="ct">&gt;</span>
+
+  <span class="ct">&lt;head&gt;</span>
+    <span class="ct">&lt;meta</span> <span class="ca">charset</span><span class="cv">="UTF-8"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;meta</span> <span class="ca">name</span><span class="cv">="viewport"</span> <span class="ca">content</span><span class="cv">="width=device-width, initial-scale=1.0"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;title&gt;</span>My First Page<span class="ct">&lt;/title&gt;</span>
+    <span class="cc">&lt;!-- CSS goes here --&gt;</span>
+    <span class="ct">&lt;link</span> <span class="ca">rel</span><span class="cv">="stylesheet"</span> <span class="ca">href</span><span class="cv">="css/style.css"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;/head&gt;</span>
+
+  <span class="ct">&lt;body&gt;</span>
+    <span class="cc">&lt;!-- Everything visible goes here --&gt;</span>
+    <span class="ct">&lt;h1&gt;</span>Hello, World!<span class="ct">&lt;/h1&gt;</span>
+    <span class="cc">&lt;!-- JS goes at the bottom --&gt;</span>
+    <span class="ct">&lt;script</span> <span class="ca">src</span><span class="cv">="js/script.js"</span><span class="ct">&gt;&lt;/script&gt;</span>
+  <span class="ct">&lt;/body&gt;</span>
+
+<span class="ct">&lt;/html&gt;</span>
+    </div>
+  </div>
+
+  <div class="card-grid card-grid-2" style="margin-top:1.25rem">
+    <div class="card">
+      <div class="card-icon icon-p">🧠</div>
+      <div class="card-title-en">What goes in &lt;head&gt;?</div>
+      <div class="card-title-ar">ماذا يوضع في head؟</div>
+      <p class="card-body">• <code style="font-size:12px;background:var(--code-bg);padding:1px 5px;border-radius:3px">&lt;title&gt;</code> — tab name in browser<br>• <code style="font-size:12px;background:var(--code-bg);padding:1px 5px;border-radius:3px">&lt;meta charset&gt;</code> — character encoding<br>• <code style="font-size:12px;background:var(--code-bg);padding:1px 5px;border-radius:3px">&lt;meta viewport&gt;</code> — mobile scaling<br>• <code style="font-size:12px;background:var(--code-bg);padding:1px 5px;border-radius:3px">&lt;link&gt;</code> — connect CSS file<br>• SEO description, favicon link</p>
+      <p class="card-body-ar">• title — اسم التبويب في المتصفح<br>• meta charset — ترميز الأحرف<br>• meta viewport — المقياس على الجوال<br>• link — ربط ملف CSS<br>• وصف SEO ورابط الأيقونة</p>
+    </div>
+    <div class="card">
+      <div class="card-icon icon-g">👁️</div>
+      <div class="card-title-en">What goes in &lt;body&gt;?</div>
+      <div class="card-title-ar">ماذا يوضع في body؟</div>
+      <p class="card-body">Everything the user sees:<br>• Text: headings, paragraphs<br>• Media: images, video, audio<br>• Navigation, buttons, forms<br>• All layout and content</p>
+      <p class="card-body-ar">كل ما يراه المستخدم:<br>• النصوص: عناوين وفقرات<br>• الوسائط: صور وفيديو وصوت<br>• التنقل والأزرار والنماذج<br>• كل التخطيط والمحتوى</p>
+    </div>
+  </div>
+
+  <div class="infobox tip">
+    <span class="infobox-icon">💡</span>
+    <div>
+      <p class="infobox-en"><strong>In VS Code</strong>, type <code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">!</code> inside an empty HTML file and press <strong>Tab</strong> or <strong>Enter</strong>. It instantly generates the full boilerplate. This is an Emmet shortcut!</p>
+      <p class="infobox-ar"><strong>في VS Code</strong>، اكتب <code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">!</code> داخل ملف HTML فارغ ثم اضغط <strong>Tab</strong> أو <strong>Enter</strong>. سيولّد القالب الكامل فوراً. هذا اختصار Emmet!</p>
+    </div>
+  </div>
+
+  <div class="quiz-box">
+    <div class="quiz-title">✏️ Quick Check</div>
+    <div class="quiz-title-ar">اختبار سريع</div>
+    <p class="quiz-q">Where do you link your CSS file in an HTML page?</p>
+    <p class="quiz-q-ar">أين تربط ملف CSS في صفحة HTML؟</p>
+    <div class="quiz-options" id="q2">
+      <button class="quiz-opt" onclick="answer(this,'q2',false)"><span>Inside &lt;body&gt; at the top <span class="ar-part">داخل body في الأعلى</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q2',true)"><span>Inside &lt;head&gt; using &lt;link&gt; <span class="ar-part">داخل head باستخدام link</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q2',false)"><span>After &lt;/html&gt; closing tag <span class="ar-part">بعد وسم الإغلاق html</span></span></button>
+    </div>
+    <div class="quiz-feedback" id="q2-fb"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     S3 — TEXT ELEMENTS
+══════════════════════════════════ -->
+<section class="section" id="s3">
+  <div class="section-header">
+    <div class="section-num">03</div>
+    <div class="section-titles">
+      <div class="section-title-en">Text Elements — Headings, Paragraphs &amp; Lists</div>
+      <div class="section-title-ar">عناصر النص — العناوين، الفقرات والقوائم</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">Text is the backbone of every webpage. HTML gives you specific tags for each type of text — headings tell the browser "this is important", paragraphs hold body text, and lists organize items clearly.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">النص هو العمود الفقري لكل صفحة ويب. يمنحك HTML وسوماً محددة لكل نوع من النصوص — العناوين تخبر المتصفح "هذا مهم"، والفقرات تحمل نص الجسم، والقوائم تنظم العناصر بوضوح.</p>
+    </div>
+  </div>
+
+  <!-- Headings live preview -->
+  <div class="live-wrap">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Headings h1–h6 / العناوين</div>
+    </div>
+    <div class="live-code">
+<span class="ct">&lt;h1&gt;</span>Heading 1 — Biggest (Page Title)<span class="ct">&lt;/h1&gt;</span>
+<span class="ct">&lt;h2&gt;</span>Heading 2 — Section Title<span class="ct">&lt;/h2&gt;</span>
+<span class="ct">&lt;h3&gt;</span>Heading 3 — Sub-section<span class="ct">&lt;/h3&gt;</span>
+<span class="ct">&lt;h4&gt;</span>Heading 4<span class="ct">&lt;/h4&gt;</span>
+<span class="ct">&lt;h5&gt;</span>Heading 5<span class="ct">&lt;/h5&gt;</span>
+<span class="ct">&lt;h6&gt;</span>Heading 6 — Smallest<span class="ct">&lt;/h6&gt;</span>
+    </div>
+    <div class="preview-label">👁️ Browser Preview / معاينة المتصفح</div>
+    <div class="live-preview">
+      <h1>Heading 1 — Biggest (Page Title)</h1>
+      <h2>Heading 2 — Section Title</h2>
+      <h3>Heading 3 — Sub-section</h3>
+      <h4>Heading 4</h4>
+      <h5>Heading 5</h5>
+      <h6>Heading 6 — Smallest</h6>
+    </div>
+  </div>
+
+  <!-- Paragraphs + text formatting -->
+  <div class="live-wrap" style="margin-top:1rem">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Paragraphs &amp; Text Formatting / الفقرات وتنسيق النص</div>
+    </div>
+    <div class="live-code">
+<span class="ct">&lt;p&gt;</span>This is a regular paragraph of text.<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;p&gt;</span>
+  You can make text <span class="ct">&lt;strong&gt;</span>bold<span class="ct">&lt;/strong&gt;</span>,
+  <span class="ct">&lt;em&gt;</span>italic<span class="ct">&lt;/em&gt;</span>,
+  or <span class="ct">&lt;u&gt;</span>underlined<span class="ct">&lt;/u&gt;</span>.
+<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;p&gt;</span>Line break here:<span class="ct">&lt;br&gt;</span>New line continues here.<span class="ct">&lt;/p&gt;</span>
+
+<span class="ct">&lt;blockquote&gt;</span>
+  "The only way to learn a new programming language is by writing programs in it."
+<span class="ct">&lt;/blockquote&gt;</span>
+    </div>
+    <div class="preview-label">👁️ Browser Preview</div>
+    <div class="live-preview">
+      <p>This is a regular paragraph of text.</p>
+      <p>You can make text <strong>bold</strong>, <em>italic</em>, or <u>underlined</u>.</p>
+      <p>Line break here:<br>New line continues here.</p>
+      <blockquote>"The only way to learn a new programming language is by writing programs in it."</blockquote>
+    </div>
+  </div>
+
+  <!-- Lists -->
+  <div class="live-wrap" style="margin-top:1rem">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Lists — Unordered &amp; Ordered / القوائم</div>
+    </div>
+    <div class="live-code">
+<span class="cc">&lt;!-- Unordered list (bullets) / قائمة غير مرتبة --&gt;</span>
+<span class="ct">&lt;ul&gt;</span>
+  <span class="ct">&lt;li&gt;</span>HTML<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>CSS<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>JavaScript<span class="ct">&lt;/li&gt;</span>
+<span class="ct">&lt;/ul&gt;</span>
+
+<span class="cc">&lt;!-- Ordered list (numbers) / قائمة مرتبة --&gt;</span>
+<span class="ct">&lt;ol&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Install VS Code<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Create index.html<span class="ct">&lt;/li&gt;</span>
+  <span class="ct">&lt;li&gt;</span>Write your first HTML<span class="ct">&lt;/li&gt;</span>
+<span class="ct">&lt;/ol&gt;</span>
+    </div>
+    <div class="preview-label">👁️ Browser Preview</div>
+    <div class="live-preview">
+      <ul><li>HTML</li><li>CSS</li><li>JavaScript</li></ul>
+      <br>
+      <ol><li>Install VS Code</li><li>Create index.html</li><li>Write your first HTML</li></ol>
+    </div>
+  </div>
+
+  <div class="infobox warn">
+    <span class="infobox-icon">⚠️</span>
+    <div>
+      <p class="infobox-en"><strong>Use headings in order.</strong> Never skip from h1 to h4. Search engines and screen readers depend on heading hierarchy. Every page should have only <strong>one h1</strong>.</p>
+      <p class="infobox-ar"><strong>استخدم العناوين بالترتيب.</strong> لا تقفز من h1 إلى h4. محركات البحث وقارئات الشاشة تعتمد على تسلسل العناوين. يجب أن تحتوي كل صفحة على <strong>h1 واحد فقط</strong>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     S4 — LINKS & IMAGES
+══════════════════════════════════ -->
+<section class="section" id="s4">
+  <div class="section-header">
+    <div class="section-num">04</div>
+    <div class="section-titles">
+      <div class="section-title-en">Links &amp; Images</div>
+      <div class="section-title-ar">الروابط والصور</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">Links connect the web together — without them, every page would be an island. Images make pages visual and engaging. Both are essential HTML skills you'll use in every single project.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">الروابط تربط الويب ببعضه — بدونها كل صفحة ستكون جزيرة. الصور تجعل الصفحات مرئية وجذابة. كلاهما مهارات HTML أساسية ستستخدمها في كل مشروع.</p>
+    </div>
+  </div>
+
+  <div class="live-wrap">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Links — &lt;a&gt; tag / الروابط</div>
+    </div>
+    <div class="live-code">
+<span class="cc">&lt;!-- External link / رابط خارجي --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span><span class="cv">="https://google.com"</span> <span class="ca">target</span><span class="cv">="_blank"</span><span class="ct">&gt;</span>Open Google<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- Internal link (another page) / رابط داخلي --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span><span class="cv">="about.html"</span><span class="ct">&gt;</span>About Us<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- Link to a section on same page / رابط لقسم في نفس الصفحة --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span><span class="cv">="#contact"</span><span class="ct">&gt;</span>Jump to Contact<span class="ct">&lt;/a&gt;</span>
+
+<span class="cc">&lt;!-- Email link / رابط بريد إلكتروني --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span><span class="cv">="mailto:hello@example.com"</span><span class="ct">&gt;</span>Send Email<span class="ct">&lt;/a&gt;</span>
+    </div>
+  </div>
+
+  <table class="el-table" style="margin-top:1rem">
+    <thead><tr><th>Attribute</th><th>Value</th><th>What it does</th><th style="text-align:right">الوظيفة</th></tr></thead>
+    <tbody>
+      <tr><td><code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">href</code></td><td><span class="badge badge-b">URL or path</span></td><td>The destination link</td><td class="ar-td">الرابط الوجهة</td></tr>
+      <tr><td><code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">target="_blank"</code></td><td><span class="badge badge-g">_blank</span></td><td>Opens in new tab</td><td class="ar-td">يفتح في تبويب جديد</td></tr>
+      <tr><td><code style="font-size:12px;background:var(--code-bg);padding:1px 6px;border-radius:4px">title</code></td><td><span class="badge badge-y">text</span></td><td>Tooltip on hover</td><td class="ar-td">تلميح عند المرور</td></tr>
+    </tbody>
+  </table>
+
+  <div class="live-wrap" style="margin-top:1.25rem">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Images — &lt;img&gt; tag / الصور</div>
+    </div>
+    <div class="live-code">
+<span class="cc">&lt;!-- Basic image from your folder / صورة من مجلدك --&gt;</span>
+<span class="ct">&lt;img</span>
+  <span class="ca">src</span><span class="cv">="images/photo.jpg"</span>
+  <span class="ca">alt</span><span class="cv">="A description of the image"</span>
+  <span class="ca">width</span><span class="cv">="400"</span>
+<span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- Image from the internet / صورة من الإنترنت --&gt;</span>
+<span class="ct">&lt;img</span>
+  <span class="ca">src</span><span class="cv">="https://picsum.photos/400/200"</span>
+  <span class="ca">alt</span><span class="cv">="Random placeholder image"</span>
+<span class="ct">&gt;</span>
+
+<span class="cc">&lt;!-- Clickable image (link + image) / صورة قابلة للنقر --&gt;</span>
+<span class="ct">&lt;a</span> <span class="ca">href</span><span class="cv">="https://google.com"</span><span class="ct">&gt;</span>
+  <span class="ct">&lt;img</span> <span class="ca">src</span><span class="cv">="logo.png"</span> <span class="ca">alt</span><span class="cv">="Go to Google"</span><span class="ct">&gt;</span>
+<span class="ct">&lt;/a&gt;</span>
+    </div>
+    <div class="preview-label">👁️ Browser Preview</div>
+    <div class="live-preview">
+      <img src="https://picsum.photos/seed/web/500/160" alt="Placeholder" style="border-radius:6px;width:100%">
+      <p style="font-size:13px;color:#666;margin-top:6px">↑ A real image rendered from an internet URL</p>
+    </div>
+  </div>
+
+  <div class="infobox tip" style="margin-top:1rem">
+    <span class="infobox-icon">♿</span>
+    <div>
+      <p class="infobox-en"><strong>Always write an alt attribute</strong> on images. It describes the image for screen readers (blind users) and appears when the image fails to load. <strong>Never leave it empty</strong> unless the image is purely decorative.</p>
+      <p class="infobox-ar"><strong>اكتب دائماً سمة alt</strong> على الصور. تصف الصورة لقارئات الشاشة (المستخدمون المكفوفون) وتظهر عند فشل تحميل الصورة. <strong>لا تتركها فارغة</strong> إلا إذا كانت الصورة زخرفية بحتة.</p>
+    </div>
+  </div>
+
+  <div class="quiz-box">
+    <div class="quiz-title">✏️ Quick Check</div>
+    <div class="quiz-title-ar">اختبار سريع</div>
+    <p class="quiz-q">Which attribute makes a link open in a new browser tab?</p>
+    <p class="quiz-q-ar">أي سمة تجعل الرابط يفتح في تبويب جديد؟</p>
+    <div class="quiz-options" id="q3">
+      <button class="quiz-opt" onclick="answer(this,'q3',false)"><span>href="_blank" <span class="ar-part">ليست الإجابة</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q3',true)"><span>target="_blank" <span class="ar-part">الإجابة الصحيحة</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q3',false)"><span>open="new" <span class="ar-part">ليست الإجابة</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q3',false)"><span>link="tab" <span class="ar-part">ليست الإجابة</span></span></button>
+    </div>
+    <div class="quiz-feedback" id="q3-fb"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     S5 — FORMS & INPUTS
+══════════════════════════════════ -->
+<section class="section" id="s5">
+  <div class="section-header">
+    <div class="section-num">05</div>
+    <div class="section-titles">
+      <div class="section-title-en">Forms &amp; Inputs</div>
+      <div class="section-title-ar">النماذج وحقول الإدخال</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">Forms are how users interact with your site — login pages, search boxes, contact forms, sign-ups. HTML provides many input types to capture exactly the data you need.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">النماذج هي طريقة تفاعل المستخدمين مع موقعك — صفحات تسجيل الدخول، مربعات البحث، نماذج الاتصال، التسجيل. يوفر HTML أنواع إدخال متعددة لالتقاط البيانات التي تحتاجها.</p>
+    </div>
+  </div>
+
+  <div class="live-wrap">
+    <div class="live-header">
+      <div class="live-dots"><div class="live-dot" style="background:#ff5f57"></div><div class="live-dot" style="background:#ffbd2e"></div><div class="live-dot" style="background:#28ca41"></div></div>
+      <div class="live-label">Complete Form Example / مثال نموذج كامل</div>
+      <button class="code-copy" onclick="copyCode('form-code')">Copy</button>
+    </div>
+    <div class="live-code" id="form-code">
+<span class="ct">&lt;form</span> <span class="ca">action</span><span class="cv">="/submit"</span> <span class="ca">method</span><span class="cv">="POST"</span><span class="ct">&gt;</span>
+
+  <span class="cc">&lt;!-- Text input --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span><span class="cv">="name"</span><span class="ct">&gt;</span>Full Name<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span><span class="cv">="text"</span> <span class="ca">id</span><span class="cv">="name"</span> <span class="ca">name</span><span class="cv">="name"</span> <span class="ca">placeholder</span><span class="cv">="Your name"</span> <span class="ca">required</span><span class="ct">&gt;</span>
+
+  <span class="cc">&lt;!-- Email input --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span><span class="cv">="email"</span><span class="ct">&gt;</span>Email Address<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;input</span> <span class="ca">type</span><span class="cv">="email"</span> <span class="ca">id</span><span class="cv">="email"</span> <span class="ca">name</span><span class="cv">="email"</span> <span class="ca">placeholder</span><span class="cv">="you@example.com"</span><span class="ct">&gt;</span>
+
+  <span class="cc">&lt;!-- Dropdown --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span><span class="cv">="level"</span><span class="ct">&gt;</span>Your Level<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;select</span> <span class="ca">id</span><span class="cv">="level"</span> <span class="ca">name</span><span class="cv">="level"</span><span class="ct">&gt;</span>
+    <span class="ct">&lt;option</span> <span class="ca">value</span><span class="cv">="beginner"</span><span class="ct">&gt;</span>Beginner<span class="ct">&lt;/option&gt;</span>
+    <span class="ct">&lt;option</span> <span class="ca">value</span><span class="cv">="intermediate"</span><span class="ct">&gt;</span>Intermediate<span class="ct">&lt;/option&gt;</span>
+  <span class="ct">&lt;/select&gt;</span>
+
+  <span class="cc">&lt;!-- Textarea --&gt;</span>
+  <span class="ct">&lt;label</span> <span class="ca">for</span><span class="cv">="msg"</span><span class="ct">&gt;</span>Message<span class="ct">&lt;/label&gt;</span>
+  <span class="ct">&lt;textarea</span> <span class="ca">id</span><span class="cv">="msg"</span> <span class="ca">name</span><span class="cv">="msg"</span> <span class="ca">rows</span><span class="cv">="4"</span> <span class="ca">placeholder</span><span class="cv">="Write here..."</span><span class="ct">&gt;&lt;/textarea&gt;</span>
+
+  <span class="ct">&lt;button</span> <span class="ca">type</span><span class="cv">="submit"</span><span class="ct">&gt;</span>Send Message<span class="ct">&lt;/button&gt;</span>
+
+<span class="ct">&lt;/form&gt;</span>
+    </div>
+    <div class="preview-label">👁️ Browser Preview</div>
+    <div class="live-preview">
+      <form onsubmit="return false">
+        <label for="pv-name">Full Name</label>
+        <input type="text" id="pv-name" placeholder="Your name">
+        <label for="pv-email">Email Address</label>
+        <input type="email" id="pv-email" placeholder="you@example.com">
+        <label for="pv-level">Your Level</label>
+        <select id="pv-level"><option>Beginner</option><option>Intermediate</option></select>
+        <label for="pv-msg">Message</label>
+        <textarea id="pv-msg" rows="3" placeholder="Write here..."></textarea>
+        <button type="button">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <p style="font-size:.85rem;color:var(--text3);margin:1.75rem 0 .75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;">All input types — أنواع الإدخال</p>
+  <div class="form-anat">
+    <div class="fa-field">
+      <div class="fa-name">type="text"</div>
+      <div class="fa-name-ar">إدخال نصي</div>
+      <div class="fa-code">Single line of text</div>
+      <div class="fa-desc">Name, username, city, etc.</div>
+      <div class="fa-desc-ar">اسم، اسم مستخدم، مدينة...</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="email"</div>
+      <div class="fa-name-ar">إدخال بريد</div>
+      <div class="fa-code">Validates email format</div>
+      <div class="fa-desc">Auto-validates format on submit.</div>
+      <div class="fa-desc-ar">يتحقق تلقائياً من صيغة البريد.</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="password"</div>
+      <div class="fa-name-ar">إدخال كلمة مرور</div>
+      <div class="fa-code">Hides typed characters</div>
+      <div class="fa-desc">Shows dots instead of text.</div>
+      <div class="fa-desc-ar">يعرض نقاطاً بدل النص.</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="number"</div>
+      <div class="fa-name-ar">إدخال رقمي</div>
+      <div class="fa-code">Numbers only</div>
+      <div class="fa-desc">Age, quantity, price, etc.</div>
+      <div class="fa-desc-ar">عمر، كمية، سعر...</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="checkbox"</div>
+      <div class="fa-name-ar">مربع اختيار</div>
+      <div class="fa-code">True / False toggle</div>
+      <div class="fa-desc">Accept terms, preferences.</div>
+      <div class="fa-desc-ar">قبول الشروط، التفضيلات.</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="radio"</div>
+      <div class="fa-name-ar">زر اختيار منفرد</div>
+      <div class="fa-code">Pick one from a group</div>
+      <div class="fa-desc">Gender, payment method, etc.</div>
+      <div class="fa-desc-ar">الجنس، طريقة الدفع...</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="date"</div>
+      <div class="fa-name-ar">اختيار تاريخ</div>
+      <div class="fa-code">Opens a date picker</div>
+      <div class="fa-desc">Birthdate, appointment, booking.</div>
+      <div class="fa-desc-ar">تاريخ الميلاد، موعد، حجز.</div>
+    </div>
+    <div class="fa-field">
+      <div class="fa-name">type="file"</div>
+      <div class="fa-name-ar">رفع ملف</div>
+      <div class="fa-code">Browse &amp; upload a file</div>
+      <div class="fa-desc">Upload image, PDF, doc, etc.</div>
+      <div class="fa-desc-ar">رفع صورة، PDF، مستند...</div>
+    </div>
+  </div>
+
+  <div class="infobox info">
+    <span class="infobox-icon">ℹ️</span>
+    <div>
+      <p class="infobox-en"><strong>Always pair &lt;label&gt; with &lt;input&gt;</strong> using matching <code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">for</code> and <code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">id</code> attributes. This makes clicking the label focus the input — better UX and accessibility.</p>
+      <p class="infobox-ar"><strong>اقرن دائماً &lt;label&gt; مع &lt;input&gt;</strong> باستخدام سمتَي <code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">for</code> و<code style="background:var(--code-bg);padding:1px 6px;border-radius:4px;font-size:13px">id</code> المتطابقتين. هذا يجعل النقر على التسمية يركّز على حقل الإدخال — تجربة مستخدم وإمكانية وصول أفضل.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════
+     S6 — SEMANTIC HTML
+══════════════════════════════════ -->
+<section class="section" id="s6">
+  <div class="section-header">
+    <div class="section-num">06</div>
+    <div class="section-titles">
+      <div class="section-title-en">Semantic HTML — The Modern Approach</div>
+      <div class="section-title-ar">HTML الدلالي — المنهج الحديث</div>
+    </div>
+  </div>
+
+  <div class="bilingual">
+    <div>
+      <div class="bi-label">English</div>
+      <p class="bi-en">Semantic HTML means using the <em>right tag for the right purpose</em>. Instead of wrapping everything in &lt;div&gt;, modern HTML has meaningful tags like &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;footer&gt;. These help search engines, screen readers, and other developers understand your page.</p>
+    </div>
+    <div class="divider"></div>
+    <div>
+      <div class="bi-label" style="text-align:right">العربية</div>
+      <p class="bi-ar">HTML الدلالي يعني استخدام <em>الوسم الصحيح للغرض الصحيح</em>. بدلاً من تغليف كل شيء في &lt;div&gt;، يملك HTML الحديث وسوماً ذات معنى مثل &lt;header&gt; و&lt;nav&gt; و&lt;main&gt; و&lt;article&gt; و&lt;footer&gt;. تساعد محركات البحث وقارئات الشاشة والمطورين الآخرين على فهم صفحتك.</p>
+    </div>
+  </div>
+
+  <!-- Visual page diagram -->
+  <p style="font-size:.85rem;color:var(--text3);margin:1.5rem 0 .75rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;">Page Layout with Semantic Tags — تخطيط الصفحة بالوسوم الدلالية</p>
+  <div class="semantic-wrap">
+    <div class="sem-page">
+      <div class="sem-row">
+        <div class="sem-block" style="flex:1;background:rgba(192,132,252,0.1);border-color:rgba(192,132,252,0.25)">
+          <div class="sem-tag" style="color:var(--purple)">&lt;header&gt;</div>
+          <div class="sem-desc">Logo, site title, nav bar</div>
+          <div class="sem-desc-ar">شعار، عنوان الموقع، شريط التنقل</div>
+        </div>
+      </div>
+      <div class="sem-row">
+        <div class="sem-block" style="flex:1;background:rgba(96,165,250,0.1);border-color:rgba(96,165,250,0.25)">
+          <div class="sem-tag" style="color:var(--blue)">&lt;nav&gt;</div>
+          <div class="sem-desc">Navigation links menu</div>
+          <div class="sem-desc-ar">قائمة روابط التنقل</div>
+        </div>
+      </div>
+      <div class="sem-row" style="min-height:120px">
+        <div class="sem-block" style="flex:2;background:rgba(52,211,153,0.08);border-color:rgba(52,211,153,0.2)">
+          <div class="sem-tag" style="color:var(--green)">&lt;main&gt;</div>
+          <div class="sem-desc">Primary page content</div>
+          <div class="sem-desc-ar">المحتوى الرئيسي للصفحة</div>
+          <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+            <div style="background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:6px 10px">
+              <div style="font-size:11px;color:var(--green);font-weight:700">&lt;article&gt;</div>
+              <div style="font-size:10px;color:var(--text3)">Blog post / content</div>
+            </div>
+            <div style="background:rgba(52,211,153,0.12);border:1px solid rgba(52,211,153,0.2);border-radius:6px;padding:6px 10px">
+              <div style="font-size:11px;color:var(--green);font-weight:700">&lt;section&gt;</div>
+              <div style="font-size:10px;color:var(--text3)">Thematic group</div>
+            </div>
+          </div>
+        </div>
+        <div class="sem-block" style="flex:1;background:rgba(251,191,36,0.07);border-color:rgba(251,191,36,0.2)">
+          <div class="sem-tag" style="color:var(--accent)">&lt;aside&gt;</div>
+          <div class="sem-desc">Sidebar / related content</div>
+          <div class="sem-desc-ar">الشريط الجانبي / محتوى ذو صلة</div>
+        </div>
+      </div>
+      <div class="sem-row">
+        <div class="sem-block" style="flex:1;background:rgba(248,113,113,0.08);border-color:rgba(248,113,113,0.2)">
+          <div class="sem-tag" style="color:var(--red)">&lt;footer&gt;</div>
+          <div class="sem-desc">Copyright, links, contact</div>
+          <div class="sem-desc-ar">حقوق النشر، روابط، تواصل</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Non-semantic vs Semantic comparison -->
+  <div class="card-grid card-grid-2" style="margin-top:1.5rem">
+    <div class="card" style="border-color:rgba(248,113,113,0.3)">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--red);margin-bottom:.75rem">❌ Old Way — الطريقة القديمة</div>
+      <div style="font-family:'Courier New',monospace;font-size:13px;line-height:1.9;color:var(--text2)">
+        <div><span class="ct">&lt;div</span> <span class="ca">class</span><span class="cv">="header"</span><span class="ct">&gt;</span>...<span class="ct">&lt;/div&gt;</span></div>
+        <div><span class="ct">&lt;div</span> <span class="ca">class</span><span class="cv">="nav"</span><span class="ct">&gt;</span>...<span class="ct">&lt;/div&gt;</span></div>
+        <div><span class="ct">&lt;div</span> <span class="ca">class</span><span class="cv">="main"</span><span class="ct">&gt;</span>...<span class="ct">&lt;/div&gt;</span></div>
+        <div><span class="ct">&lt;div</span> <span class="ca">class</span><span class="cv">="footer"</span><span class="ct">&gt;</span>...<span class="ct">&lt;/div&gt;</span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--text3);margin-top:.75rem">Everything is a div. No meaning for browsers or Google.</p>
+      <p style="font-family:'IBM Plex Sans Arabic',sans-serif;direction:rtl;font-size:.8rem;color:var(--text3);margin-top:4px">كل شيء div. لا معنى للمتصفحات أو Google.</p>
+    </div>
+    <div class="card" style="border-color:rgba(52,211,153,0.3)">
+      <div style="font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--green);margin-bottom:.75rem">✅ Modern Way — الطريقة الحديثة</div>
+      <div style="font-family:'Courier New',monospace;font-size:13px;line-height:1.9;color:var(--text2)">
+        <div><span class="ct">&lt;header&gt;</span>...<span class="ct">&lt;/header&gt;</span></div>
+        <div><span class="ct">&lt;nav&gt;</span>...<span class="ct">&lt;/nav&gt;</span></div>
+        <div><span class="ct">&lt;main&gt;</span>...<span class="ct">&lt;/main&gt;</span></div>
+        <div><span class="ct">&lt;footer&gt;</span>...<span class="ct">&lt;/footer&gt;</span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--text3);margin-top:.75rem">Meaningful tags. Better SEO, accessibility &amp; readability.</p>
+      <p style="font-family:'IBM Plex Sans Arabic',sans-serif;direction:rtl;font-size:.8rem;color:var(--text3);margin-top:4px">وسوم ذات معنى. أفضل لـ SEO وإمكانية الوصول والقراءة.</p>
+    </div>
+  </div>
+
+  <div class="infobox tip" style="margin-top:1rem">
+    <span class="infobox-icon">🏆</span>
+    <div>
+      <p class="infobox-en"><strong>Rule of thumb:</strong> if a tag has a name that describes what it contains (header, footer, nav, article), use it. Only use &lt;div&gt; and &lt;span&gt; when no semantic tag fits.</p>
+      <p class="infobox-ar"><strong>القاعدة الذهبية:</strong> إذا كان للوسم اسم يصف ما يحتويه (header, footer, nav, article) — استخدمه. استخدم &lt;div&gt; و&lt;span&gt; فقط عندما لا يناسب أي وسم دلالي.</p>
+    </div>
+  </div>
+
+  <!-- Final quiz -->
+  <div class="quiz-box">
+    <div class="quiz-title">✏️ Chapter 2 Final Quiz</div>
+    <div class="quiz-title-ar">الاختبار الختامي للفصل الثاني</div>
+    <p class="quiz-q">Which tag should you use for the main navigation menu of a website?</p>
+    <p class="quiz-q-ar">أي وسم يجب استخدامه لقائمة التنقل الرئيسية للموقع؟</p>
+    <div class="quiz-options" id="q4">
+      <button class="quiz-opt" onclick="answer(this,'q4',false)"><span>&lt;div class="nav"&gt; <span class="ar-part">div مع class</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q4',false)"><span>&lt;menu&gt; <span class="ar-part">وسم menu</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q4',true)"><span>&lt;nav&gt; <span class="ar-part">الوسم الدلالي الصحيح</span></span></button>
+      <button class="quiz-opt" onclick="answer(this,'q4',false)"><span>&lt;ul&gt; <span class="ar-part">قائمة غير مرتبة فقط</span></span></button>
+    </div>
+    <div class="quiz-feedback" id="q4-fb"></div>
+  </div>
+</section>
+
+<!-- CHAPTER SUMMARY -->
+<div class="summary-box">
+  <div style="font-size:1.15rem;font-weight:700;color:var(--accent3);margin-bottom:.4rem">✅ Chapter 2 Complete!</div>
+  <div style="font-family:'IBM Plex Sans Arabic',sans-serif;direction:rtl;font-size:.95rem;color:var(--text2);margin-bottom:1.5rem">أحسنت! لقد أتممت الفصل الثاني 🎉 أنت الآن تفهم HTML حقيقية.</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> HTML tags, elements &amp; attributes</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> Page structure &amp; boilerplate</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> Text, headings &amp; lists</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> Links &amp; images with attributes</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> Forms, inputs &amp; all input types</div>
+    <div style="display:flex;align-items:center;gap:8px;font-size:.88rem;color:var(--text2)"><span style="color:var(--green)">✓</span> Modern semantic HTML</div>
+  </div>
+  <div style="font-size:.95rem;font-weight:600;color:var(--text)">Up next: <span style="color:var(--accent)">Chapter 3 — CSS: Styling the Web 🎨</span></div>
+  <div style="font-family:'IBM Plex Sans Arabic',sans-serif;direction:rtl;font-size:.88rem;color:var(--text2);margin-top:4px">الفصل القادم: CSS — تصميم الويب</div>
+</div>
+
+</main>
+
+<footer class="footer">
+  <div>Web Dev Bootcamp — Chapter 2: HTML · 2025</div>
+  <div class="ar">كورس تطوير الويب — الفصل الثاني: HTML</div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('progressBar').style.width=Math.min((d.scrollTop/(d.scrollHeight-d.clientHeight))*100,100)+'%';
+  const ids=['s1','s2','s3','s4','s5','s6'];
+  const btns=document.querySelectorAll('.toc-btn');
+  let cur=0;
+  ids.forEach((id,i)=>{ const el=document.getElementById(id); if(el&&window.scrollY>=el.offsetTop-100) cur=i; });
+  btns.forEach((b,i)=>b.classList.toggle('active',i===cur));
+});
+
+function goTo(id){ document.getElementById(id).scrollIntoView({behavior:'smooth'}); }
+
+function answer(btn,qid,correct){
+  const container=document.getElementById(qid);
+  const opts=container.querySelectorAll('.quiz-opt');
+  opts.forEach(o=>{
+    o.style.pointerEvents='none';
+    if(o===btn) o.classList.add(correct?'correct':'wrong');
+    if(!correct && o.getAttribute('onclick')&&o.getAttribute('onclick').includes(',true)')) o.classList.add('correct');
+  });
+  const fb=document.getElementById(qid+'-fb');
+  fb.classList.add('show');
+  if(correct){
+    fb.classList.add('ok');
+    fb.innerHTML='✅ Correct! Well done.<span class="fb-ar">صحيح! أحسنت.</span>';
+  } else {
+    fb.classList.add('nope');
+    fb.innerHTML='❌ Not quite — check the highlighted correct answer.<span class="fb-ar">ليس تماماً — راجع الإجابة الصحيحة المظلّلة.</span>';
+  }
+}
+
+function copyCode(id){
+  const el=document.getElementById(id);
+  const text=el.innerText||el.textContent;
+  navigator.clipboard.writeText(text).then(()=>{
+    const btns=document.querySelectorAll('.code-copy');
+    btns.forEach(b=>{ if(b.getAttribute('onclick')&&b.getAttribute('onclick').includes(id)){ b.textContent='Copied!'; setTimeout(()=>b.textContent='Copy',2000); } });
+  });
+}
+</script>
+</body>
+</html>
